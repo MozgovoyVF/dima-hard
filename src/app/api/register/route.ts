@@ -1,7 +1,6 @@
 import { userService } from "@/services/user.service";
 import { IAuthForm } from "@/types/auth.types";
 import jwt from "jsonwebtoken";
-import { serialize } from "cookie";
 import { cookies } from "next/headers";
 
 const EXPIRE_DAY_REFRESH_TOKEN = 1;
@@ -14,7 +13,7 @@ export async function POST(req: Request) {
 
   if (oldUser)
     return new Response(JSON.stringify({ error: "User already exist" }), {
-      status: 401,
+      status: 400,
     });
 
   const { password, ...user } = await userService.create(dto);

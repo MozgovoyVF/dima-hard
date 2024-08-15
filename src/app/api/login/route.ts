@@ -1,7 +1,6 @@
 import { userService } from "@/services/user.service";
 import { IAuthForm } from "@/types/auth.types";
 import jwt from "jsonwebtoken";
-import { serialize } from "cookie";
 import { verify } from "argon2";
 import { cookies } from "next/headers";
 
@@ -15,14 +14,14 @@ export async function POST(req: Request) {
 
   if (!loginUser)
     return new Response(JSON.stringify({ error: "User does not exist" }), {
-      status: 401,
+      status: 400,
     });
 
   const isValid = verify(loginUser.password, dto.password);
 
   if (!isValid)
     return new Response(JSON.stringify({ error: "Invalid password" }), {
-      status: 401,
+      status: 400,
     });
 
   const { password, ...user } = loginUser;

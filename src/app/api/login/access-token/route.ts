@@ -1,4 +1,3 @@
-import { serialize } from "cookie";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import jwt, { UserIDJwtPayload } from "jsonwebtoken";
@@ -23,7 +22,7 @@ export async function POST(req: Request, res: NextResponse) {
     });
 
     return new Response(JSON.stringify({ error: "Refresh token not passed" }), {
-      status: 401,
+      status: 403,
     });
   }
 
@@ -36,7 +35,7 @@ export async function POST(req: Request, res: NextResponse) {
 
   if (!result)
     return new Response(JSON.stringify({ error: "Invalid refresh token" }), {
-      status: 401,
+      status: 403,
     });
 
   const { password, ...user } = (await userService.getById(result.id)) as User;
