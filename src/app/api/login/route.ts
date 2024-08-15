@@ -3,6 +3,7 @@ import { IAuthForm } from "@/types/auth.types";
 import jwt from "jsonwebtoken";
 import { verify } from "argon2";
 import { cookies } from "next/headers";
+import { NEXT_DOMAIN } from "../../../constants/global.constants";
 
 const EXPIRE_DAY_REFRESH_TOKEN = 1;
 const REFRESH_TOKEN_NAME = "refreshToken";
@@ -40,7 +41,7 @@ export async function POST(req: Request) {
   const cookieStore = cookies();
   cookieStore.set(REFRESH_TOKEN_NAME, String(refreshToken), {
     httpOnly: true,
-    domain: "localhost",
+    domain: NEXT_DOMAIN,
     expires: expiresIn,
     secure: true,
     sameSite: "none",

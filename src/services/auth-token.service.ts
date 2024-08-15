@@ -1,3 +1,4 @@
+import { NEXT_DOMAIN } from "@/constants/global.constants";
 import { EnumTokens } from "./auth.service";
 import Cookies from "js-cookie";
 
@@ -8,7 +9,7 @@ export const getAccessToken = () => {
 
 export const saveTokenStorage = (accessToken: string) => {
   Cookies.set(EnumTokens.ACCESS_TOKEN, accessToken, {
-    domain: "localhost",
+    domain: NEXT_DOMAIN,
     sameSite: "strict",
     expires: 1,
   });
