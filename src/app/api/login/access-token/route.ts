@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import jwt, { UserIDJwtPayload } from "jsonwebtoken";
 import { userService } from "../../../../services/user.service";
 import { User } from "@prisma/client";
+import { NEXT_DOMAIN } from "../../../../constants/global.constants";
 
 const REFRESH_TOKEN_NAME = "refreshToken";
 const EXPIRE_DAY_REFRESH_TOKEN = 1;
@@ -15,7 +16,7 @@ export async function POST(req: Request, res: NextResponse) {
   if (!refreshTokenFromCookies) {
     cookieStore.set(REFRESH_TOKEN_NAME, "", {
       httpOnly: true,
-      domain: "localhost",
+      domain: NEXT_DOMAIN,
       expires: new Date(0),
       secure: true,
       sameSite: "none",
@@ -58,7 +59,7 @@ export async function POST(req: Request, res: NextResponse) {
 
   cookieStore.set(REFRESH_TOKEN_NAME, String(refreshToken), {
     httpOnly: true,
-    domain: "localhost",
+    domain: NEXT_DOMAIN,
     expires: expiresIn,
     secure: true,
     sameSite: "none",

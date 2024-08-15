@@ -5,9 +5,10 @@ import {
 import { authService } from "@/services/auth.service";
 import axios, { type CreateAxiosDefaults } from "axios";
 import { errorCatch } from "./error";
+import { NEXT_URL } from "@/constants/global.constants";
 
 const options: CreateAxiosDefaults = {
-  baseURL: "http://localhost:3000/api",
+  baseURL: NEXT_URL + "/api",
   headers: {
     "Content-Type": "application/json",
   },
