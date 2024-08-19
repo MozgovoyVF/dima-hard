@@ -2,7 +2,7 @@
 
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -13,6 +13,7 @@ import { Field } from "@/components/ui/fields/Field";
 import { IAuthForm } from "@/types/auth.types";
 import { authService } from "@/services/auth.service";
 import { DASHBOARD_PAGES } from "@/config/pages-url.config";
+import { signIn } from "next-auth/react";
 
 export function Auth() {
   const { register, handleSubmit, reset } = useForm<IAuthForm>({
@@ -30,9 +31,17 @@ export function Auth() {
     onSuccess() {
       toast.success("Successfully login!");
       reset();
-      push(DASHBOARD_PAGES.HOME);
+      push(DASHBOARD_PAGES.PERSONAL_ACCOUNT);
     },
   });
+
+  const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    signIn("google", {
+      redirect: true,
+      callbackUrl: DASHBOARD_PAGES.PERSONAL_ACCOUNT,
+    });
+  };
 
   const onSubmit: SubmitHandler<IAuthForm> = (data) => {
     mutate(data);
@@ -73,6 +82,7 @@ export function Auth() {
           <Button onClick={() => setIsLoginForm(false)}>Register</Button>
           <Button onClick={() => refresh()}>Refresh</Button>
           <Button onClick={() => logout()}>Logout</Button>
+          <Button onClick={handleClick}>GOOGLE</Button>
         </div>
       </form>
     </div>

@@ -27,7 +27,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "env.d.ts",
-    "jwt.d.ts"
+    "jwt.d.ts",
+    "next-auth.d.ts"
   ],
   "exclude": ["node_modules"]
 }
