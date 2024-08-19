@@ -11,7 +11,9 @@ export async function middleware(request: NextRequest, response: NextResponse) {
   const isAuthPage = url.includes("/auth");
 
   if (isAuthPage && refreshToken) {
-    return NextResponse.redirect(new URL(DASHBOARD_PAGES.HOME, url));
+    return NextResponse.redirect(
+      new URL(DASHBOARD_PAGES.PERSONAL_ACCOUNT, url)
+    );
   }
 
   if (isAuthPage) {

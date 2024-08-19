@@ -21,12 +21,12 @@ export const authService = {
   },
 
   async register(dto: AuthDto) {
-    const oldUser = await userService.getByEmail(dto.email);
+    const oldUser = await userService.getByEmail(dto.email, "credentials");
 
     if (oldUser)
       throw new Error({ statusCode: 401, title: "User already exist" });
 
-    const { password, ...user } = await userService.create(dto);
+    const { password, ...user } = await userService.create(dto, "credentials");
 
     const tokens = this.issueTokens(user.id);
 
@@ -53,9 +53,9 @@ export const authService = {
   },
 
   async validateUser(dto: AuthDto) {
-    const user = await userService.getByEmail(dto.email);
+    const user = await userService.getByEmail(dto.email, "credentials");
 
-    if (!user)
+    if (!user || !user.password)
       throw new Error({ title: "User does not exist", statusCode: 401 });
 
     const isValid = jwt.verify(user.password, dto.password);

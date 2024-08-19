@@ -4,21 +4,24 @@ import {
   REFRESH_TOKEN_NAME,
 } from "@/constants/global.constants";
 import { userService } from "@/services/user.service";
-import { IAuthForm } from "@/types/auth.types";
+import { GoogleAuthDto } from "@/types/auth.types";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 
 export async function POST(req: Request) {
-  const dto: IAuthForm = await req.json();
+  const profile = await req.json();
+  console.log(profile);
 
-  const oldUser = await userService.getByEmail(dto.email, "credentials");
+  const dto: GoogleAuthDto = {
+    name: profile?.given_name,
+    email: profile?.email,
+    avatarUrl: profile?.picture,
+  };
 
-  if (oldUser)
-    return new Response(JSON.stringify({ error: "User already exist" }), {
-      status: 400,
-    });
-
-  const { password, ...user } = await userService.create(dto, "credentials");
+  const { password, ...user } = await userService.createGoogle(
+    dto,
+    "credentials"
+  );
 
   const accessToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
     expiresIn: "1h",
