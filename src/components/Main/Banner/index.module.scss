@@ -1,0 +1,46 @@
+.container {
+  background-image: url("/images/фон.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  .banner {
+    padding: 20px 10px;
+    background-image: url("/images/background2.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center right;
+
+    .title {
+      align-self: flex-start;
+      width: 60%;
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: blueviolet;
+    }
+
+    .promise {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      gap: 10px;
+      background-color: rgba(0, 0, 0, 0.411);
+
+      .me {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 5px;
+        font-size: 16px;
+        color: white;
+
+        span {
+          flex: 1 1 100%;
+        }
+
+        svg {
+          flex: 0 0 20px;
+        }
+      }
+    }
+  }
+}

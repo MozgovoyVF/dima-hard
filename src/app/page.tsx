@@ -1,7 +1,12 @@
 "use client";
 
-import styles from "./page.module.css";
+import { Main } from "@/components/Main/Main";
+import styles from "./page.module.scss";
 
 export default function Home() {
-  return <div>HOME PAGE</div>;
+  return (
+    <div className={styles.container}>
+      <Main />
+    </div>
+  );
 }
