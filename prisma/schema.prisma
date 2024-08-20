@@ -21,8 +21,16 @@ model User {
 
   email    String  @unique
   name     String?
-  password String
+  lastName String?
+  password String?
   avatarUrl String?
 
+  provider Provider @default(credentials)
+
   @@map("user")
+}
+
+enum Provider {
+  credentials
+  google
 }

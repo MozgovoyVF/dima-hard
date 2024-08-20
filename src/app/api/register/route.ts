@@ -1,23 +1,24 @@
-import { NEXT_DOMAIN } from "@/constants/global.constants";
+import {
+  EXPIRE_DAY_REFRESH_TOKEN,
+  NEXT_DOMAIN,
+  REFRESH_TOKEN_NAME,
+} from "@/constants/global.constants";
 import { userService } from "@/services/user.service";
 import { IAuthForm } from "@/types/auth.types";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 
-const EXPIRE_DAY_REFRESH_TOKEN = 1;
-const REFRESH_TOKEN_NAME = "refreshToken";
-
 export async function POST(req: Request) {
   const dto: IAuthForm = await req.json();
 
-  const oldUser = await userService.getByEmail(dto.email);
+  const oldUser = await userService.getByEmail(dto.email, "credentials");
 
   if (oldUser)
     return new Response(JSON.stringify({ error: "User already exist" }), {
       status: 400,
     });
 
-  const { password, ...user } = await userService.create(dto);
+  const { password, ...user } = await userService.create(dto, "credentials");
 
   const accessToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
     expiresIn: "1h",

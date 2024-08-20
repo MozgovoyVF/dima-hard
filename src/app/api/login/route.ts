@@ -3,22 +3,25 @@ import { IAuthForm } from "@/types/auth.types";
 import jwt from "jsonwebtoken";
 import { verify } from "argon2";
 import { cookies } from "next/headers";
-import { NEXT_DOMAIN } from "../../../constants/global.constants";
-
-const EXPIRE_DAY_REFRESH_TOKEN = 1;
-const REFRESH_TOKEN_NAME = "refreshToken";
+import {
+  EXPIRE_DAY_REFRESH_TOKEN,
+  NEXT_DOMAIN,
+  REFRESH_TOKEN_NAME,
+} from "../../../constants/global.constants";
 
 export async function POST(req: Request) {
   const dto: IAuthForm = await req.json();
 
-  const loginUser = await userService.getByEmail(dto.email);
+  const loginUser = await userService.getByEmail(dto.email, "credentials");
 
   if (!loginUser)
     return new Response(JSON.stringify({ error: "User does not exist" }), {
       status: 400,
     });
 
-  const isValid = verify(loginUser.password, dto.password);
+  const isValid = loginUser.password
+    ? verify(loginUser.password, dto.password)
+    : null;
 
   if (!isValid)
     return new Response(JSON.stringify({ error: "Invalid password" }), {
