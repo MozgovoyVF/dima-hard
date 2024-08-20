@@ -1,0 +1,93 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  background-image: url("/images/фон.jpg");
+  background-size: cover;
+  padding: 10px 5px;
+
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+
+    & a {
+      color: white;
+    }
+
+    .email {
+      font-size: 12px;
+
+      @media (min-width: 500px) {
+        & {
+          font-size: 16px;
+        }
+      }
+    }
+
+    .social {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .whatsapp,
+    .telegram,
+    .phone {
+      width: 25px;
+      height: 25px;
+
+      &:hover {
+        color: green;
+        transform: scale(1.1);
+      }
+
+      @media (min-width: 920px) {
+        & {
+          width: 35px;
+          height: 35px;
+        }
+      }
+    }
+  }
+
+  .main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .info {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .name {
+        color: white;
+        font-size: 12px;
+      }
+      .lastName {
+        color: white;
+        font-size: 16px;
+      }
+      img {
+        // background-color: rgb(94, 17, 111);
+        border-radius: 50%;
+      }
+    }
+
+    .lk {
+      display: flex;
+      flex-direction: column;
+      color: white;
+      svg {
+        width: 40px;
+        height: 40px;
+      }
+    }
+  }
+}

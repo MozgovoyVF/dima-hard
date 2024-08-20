@@ -1,4 +1,3 @@
-import cn from "clsx";
 import type { ButtonHTMLAttributes, PropsWithChildren } from "react";
 
 type TypeButton = ButtonHTMLAttributes<HTMLButtonElement>;
@@ -8,5 +7,9 @@ export function Button({
   className,
   ...rest
 }: PropsWithChildren<TypeButton>) {
-  return <button {...rest}>{children}</button>;
+  return (
+    <button className={className} {...rest}>
+      {children}
+    </button>
+  );
 }

@@ -1,10 +1,6 @@
-## Скелет
+R-1
+Auth
 
-# 1 LOGO 
-Найти идею и реализовать
-
-# 2 Название
-1% Better every day
-
-# 3 
+R-2
+Header and 1st block
 
