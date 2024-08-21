@@ -1,15 +1,18 @@
 .priceCard {
   display: flex;
   flex-direction: column;
+  flex: 1 1 33%;
+  gap: 5px;
 
   .content {
     display: flex;
+    flex: 1 1 100%;
 
     .heading {
       display: flex;
       flex: 1 1 50%;
       position: relative;
-      height: 300px;
+      // height: 300px;
       padding: 10px 0;
       img {
         position: absolute;
@@ -22,8 +25,9 @@
       }
 
       .title {
+        width: 100%;
         align-self: self-end;
-        justify-self: self-start;
+        text-align: center;
         font-size: 16px;
         color: white;
         z-index: 1;
@@ -39,9 +43,11 @@
       color: white;
 
       .text {
+        font-size: 14px;
       }
 
       .price {
+        font-size: 16px;
       }
     }
   }
@@ -54,6 +60,11 @@
       padding: 10px 20px;
       color: white;
       background-color: blueviolet;
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        box-shadow: 0 0 10px 3px white;
+      }
     }
 
     .more {
@@ -61,6 +72,11 @@
       color: white;
       background-color: transparent;
       border: 2px solid blueviolet;
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        box-shadow: 0 0 10px 3px blueviolet;
+      }
     }
   }
 }

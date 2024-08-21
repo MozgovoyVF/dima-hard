@@ -1,53 +1,50 @@
 import * as React from "react";
 import styles from "./index.module.scss";
-import {
-  ForwardedRef,
-  forwardRef,
-  useEffect,
-  useImperativeHandle,
-  useRef,
-} from "react";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
 import { MENU_CONTENT } from "@/constants/menu.constants";
-
-gsap.registerPlugin(useGSAP);
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { useEffect } from "react";
 
 interface IModal {
   closeFn: () => void;
 }
 
-export const MenuModal = forwardRef<HTMLDivElement, IModal>(
-  ({ closeFn }: IModal, outerRef: ForwardedRef<HTMLDivElement>) => {
-    const innerRef = useRef<HTMLDivElement>(null);
-    useImperativeHandle(outerRef, () => innerRef.current!, []);
+export const MenuModal = ({ closeFn }: IModal) => {
+  useEffect(() => {
+    document.body.style.overflow = 'hidden'
 
-    useEffect(() => {
-      gsap.fromTo(
-        innerRef.current,
-        { opacity: 0 },
-        { duration: 0.5, opacity: 1 }
-      );
-    }, [innerRef]);
-
-    return (
-      <div ref={innerRef} className={styles.modal}>
-        <div className={styles.window}>
-          <div className={styles.content}>
-            <ul className={styles.list}>
-              {MENU_CONTENT.map((item) => (
-                <li key={item.title} onClick={() => closeFn()} className="item">
-                  <a className={styles.link} href={item.link}>
-                    {<item.icon />} {item.title}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+    return () => {
+      document.body.style.overflow = 'auto'
+    }
+  }, []);
+  return (
+    <motion.div
+      initial={{ x: 300, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      exit={{ x: 300, opacity: 0 }}
+      transition={{
+        type: "spring",
+        stiffness: 260,
+        damping: 20,
+      }}
+      key={1}
+      className={styles.modal}
+    >
+      <div className={styles.window}>
+        <div className={styles.content}>
+          <ul className={styles.list}>
+            {MENU_CONTENT.map((item) => (
+              <li key={item.title} onClick={() => closeFn()} className="item">
+                <Link scroll={true} className={styles.link} href={item.link}>
+                  {<item.icon />} {item.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
-    );
-  }
-);
+    </motion.div>
+  );
+};
 
 MenuModal.displayName = "menuModal";
