@@ -1,9 +1,14 @@
 .header {
+  position: fixed;
+  width: 100vw;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   background-image: url("/images/фон.jpg");
   background-size: cover;
   padding: 10px 5px;
+  height: 130px;
+  z-index: 10;
 
   .top {
     display: flex;

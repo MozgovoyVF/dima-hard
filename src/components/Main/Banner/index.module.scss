@@ -1,19 +1,20 @@
 .container {
-  background-image: url("/images/фон.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
+  height: calc(100vh - 130px);
 
   .banner {
-    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
     background-image: url("/images/background2.png");
     background-size: contain;
     background-repeat: no-repeat;
-    background-position: center right;
+    background-position: center;
 
     .title {
-      align-self: flex-start;
-      width: 60%;
+      padding: 20px 10px;
       margin-bottom: 20px;
+      text-align: center;
       font-size: 24px;
       color: blueviolet;
     }
@@ -21,15 +22,19 @@
     .promise {
       display: flex;
       flex-direction: column;
+      justify-self: flex-end;
       position: relative;
-      gap: 10px;
-      background-color: rgba(0, 0, 0, 0.411);
+      gap: 20px;
+      padding: 20px 5px 40px 5px;
+      background-color: rgba(0, 0, 0, 0.7);
+      border: 1px solid blueviolet;
+      box-shadow: 0 0 20px 4px blueviolet;
 
       .me {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 5px;
+        gap: 10px;
         font-size: 16px;
         color: white;
 

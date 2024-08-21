@@ -1,22 +1,19 @@
 .cards {
-  // padding: 20px 10px;
-  background-image: url("/images/фон.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-
   .list {
     display: flex;
     flex-direction: column;
+    height: 100%;
     .card {
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-      flex: 0 0 150px;
+      flex: 0 0 calc((100vh - 130px) / 3);
       background-size: cover;
       background-position: center center;
       background-color: rgba(0, 0, 0);
       color: white;
+      box-shadow: inset 0px 0px 20px 2px blueviolet;
 
       img {
         position: absolute;
