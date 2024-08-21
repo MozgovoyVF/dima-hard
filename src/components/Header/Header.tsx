@@ -6,14 +6,13 @@ import { Squash as Hamburger } from "hamburger-react";
 import { FaTelegram, FaWhatsapp } from "react-icons/fa";
 import { BiPhone } from "react-icons/bi";
 import { PHONE_NUMBER } from "@/constants/global.constants";
-import gsap from "gsap";
 import ClientOnlyPortal from "@/components/ClientOnlyPortal/ClientOnlyPortal";
 import { MenuModal } from "@/components/MenuModal/MenuModal";
 import Image from "next/image";
-import { Button } from "../ui/buttons/Button";
 import Link from "next/link";
 import { DASHBOARD_PAGES } from "@/config/pages-url.config";
 import { MdPersonalInjury } from "react-icons/md";
+import { AnimatePresence } from "framer-motion";
 
 export function Header() {
   const [isShowModal, setIsShowModal] = useState(false);
@@ -24,19 +23,17 @@ export function Header() {
   };
 
   const fade = () => {
-    gsap.to(el.current, {
-      opacity: 0,
-      duration: 0.5,
-      onComplete: () => setIsShowModal(false),
-    });
+    setIsShowModal(false);
   };
 
   return (
     <div className={styles.header}>
       {isShowModal ? (
-        <ClientOnlyPortal selector={"#modal"}>
-          <MenuModal ref={el} closeFn={() => fade()} />
-        </ClientOnlyPortal>
+        <AnimatePresence mode="wait" initial={true}>
+          <ClientOnlyPortal selector={"#modal"}>
+            <MenuModal closeFn={() => setIsShowModal(false)} />
+          </ClientOnlyPortal>
+        </AnimatePresence>
       ) : null}
       <div className={styles.top}>
         <Hamburger
