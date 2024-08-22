@@ -21,15 +21,12 @@
   // height: calc(var(--vh, 1vh) * 100);
   // height: var(--app-height);
   padding-top: 130px;
-  padding-bottom: 50px;
   scroll-snap-align: center;
   perspective: 500px;
   border-bottom: 3px solid blueviolet;
 }
 
 .section > div {
-  display: flex;
-  flex-direction: column;
   flex: 1 1 100%;
   overflow: hidden;
 }
