@@ -35,14 +35,14 @@ export function Main() {
     damping: 30,
     restDelta: 0.001,
   });
-  const imageScale = useTransform(scrollYProgress, [0, .5], [0, 1])
+
   return (
     <div className={styles.main}>
       <ParallaxContainer>
         <Banner />
       </ParallaxContainer>
       <ParallaxContainer>
-        <Cards imageScale={imageScale} />
+        <Cards />
       </ParallaxContainer>
       <ParallaxContainer>
         <Price />

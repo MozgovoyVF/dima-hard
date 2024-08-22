@@ -11,11 +11,11 @@ interface IModal {
 
 export const MenuModal = ({ closeFn }: IModal) => {
   useEffect(() => {
-    document.body.style.overflow = 'hidden'
+    document.body.style.overflow = "hidden";
 
     return () => {
-      document.body.style.overflow = 'auto'
-    }
+      document.body.style.overflow = "auto";
+    };
   }, []);
   return (
     <motion.div
@@ -35,7 +35,7 @@ export const MenuModal = ({ closeFn }: IModal) => {
           <ul className={styles.list}>
             {MENU_CONTENT.map((item) => (
               <li key={item.title} onClick={() => closeFn()} className="item">
-                <Link scroll={true} className={styles.link} href={item.link}>
+                <Link className={styles.link} href={item.link}>
                   {<item.icon />} {item.title}
                 </Link>
               </li>
