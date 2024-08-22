@@ -3,10 +3,17 @@ import styles from "./index.module.scss";
 import { FaMedal } from "react-icons/fa";
 import { GiBiceps } from "react-icons/gi";
 import { PiNotepadBold } from "react-icons/pi";
+import { motion } from "framer-motion";
 
 export function Banner() {
   return (
-    <div className={styles.container}>
+    <motion.div
+      initial={{ x: 300, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      exit={{ x: -300, opacity: 0 }}
+      transition={{ duration: 1, ease: "easeInOut" }}
+      className={styles.container}
+    >
       <div className={styles.banner}>
         <h1 className={styles.title}>
           Ты заслуживаешь здорового и сильного тела!
@@ -31,6 +38,6 @@ export function Banner() {
           </li>
         </ul>
       </div>
-    </div>
+    </motion.div>
   );
 }

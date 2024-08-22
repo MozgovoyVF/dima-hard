@@ -4,7 +4,7 @@ import { PriceCard } from "./PriceCard/PriceCard";
 
 export function Price() {
   return (
-    <div id="#online-training" className={styles.price}>
+    <div id="online-training" className={styles.price}>
       <h1 className={styles.title}>
         Сколько Вы готовы тратить на тренировочный процесс в месяц?
       </h1>

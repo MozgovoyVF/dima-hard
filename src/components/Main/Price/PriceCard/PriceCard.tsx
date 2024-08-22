@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./index.module.scss";
 import Image from "next/image";
 import { Button } from "@/components/ui/buttons/Button";
+import { motion } from "framer-motion";
 
 interface IPriceCard {
   title: string;
@@ -11,11 +12,21 @@ interface IPriceCard {
 }
 
 export function PriceCard({ price, text, title, image }: IPriceCard) {
+  const variants = {
+    visible: { opacity: 1, scale: 1 },
+    hidden: { opacity: 0, scale: 0 },
+  };
   return (
-    <div className={styles.priceCard}>
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      transition={{ duration: 0.3 }}
+      variants={variants}
+      className={styles.priceCard}
+    >
       <div className={styles.content}>
         <div className={styles.heading}>
-          <Image src={image} alt="Price card" width={100} height={100} />
+          <Image src={`${image}`} alt="Price card" width={100} height={100} />
           <h4 className={styles.title}>Тариф `{title}`</h4>
         </div>
         <div className={styles.description}>
@@ -29,6 +40,6 @@ export function PriceCard({ price, text, title, image }: IPriceCard) {
         <Button className={styles.buy}>Купить</Button>
         <Button className={styles.more}>Подробнее</Button>
       </div>
-    </div>
+    </motion.div>
   );
 }
