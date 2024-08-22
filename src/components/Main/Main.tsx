@@ -5,14 +5,7 @@ import { Cards } from "./Cards/Cards";
 import { Price } from "./Price/Price";
 import { useVH } from "@/hooks/useVH";
 
-import {
-  motion,
-  useScroll,
-  useSpring,
-  useTransform,
-  MotionValue,
-} from "framer-motion";
-
+import { motion, useScroll, useSpring } from "framer-motion";
 
 function ParallaxContainer({ children }: PropsWithChildren) {
   const ref = useRef(null);
@@ -42,7 +35,7 @@ export function Main() {
       <ParallaxContainer>
         <Cards />
       </ParallaxContainer>
-      <ParallaxContainer>
+      <ParallaxContainer >
         <Price />
       </ParallaxContainer>
       <motion.div className={styles.progress} style={{ scaleX }} />
