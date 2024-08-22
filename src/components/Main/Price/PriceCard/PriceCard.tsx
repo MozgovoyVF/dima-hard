@@ -22,6 +22,7 @@ export function PriceCard({ price, text, title, image }: IPriceCard) {
       whileInView="visible"
       transition={{ duration: 0.3 }}
       variants={variants}
+      viewport={{ once: true }}
       className={styles.priceCard}
     >
       <div className={styles.content}>

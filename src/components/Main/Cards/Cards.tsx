@@ -16,6 +16,7 @@ export function Cards() {
           whileInView="visible"
           transition={{ duration: 0.3 }}
           variants={variants}
+          viewport={{ once: true }}
           className={styles.card}
         >
           <Image
@@ -31,6 +32,7 @@ export function Cards() {
           whileInView="visible"
           transition={{ duration: 0.3 }}
           variants={variants}
+          viewport={{ once: true }}
           className={styles.card}
         >
           <Image
@@ -46,6 +48,7 @@ export function Cards() {
           whileInView="visible"
           transition={{ duration: 0.3 }}
           variants={variants}
+          viewport={{ once: true }}
           className={styles.card}
         >
           <Image
