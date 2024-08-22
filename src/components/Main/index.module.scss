@@ -17,7 +17,9 @@
 
 .section {
   display: flex;
-  height: 100vh;
+  // height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+  padding-top: 130px;
   scroll-snap-align: center;
   perspective: 500px;
   border-bottom: 3px solid blueviolet;
@@ -26,5 +28,4 @@
 .section > div {
   flex: 1 1 100%;
   overflow: hidden;
-  margin-top: 130px;
 }
