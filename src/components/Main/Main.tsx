@@ -13,9 +13,6 @@ import {
   MotionValue,
 } from "framer-motion";
 
-function useParallax(value: MotionValue<number>, distance: number) {
-  return useTransform(value, [0, 1], [-distance, distance]);
-}
 
 function ParallaxContainer({ children }: PropsWithChildren) {
   const ref = useRef(null);
@@ -35,7 +32,7 @@ export function Main() {
     restDelta: 0.001,
   });
 
-  useVH();
+  // useVH();
 
   return (
     <div className={styles.main}>
