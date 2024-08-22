@@ -19,8 +19,6 @@ function useParallax(value: MotionValue<number>, distance: number) {
 
 function ParallaxContainer({ children }: PropsWithChildren) {
   const ref = useRef(null);
-  const { scrollYProgress } = useScroll({ target: ref });
-  const y = useParallax(scrollYProgress, 300);
 
   return (
     <section className={styles.section}>
