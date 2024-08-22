@@ -4,7 +4,7 @@
 
 #root {
   width: 100%;
-  height: 100lvh;
+  height: 100svh;
   background-size: cover;
   color: white;
 }
@@ -20,7 +20,7 @@ body {
   display: flex;
   flex-direction: column;
   min-width: 320px;
-  min-height: 100lvh;
+  min-height: 100svh;
   // min-height: -webkit-fill-available;
 }
 
