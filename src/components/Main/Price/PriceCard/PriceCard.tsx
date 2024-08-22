@@ -26,7 +26,7 @@ export function PriceCard({ price, text, title, image }: IPriceCard) {
     >
       <div className={styles.content}>
         <div className={styles.heading}>
-          <Image src={`${image}`} alt="Price card" width={100} height={100} />
+          <Image src={image} alt="Price card" width={100} height={150} />
           <h4 className={styles.title}>Тариф `{title}`</h4>
         </div>
         <div className={styles.description}>
