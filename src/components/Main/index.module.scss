@@ -18,7 +18,8 @@
 .section {
   display: flex;
   // height: 100vh;
-  height: calc(var(--vh, 1vh) * 100);
+  // height: calc(var(--vh, 1vh) * 100);
+  height: var(--app-height);
   padding-top: 130px;
   scroll-snap-align: center;
   perspective: 500px;
