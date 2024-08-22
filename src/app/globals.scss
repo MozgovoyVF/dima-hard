@@ -21,6 +21,7 @@ body {
   flex-direction: column;
   min-width: 320px;
   min-height: 100svh;
+  scroll-snap-type: y mandatory;
   // min-height: -webkit-fill-available;
 }
 
