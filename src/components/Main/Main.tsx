@@ -3,7 +3,8 @@ import styles from "./index.module.scss";
 import { Banner } from "./Banner/Banner";
 import { Cards } from "./Cards/Cards";
 import { Price } from "./Price/Price";
-import { useVH } from "@/hooks/useVH";
+import { Training } from "./Training/Training";
+import { Program } from "./Program/Program";
 
 import { motion, useScroll, useSpring } from "framer-motion";
 
@@ -35,8 +36,14 @@ export function Main() {
       <ParallaxContainer>
         <Cards />
       </ParallaxContainer>
-      <ParallaxContainer >
+      <ParallaxContainer>
         <Price />
+      </ParallaxContainer>
+      <ParallaxContainer>
+        <Training />
+      </ParallaxContainer>
+      <ParallaxContainer>
+        <Program />
       </ParallaxContainer>
       <motion.div className={styles.progress} style={{ scaleX }} />
     </div>
