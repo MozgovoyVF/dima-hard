@@ -35,14 +35,15 @@ export function PriceCard({ price, text, title, image }: IPriceCard) {
           <div className={styles.description}>
             <p className={styles.text}>{text}</p>
             <span className={styles.price}>
-              Цена - {price.toLocaleString("de-DE")} руб./мес.
+              {price.toLocaleString("de-DE")} руб./мес.
             </span>
+            <Button className={styles.more}>Подробнее</Button>
           </div>
         </div>
-        <div className={styles.buttonGroup}>
+        {/* <div className={styles.buttonGroup}>
           <Button className={styles.buy}>Купить</Button>
           <Button className={styles.more}>Подробнее</Button>
-        </div>
+        </div> */}
       </motion.div>
     </AnimatePresence>
   );

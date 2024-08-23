@@ -16,7 +16,7 @@ export function Cards() {
             key={1}
             initial="hidden"
             whileInView="visible"
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.5 }}
             variants={variants}
             viewport={{ once: true }}
             className={styles.card}
@@ -27,7 +27,9 @@ export function Cards() {
               width={100}
               src="/images/cards/result1.jpg"
             />
-            <h4>Для достижения спортивных результатов</h4>
+            <h4 className={styles.description}>
+              Для достижения спортивных результатов
+            </h4>
           </motion.div>
           <motion.div
             key={2}

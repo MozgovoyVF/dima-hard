@@ -40,14 +40,30 @@
       justify-content: space-between;
       padding: 10px;
       flex: 1 1 50%;
+      gap: 5px;
       color: white;
 
       .text {
+        flex: 1 1 100%;
         font-size: 14px;
+        text-align: center;
       }
 
       .price {
+        text-align: center;
         font-size: 16px;
+      }
+
+      .more {
+        padding: 10px 20px;
+        color: white;
+        background-color: transparent;
+        border: 2px solid blueviolet;
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+          box-shadow: 0 0 10px 3px blueviolet;
+        }
       }
     }
   }
