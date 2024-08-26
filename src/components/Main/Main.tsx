@@ -5,6 +5,9 @@ import { Cards } from "./Cards/Cards";
 import { Price } from "./Price/Price";
 import { Training } from "./Training/Training";
 import { Program } from "./Program/Program";
+import { Regals } from "./Regals/Regals";
+import { Results } from "./Results/Results";
+import { ArrowLink } from "@/components/ui/arrowLink/ArrowLink";
 
 import { motion, useScroll, useSpring } from "framer-motion";
 
@@ -26,8 +29,6 @@ export function Main() {
     restDelta: 0.001,
   });
 
-  // useVH();
-
   return (
     <div className={styles.main}>
       <ParallaxContainer>
@@ -45,7 +46,14 @@ export function Main() {
       <ParallaxContainer>
         <Program />
       </ParallaxContainer>
+      <ParallaxContainer>
+        <Regals />
+      </ParallaxContainer>
+      <ParallaxContainer>
+        <Results />
+      </ParallaxContainer>
       <motion.div className={styles.progress} style={{ scaleX }} />
+      <ArrowLink />
     </div>
   );
 }
