@@ -19,31 +19,29 @@ export function Contact() {
         <div className={styles.content}>
           <ul className={styles.list}>
             <motion.li
-              key={"contact1"}
+              key="contact1"
               initial="hidden"
               whileInView="visible"
               transition={{ duration: 0.3 }}
               variants={variants}
               viewport={{ once: true }}
-              className={styles.item}
-            >
+              className={styles.item}>
               <FaHome className={styles.svg} />
               <div className={styles.info}>
                 <span className={styles.subtitle}>Адрес</span>
                 <span className={styles.text}>
-                  г. Мытищи, Шараповский пр., вл2с3, ТЦ "Красный Кит"
+                  г. Мытищи, Шараповский пр., вл2с3, ТЦ &quot;Красный Кит&quot;
                 </span>
               </div>
             </motion.li>
             <motion.li
-              key={"contact2"}
+              key="contact2"
               initial="hidden"
               whileInView="visible"
               transition={{ duration: 0.3 }}
               variants={variants}
               viewport={{ once: true }}
-              className={styles.item}
-            >
+              className={styles.item}>
               <PiTelegramLogo className={styles.svg} />
               <div className={styles.info}>
                 <span className={styles.subtitle}>Почта</span>
@@ -53,14 +51,13 @@ export function Contact() {
               </div>
             </motion.li>
             <motion.li
-              key={"contact3"}
+              key="contact3"
               initial="hidden"
               whileInView="visible"
               transition={{ duration: 0.3 }}
               variants={variants}
               viewport={{ once: true }}
-              className={styles.item}
-            >
+              className={styles.item}>
               <FaClock className={styles.svg} />
               <div className={styles.info}>
                 <span className={styles.subtitle}>График работы</span>
