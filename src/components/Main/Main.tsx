@@ -7,6 +7,7 @@ import { Training } from "./Training/Training";
 import { Program } from "./Program/Program";
 import { Regals } from "./Regals/Regals";
 import { Results } from "./Results/Results";
+import { Contact } from "./Contact/Contact";
 import { ArrowLink } from "@/components/ui/arrowLink/ArrowLink";
 
 import { motion, useScroll, useSpring } from "framer-motion";
@@ -51,6 +52,9 @@ export function Main() {
       </ParallaxContainer>
       <ParallaxContainer>
         <Results />
+      </ParallaxContainer>
+      <ParallaxContainer>
+        <Contact />
       </ParallaxContainer>
       <motion.div className={styles.progress} style={{ scaleX }} />
       <ArrowLink />
