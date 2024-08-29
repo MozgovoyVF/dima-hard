@@ -16,5 +16,7 @@ export const saveTokenStorage = (accessToken: string) => {
 };
 
 export const removeFromStorage = () => {
-  Cookies.remove(EnumTokens.ACCESS_TOKEN);
+  Cookies.remove(EnumTokens.ACCESS_TOKEN, {
+    domain: NEXT_DOMAIN,
+  });
 };
