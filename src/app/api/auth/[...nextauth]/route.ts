@@ -3,7 +3,6 @@ import NextAuth from "next-auth";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 import {
-  ACCESS_TOKEN_NAME,
   EXPIRE_DAY_ACCESS_TOKEN,
   EXPIRE_DAY_REFRESH_TOKEN,
   NEXT_DOMAIN,
