@@ -7,7 +7,6 @@
   justify-content: space-around;
   align-items: center;
   gap: 30px;
-  box-shadow: inset 0 0 20px 5px blueviolet;
   padding-top: 130px;
 
   .title {
@@ -22,6 +21,7 @@
     .list {
       display: flex;
       flex-direction: column;
+      padding: 0 10px;
       gap: 20px;
 
       .item {
@@ -58,6 +58,12 @@
     
     a {
       color: white;
+      transition: all .3s ease-in-out;
+
+      &:hover {
+        color: green;
+        transform: scale(1.1);
+      }
     }
   }
 

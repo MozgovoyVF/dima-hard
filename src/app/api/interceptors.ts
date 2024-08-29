@@ -1,7 +1,4 @@
-import {
-  getAccessToken,
-  removeFromStorage,
-} from "@/services/auth-token.service";
+import { getAccessToken, removeFromStorage } from "@/services/auth-token.service";
 import { authService } from "@/services/auth.service";
 import axios, { type CreateAxiosDefaults } from "axios";
 import { errorCatch } from "./error";
@@ -21,8 +18,7 @@ const axiosWithAuth = axios.create(options);
 axiosWithAuth.interceptors.request.use((config) => {
   const accessToken = getAccessToken();
 
-  if (config?.headers && accessToken)
-    config.headers.Authorization = `Bearer ${accessToken}`;
+  if (config?.headers && accessToken) config.headers.Authorization = `Bearer ${accessToken}`;
 
   return config;
 });
