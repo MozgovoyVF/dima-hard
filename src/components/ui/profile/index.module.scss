@@ -1,0 +1,19 @@
+.profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+
+  .button {
+    color: white;
+    border: 1px solid blueviolet;
+    border-radius: 20px;
+    padding: 10px;
+  }
+}

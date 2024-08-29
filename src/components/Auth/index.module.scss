@@ -1,0 +1,97 @@
+.section {
+  display: flex;
+  height: 100lvh;
+  scroll-snap-align: center;
+  perspective: 500px;
+  border-bottom: 3px solid blueviolet;
+}
+
+.section > div {
+  padding-top: 130px;
+  flex: 1 1 100%;
+  overflow: hidden;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 40px;
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: white;
+
+    .heading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+
+      .button {
+        padding: 10px 20px;
+        border: 1px solid blueviolet;
+        border-radius: 10px;
+        transition: box-shadow 0.3s ease-in-out;
+
+        &.active {
+          background-color: blueviolet;
+        }
+
+        &:hover {
+          box-shadow: 0 0 15px 5px white;
+        }
+      }
+    }
+
+    .inputs {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-start;
+
+      & div {
+        display: flex;
+        width: 100%;
+        gap: 10px;
+        padding: 10px;
+        border: 1px solid blueviolet;
+        border-radius: 10px;
+      }
+    }
+
+    .buttonsBlock {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+      justify-content: center;
+
+      .button {
+        padding: 10px 20px;
+        border: 1px solid blueviolet;
+        border-radius: 10px;
+        background-color: blueviolet;
+        transition: box-shadow 0.3s ease-in-out;
+
+        &:hover {
+          box-shadow: 0 0 15px 5px white;
+        }
+      }
+
+      .google {
+        display: flex;
+        gap: 10px;
+        padding: 10px 20px;
+        border: 1px solid blueviolet;
+        border-radius: 10px;
+        transition: box-shadow 0.3s ease-in-out;
+
+        &:hover {
+          box-shadow: 0 0 15px 5px white;
+        }
+      }
+    }
+  }
+}

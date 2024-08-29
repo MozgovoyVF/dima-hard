@@ -1,0 +1,12 @@
+.section {
+  display: flex;
+  height: 100lvh;
+  scroll-snap-align: center;
+  perspective: 500px;
+  border-bottom: 3px solid blueviolet;
+}
+
+.section > div {
+  flex: 1 1 100%;
+  overflow: hidden;
+}

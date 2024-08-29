@@ -3,6 +3,13 @@ export interface AuthDto {
   password: string;
 }
 
+export interface RegisterDto {
+  email: string;
+  password: string;
+  name: string;
+  lastName: string;
+}
+
 export interface GoogleAuthDto {
   email: string;
   avatarUrl?: string;
@@ -13,6 +20,13 @@ export interface GoogleAuthDto {
 export interface IAuthForm {
   email: string;
   password: string;
+}
+
+export interface IRegisterForm {
+  email: string;
+  password: string;
+  name: string;
+  lastName: string;
 }
 
 export interface IAuthResponse {

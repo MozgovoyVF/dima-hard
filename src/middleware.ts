@@ -6,14 +6,11 @@ export async function middleware(request: NextRequest, response: NextResponse) {
   const { url, cookies } = request;
 
   const refreshToken = cookies.get(EnumTokens.REFRESH_TOKEN)?.value;
-  console.log(refreshToken);
 
   const isAuthPage = url.includes("/auth");
 
   if (isAuthPage && refreshToken) {
-    return NextResponse.redirect(
-      new URL(DASHBOARD_PAGES.PERSONAL_ACCOUNT, url)
-    );
+    return NextResponse.redirect(new URL(DASHBOARD_PAGES.PERSONAL_ACCOUNT, url));
   }
 
   if (isAuthPage) {

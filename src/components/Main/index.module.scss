@@ -1,9 +1,6 @@
 .main {
   display: flex;
   flex-direction: column;
-  background-image: url("/images/фон.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
 }
 
 .progress {
@@ -13,17 +10,4 @@
   right: 0;
   height: 5px;
   background: blueviolet;
-}
-
-.section {
-  display: flex;
-  height: 100lvh;
-  scroll-snap-align: center;
-  perspective: 500px;
-  border-bottom: 3px solid blueviolet;
-}
-
-.section > div {
-  flex: 1 1 100%;
-  overflow: hidden;
 }

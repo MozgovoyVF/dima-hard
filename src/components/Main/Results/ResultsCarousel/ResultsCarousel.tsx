@@ -3,6 +3,7 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import styles from "./index.module.scss";
 import Image from "next/image";
+
 export default function ResponsiveCarousel() {
   const responsive = [
     "/images/results/result1.JPG",
@@ -22,13 +23,14 @@ export default function ResponsiveCarousel() {
         showIndicators={true}
         infiniteLoop={true}
         dynamicHeight={false}
+        showThumbs={false}
         showStatus={false}
         className={styles.mySwiper}
       >
         {responsive.map((item, index) => (
           <div key={index} className={styles.swipItem}>
             <div className={styles.imgBox}>
-              <Image width={600} height={900} src={item} alt="slides" />
+              <Image priority={true} width={600} height={900} src={item} alt="slides" />
             </div>
           </div>
         ))}

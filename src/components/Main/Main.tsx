@@ -1,4 +1,6 @@
-import React, { PropsWithChildren, useEffect, useRef } from "react";
+"use client";
+
+import React from "react";
 import styles from "./index.module.scss";
 import { Banner } from "./Banner/Banner";
 import { Cards } from "./Cards/Cards";
@@ -11,16 +13,7 @@ import { Contact } from "./Contact/Contact";
 import { ArrowLink } from "@/components/ui/arrowLink/ArrowLink";
 
 import { motion, useScroll, useSpring } from "framer-motion";
-
-function ParallaxContainer({ children }: PropsWithChildren) {
-  const ref = useRef(null);
-
-  return (
-    <section className={styles.section}>
-      <div ref={ref}>{children}</div>
-    </section>
-  );
-}
+import { ParallaxContainer } from "../ParallaxContainer/ParallaxContainer";
 
 export function Main() {
   const { scrollYProgress } = useScroll();
@@ -31,33 +24,35 @@ export function Main() {
   });
 
   return (
-    <div className={styles.main}>
-      <ParallaxContainer>
-        <Banner />
-      </ParallaxContainer>
-      <ParallaxContainer>
-        <Cards />
-      </ParallaxContainer>
-      <ParallaxContainer>
-        <Price />
-      </ParallaxContainer>
-      <ParallaxContainer>
-        <Training />
-      </ParallaxContainer>
-      <ParallaxContainer>
-        <Program />
-      </ParallaxContainer>
-      <ParallaxContainer>
-        <Regals />
-      </ParallaxContainer>
-      <ParallaxContainer>
-        <Results />
-      </ParallaxContainer>
-      <ParallaxContainer>
-        <Contact />
-      </ParallaxContainer>
-      <motion.div className={styles.progress} style={{ scaleX }} />
-      <ArrowLink />
-    </div>
+    <main className={styles.container}>
+      <div className={styles.main}>
+        <ParallaxContainer>
+          <Banner />
+        </ParallaxContainer>
+        <ParallaxContainer>
+          <Cards />
+        </ParallaxContainer>
+        <ParallaxContainer>
+          <Price />
+        </ParallaxContainer>
+        <ParallaxContainer>
+          <Training />
+        </ParallaxContainer>
+        <ParallaxContainer>
+          <Program />
+        </ParallaxContainer>
+        <ParallaxContainer>
+          <Regals />
+        </ParallaxContainer>
+        <ParallaxContainer>
+          <Results />
+        </ParallaxContainer>
+        <ParallaxContainer>
+          <Contact />
+        </ParallaxContainer>
+        <motion.div className={styles.progress} style={{ scaleX }} />
+        <ArrowLink />
+      </div>
+    </main>
   );
 }
