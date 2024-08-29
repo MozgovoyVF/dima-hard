@@ -1,15 +1,11 @@
-import {
-  EXPIRE_DAY_REFRESH_TOKEN,
-  NEXT_DOMAIN,
-  REFRESH_TOKEN_NAME,
-} from "@/constants/global.constants";
+import { EXPIRE_DAY_REFRESH_TOKEN, NEXT_DOMAIN, REFRESH_TOKEN_NAME } from "@/constants/global.constants";
 import { userService } from "@/services/user.service";
-import { IAuthForm } from "@/types/auth.types";
+import { IRegisterForm } from "@/types/auth.types";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 
 export async function POST(req: Request) {
-  const dto: IAuthForm = await req.json();
+  const dto: IRegisterForm = await req.json();
 
   const oldUser = await userService.getByEmail(dto.email, "credentials");
 

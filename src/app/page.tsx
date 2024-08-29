@@ -1,13 +1,14 @@
-"use client";
-
 import { Main } from "@/components/Main/Main";
-import styles from "./page.module.scss";
-import { motion } from "framer-motion";
+
+import type { Metadata } from "next";
+
+import { NO_INDEX_PAGE } from "@/constants/seo.constants";
+
+export const metadata: Metadata = {
+  title: "Better every day",
+  ...NO_INDEX_PAGE,
+};
 
 export default function Home() {
-  return (
-    <main className={styles.container}>
-      <Main />
-    </main>
-  );
+  return <Main />;
 }

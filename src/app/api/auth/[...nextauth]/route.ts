@@ -1,7 +1,5 @@
 import GoogleProvider from "next-auth/providers/google";
-import NextAuth, { Account, Profile, User } from "next-auth";
-import { AdapterUser } from "next-auth/adapters";
-import { axiosClassic } from "../../interceptors";
+import NextAuth from "next-auth";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 import {
@@ -39,28 +37,18 @@ const handler = NextAuth({
       const loginUser = await userService.getByEmail(profile.email, "google");
 
       if (loginUser) {
-        const accessToken = jwt.sign(
-          { id: loginUser.id },
-          process.env.JWT_SECRET,
-          {
-            expiresIn: "1h",
-          }
-        );
+        const accessToken = jwt.sign({ id: loginUser.id }, process.env.JWT_SECRET, {
+          expiresIn: "1h",
+        });
 
-        const refreshToken = jwt.sign(
-          { id: loginUser.id },
-          process.env.JWT_SECRET,
-          {
-            expiresIn: "7d",
-          }
-        );
+        const refreshToken = jwt.sign({ id: loginUser.id }, process.env.JWT_SECRET, {
+          expiresIn: "7d",
+        });
 
         const expiresIn = new Date();
         const expiresInAccessToken = new Date();
         expiresIn.setDate(expiresIn.getDate() + EXPIRE_DAY_REFRESH_TOKEN);
-        expiresInAccessToken.setHours(
-          expiresInAccessToken.getHours() + EXPIRE_DAY_ACCESS_TOKEN
-        );
+        expiresInAccessToken.setHours(expiresInAccessToken.getHours() + EXPIRE_DAY_ACCESS_TOKEN);
 
         const cookieStore = cookies();
         cookieStore.set(REFRESH_TOKEN_NAME, String(refreshToken), {
@@ -70,17 +58,17 @@ const handler = NextAuth({
           secure: true,
           sameSite: "none",
         });
-        cookieStore.set(ACCESS_TOKEN_NAME, String(accessToken), {
-          httpOnly: true,
-          domain: NEXT_DOMAIN,
-          expires: expiresInAccessToken,
-          secure: true,
-          sameSite: "none",
-        });
+        // cookieStore.set(ACCESS_TOKEN_NAME, String(accessToken), {
+        //   httpOnly: true,
+        //   domain: NEXT_DOMAIN,
+        //   expires: expiresInAccessToken,
+        //   secure: true,
+        //   sameSite: "none",
+        // });
 
         return true;
       } else {
-        console.log(profile);
+
         const dto: GoogleAuthDto = {
           name: profile?.given_name,
           lastName: profile?.family_name,
@@ -88,33 +76,20 @@ const handler = NextAuth({
           avatarUrl: profile?.picture,
         };
 
-        const { password, ...newUser } = await userService.createGoogle(
-          dto,
-          "google"
-        );
+        const { password, ...newUser } = await userService.createGoogle(dto, "google");
 
-        const accessToken = jwt.sign(
-          { id: newUser.id },
-          process.env.JWT_SECRET,
-          {
-            expiresIn: "1h",
-          }
-        );
+        const accessToken = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET, {
+          expiresIn: "1h",
+        });
 
-        const refreshToken = jwt.sign(
-          { id: newUser.id },
-          process.env.JWT_SECRET,
-          {
-            expiresIn: "7d",
-          }
-        );
+        const refreshToken = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET, {
+          expiresIn: "7d",
+        });
 
         const expiresIn = new Date();
         const expiresInAccessToken = new Date();
         expiresIn.setDate(expiresIn.getDate() + EXPIRE_DAY_REFRESH_TOKEN);
-        expiresInAccessToken.setHours(
-          expiresInAccessToken.getHours() + EXPIRE_DAY_ACCESS_TOKEN
-        );
+        expiresInAccessToken.setHours(expiresInAccessToken.getHours() + EXPIRE_DAY_ACCESS_TOKEN);
 
         const cookieStore = cookies();
         cookieStore.set(REFRESH_TOKEN_NAME, String(refreshToken), {
@@ -124,13 +99,13 @@ const handler = NextAuth({
           secure: true,
           sameSite: "none",
         });
-        cookieStore.set(ACCESS_TOKEN_NAME, String(accessToken), {
-          httpOnly: true,
-          domain: NEXT_DOMAIN,
-          expires: expiresInAccessToken,
-          secure: true,
-          sameSite: "none",
-        });
+        // cookieStore.set(ACCESS_TOKEN_NAME, String(accessToken), {
+        //   httpOnly: true,
+        //   domain: NEXT_DOMAIN,
+        //   expires: expiresInAccessToken,
+        //   secure: true,
+        //   sameSite: "none",
+        // });
 
         return true;
       }

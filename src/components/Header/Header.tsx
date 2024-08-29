@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./index.module.scss";
 import { Squash as Hamburger } from "hamburger-react";
 import { FaTelegram, FaWhatsapp } from "react-icons/fa";
@@ -13,10 +13,19 @@ import Link from "next/link";
 import { DASHBOARD_PAGES } from "@/config/pages-url.config";
 import { MdPersonalInjury } from "react-icons/md";
 import { AnimatePresence } from "framer-motion";
+import { useProfile } from "@/hooks/useProfile";
+import Loader from "@/components/ui/loader/Loader";
+import { Profile } from "@/components/ui/profile/Profile";
 
 export function Header() {
   const [isShowModal, setIsShowModal] = useState(false);
-  const el = useRef(null);
+  const { data, isLoading, error, isRefetching } = useProfile();
+  const [user, setUser] = useState(data);
+
+  useEffect(() => {
+    if (error) setUser(undefined);
+    else setUser(data);
+  }, [data, error]);
 
   const appear = () => {
     setIsShowModal(true);
@@ -36,11 +45,7 @@ export function Header() {
         </AnimatePresence>
       ) : null}
       <div className={styles.top}>
-        <Hamburger
-          toggled={isShowModal}
-          size={20}
-          toggle={!isShowModal ? appear : fade}
-        />
+        <Hamburger toggled={isShowModal} size={20} toggle={!isShowModal ? appear : fade} />
         <div className={styles.social}>
           <a target="_blank" href={`https://wa.me/${PHONE_NUMBER}`}>
             <FaWhatsapp className={styles.whatsapp} />
@@ -61,10 +66,16 @@ export function Header() {
             <h3 className={styles.lastName}>Песчальников</h3>
           </div>
         </Link>
-        <Link className={styles.lk} href={DASHBOARD_PAGES.AUTH}>
-          <MdPersonalInjury />
-          Войти
-        </Link>
+        {isRefetching || isLoading ? (
+          <Loader />
+        ) : user ? (
+          <Profile data={user} />
+        ) : (
+          <Link className={styles.lk} href={DASHBOARD_PAGES.AUTH}>
+            <MdPersonalInjury />
+            Войти
+          </Link>
+        )}
       </div>
     </div>
   );

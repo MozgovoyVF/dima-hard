@@ -1,4 +1,4 @@
-import { AuthDto, GoogleAuthDto } from "@/types/auth.types";
+import { GoogleAuthDto, RegisterDto } from "@/types/auth.types";
 import { UserDto } from "@/types/user.types";
 import { hash } from "argon2";
 import prisma from "./prisma.service";
@@ -14,7 +14,7 @@ export const userService = {
   },
 
   getByEmail(email: string, provider: Provider) {
-    return prisma.user.findUnique({
+    return prisma.user.findFirst({
       where: {
         email,
         provider,
@@ -22,10 +22,11 @@ export const userService = {
     });
   },
 
-  async create(dto: AuthDto, provider: Provider) {
+  async create(dto: RegisterDto, provider: Provider) {
     const user = {
       email: dto.email,
-      name: "",
+      name: dto.name,
+      lastName: dto.lastName,
       password: await hash(dto.password),
       provider,
     };

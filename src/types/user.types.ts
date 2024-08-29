@@ -3,3 +3,11 @@ export interface UserDto {
   name?: string;
   password?: string;
 }
+
+export interface IProfileUser {
+  id: number;
+  name?: string;
+  lastName?: string;
+  email: string;
+  avatarUrl?: string;
+}
