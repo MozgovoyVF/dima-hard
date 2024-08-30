@@ -1,7 +1,7 @@
 "use client";
 
 import { MouseEvent, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { FieldErrors, SubmitHandler, useForm } from "react-hook-form";
 import { Field } from "@/components/ui/fields/Field";
 
 import { IAuthForm, IRegisterForm } from "@/types/auth.types";
@@ -22,11 +22,17 @@ const variants = {
 };
 
 export function Auth() {
-  const { register, handleSubmit, reset } = useForm<IAuthForm | IRegisterForm>({
-    mode: "onChange",
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<IAuthForm | IRegisterForm>({
+    mode: "onSubmit",
   });
 
   const [isLoginForm, setIsLoginForm] = useState(false);
+  const [error, setError] = useState("");
 
   const { push } = useRouter();
   const queryClient = useQueryClient();
@@ -41,6 +47,11 @@ export function Auth() {
         queryKey: ["profile"],
       });
       push(DASHBOARD_PAGES.PERSONAL_ACCOUNT);
+    },
+    onError: (error) => {
+      console.log(error);
+      // @ts-ignore //
+      setError(error.response.data.error);
     },
   });
 
@@ -73,17 +84,25 @@ export function Auth() {
       >
         <div className={styles.container}>
           <div className={styles.content}>
-            <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+            <form className={styles.form} onSubmit={handleSubmit(onSubmit)} onChange={() => setError("")}>
               <div className={styles.heading}>
                 <button
-                  className={`${styles.button} ${isLoginForm ? styles.active : ""}`}
-                  onClick={() => setIsLoginForm(true)}
+                  className={`${styles.button} ${isLoginForm && styles.active}`}
+                  onClick={() => {
+                    reset();
+                    setError("");
+                    setIsLoginForm(true);
+                  }}
                 >
                   Вход
                 </button>
                 <button
-                  className={`${styles.button} ${!isLoginForm ? styles.active : ""}`}
-                  onClick={() => setIsLoginForm(false)}
+                  className={`${styles.button} ${!isLoginForm && styles.active}`}
+                  onClick={() => {
+                    reset();
+                    setError("");
+                    setIsLoginForm(false);
+                  }}
                 >
                   Регистрация
                 </button>
@@ -104,6 +123,7 @@ export function Auth() {
                       label="Имя:"
                       placeholder="Введите имя:"
                       type="text"
+                      state={(errors as FieldErrors<IRegisterForm>).name ? "error" : "success"}
                     />
                     <Field
                       {...register("lastName", { required: "Last name is required!" })}
@@ -111,6 +131,7 @@ export function Auth() {
                       label="Фамилия:"
                       placeholder="Введите фамилию:"
                       type="text"
+                      state={(errors as FieldErrors<IRegisterForm>).lastName && "error"}
                     />
                   </>
                 )}
@@ -120,6 +141,7 @@ export function Auth() {
                   label="Email:"
                   placeholder="Введите Email:"
                   type="email"
+                  state={errors.email && "error"}
                 />
                 <Field
                   {...register("password", { required: "Password is required!" })}
@@ -127,7 +149,9 @@ export function Auth() {
                   label="Пароль:"
                   placeholder="Введите пароль:"
                   type="password"
+                  state={errors.password && "error"}
                 />
+                {error && <span className={styles.error}>{error}</span>}
               </motion.div>
               <div className={styles.buttonsBlock}>
                 {isLoginForm ? (

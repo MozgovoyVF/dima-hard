@@ -1,4 +1,5 @@
 import { forwardRef } from "react";
+import styles from "./index.module.scss";
 
 interface InputFieldProps {
   id: string;
@@ -15,7 +16,7 @@ interface InputFieldProps {
 export const Field = forwardRef<HTMLInputElement, InputFieldProps>(
   ({ label, id, extra, type, placeholder, state, disabled, isNumber, ...rest }, ref) => {
     return (
-      <div>
+      <div className={state === "error" ? styles.error : styles.success}>
         <label htmlFor={id}>{label}</label>
         <input
           ref={ref}

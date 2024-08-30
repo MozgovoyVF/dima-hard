@@ -3,11 +3,7 @@ import { IAuthForm } from "@/types/auth.types";
 import jwt from "jsonwebtoken";
 import { verify } from "argon2";
 import { cookies } from "next/headers";
-import {
-  EXPIRE_DAY_REFRESH_TOKEN,
-  NEXT_DOMAIN,
-  REFRESH_TOKEN_NAME,
-} from "../../../constants/global.constants";
+import { EXPIRE_DAY_REFRESH_TOKEN, NEXT_DOMAIN, REFRESH_TOKEN_NAME } from "../../../constants/global.constants";
 
 export async function POST(req: Request) {
   const dto: IAuthForm = await req.json();
@@ -15,16 +11,14 @@ export async function POST(req: Request) {
   const loginUser = await userService.getByEmail(dto.email, "credentials");
 
   if (!loginUser)
-    return new Response(JSON.stringify({ error: "User does not exist" }), {
+    return new Response(JSON.stringify({ error: "Пользователь не найден" }), {
       status: 400,
     });
 
-  const isValid = loginUser.password
-    ? verify(loginUser.password, dto.password)
-    : null;
+  const isValid = loginUser.password ? await verify(loginUser.password, dto.password) : null;
 
   if (!isValid)
-    return new Response(JSON.stringify({ error: "Invalid password" }), {
+    return new Response(JSON.stringify({ error: "Некорректный пароль" }), {
       status: 400,
     });
 

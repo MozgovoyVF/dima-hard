@@ -57,17 +57,9 @@ const handler = NextAuth({
           secure: true,
           sameSite: "none",
         });
-        // cookieStore.set(ACCESS_TOKEN_NAME, String(accessToken), {
-        //   httpOnly: true,
-        //   domain: NEXT_DOMAIN,
-        //   expires: expiresInAccessToken,
-        //   secure: true,
-        //   sameSite: "none",
-        // });
 
         return true;
       } else {
-
         const dto: GoogleAuthDto = {
           name: profile?.given_name,
           lastName: profile?.family_name,
@@ -98,13 +90,6 @@ const handler = NextAuth({
           secure: true,
           sameSite: "none",
         });
-        // cookieStore.set(ACCESS_TOKEN_NAME, String(accessToken), {
-        //   httpOnly: true,
-        //   domain: NEXT_DOMAIN,
-        //   expires: expiresInAccessToken,
-        //   secure: true,
-        //   sameSite: "none",
-        // });
 
         return true;
       }
