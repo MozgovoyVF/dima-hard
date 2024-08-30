@@ -121,7 +121,7 @@ export function Auth() {
                       {...register("name", { required: "Name is required!" })}
                       id="name"
                       label="Имя:"
-                      placeholder="Введите имя:"
+                      placeholder="Введите имя"
                       type="text"
                       state={(errors as FieldErrors<IRegisterForm>).name ? "error" : "success"}
                     />
@@ -129,7 +129,7 @@ export function Auth() {
                       {...register("lastName", { required: "Last name is required!" })}
                       id="lastName"
                       label="Фамилия:"
-                      placeholder="Введите фамилию:"
+                      placeholder="Введите фамилию"
                       type="text"
                       state={(errors as FieldErrors<IRegisterForm>).lastName && "error"}
                     />
@@ -139,7 +139,7 @@ export function Auth() {
                   {...register("email", { required: "Email is required!" })}
                   id="email"
                   label="Email:"
-                  placeholder="Введите Email:"
+                  placeholder="Введите Email"
                   type="email"
                   state={errors.email && "error"}
                 />
@@ -147,7 +147,7 @@ export function Auth() {
                   {...register("password", { required: "Password is required!" })}
                   id="password"
                   label="Пароль:"
-                  placeholder="Введите пароль:"
+                  placeholder="Введите пароль"
                   type="password"
                   state={errors.password && "error"}
                 />
