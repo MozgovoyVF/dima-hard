@@ -39,6 +39,8 @@
         border: 1px solid blueviolet;
         border-radius: 10px;
         transition: box-shadow 0.3s ease-in-out;
+        font-size: 16px;
+        color: white;
 
         &.active {
           background-color: blueviolet;
@@ -65,6 +67,10 @@
         border: 1px solid blueviolet;
         border-radius: 10px;
       }
+
+      & input {
+        background-color: transparent;
+      }
     }
 
     .buttonsBlock {
@@ -80,6 +86,8 @@
         border-radius: 10px;
         background-color: blueviolet;
         transition: box-shadow 0.3s ease-in-out;
+        font-size: 16px;
+        color: white;
 
         &:hover {
           box-shadow: 0 0 15px 5px white;
@@ -93,6 +101,8 @@
         border: 1px solid blueviolet;
         border-radius: 10px;
         transition: box-shadow 0.3s ease-in-out;
+        font-size: 16px;
+        color: white;
 
         &:hover {
           box-shadow: 0 0 15px 5px white;
@@ -107,7 +117,7 @@
       flex-grow: 0;
 
       @media (max-width: 450px) {
-          max-width: 300px;
+        max-width: 300px;
       }
     }
   }
