@@ -107,6 +107,7 @@ address {
 /* Form */
 
 input,
+input:-internal-autofill-selected,
 textarea,
 button,
 select {

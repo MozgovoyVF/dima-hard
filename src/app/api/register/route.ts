@@ -10,7 +10,7 @@ export async function POST(req: Request) {
   const oldUser = await userService.getByEmail(dto.email, "credentials");
 
   if (oldUser)
-    return new Response(JSON.stringify({ error: "User already exist" }), {
+    return new Response(JSON.stringify({ error: "Такой пользователь уже зарегистрирован" }), {
       status: 400,
     });
 
