@@ -16,7 +16,7 @@ interface InputFieldProps {
 export const Field = forwardRef<HTMLInputElement, InputFieldProps>(
   ({ label, id, extra, type, placeholder, state, disabled, isNumber, ...rest }, ref) => {
     return (
-      <div className={state === "error" ? styles.error : styles.success}>
+      <div className={`${styles.input} ${state === "error" ? styles.error : styles.success}`}>
         <label htmlFor={id}>{label}</label>
         <input
           ref={ref}

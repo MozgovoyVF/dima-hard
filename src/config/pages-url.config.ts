@@ -1,9 +1,11 @@
 "use client";
 
 const root = "/";
+const profile = "/i/";
 
 export const DASHBOARD_PAGES = {
   HOME: root,
-  PERSONAL_ACCOUNT: root + "i",
-  AUTH: root + "auth"
+  PERSONAL_ACCOUNT: profile,
+  AUTH: root + "auth",
+  CALC: profile + "calc",
 };

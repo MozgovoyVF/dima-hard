@@ -2,12 +2,7 @@ import GoogleProvider from "next-auth/providers/google";
 import NextAuth from "next-auth";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
-import {
-  EXPIRE_DAY_ACCESS_TOKEN,
-  EXPIRE_DAY_REFRESH_TOKEN,
-  NEXT_DOMAIN,
-  REFRESH_TOKEN_NAME,
-} from "@/constants/global.constants";
+import { EXPIRE_DAY_REFRESH_TOKEN, NEXT_DOMAIN, REFRESH_TOKEN_NAME } from "@/constants/global.constants";
 import { userService } from "@/services/user.service";
 import { GoogleAuthDto } from "@/types/auth.types";
 
@@ -36,18 +31,12 @@ const handler = NextAuth({
       const loginUser = await userService.getByEmail(profile.email, "google");
 
       if (loginUser) {
-        const accessToken = jwt.sign({ id: loginUser.id }, process.env.JWT_SECRET, {
-          expiresIn: "1h",
-        });
-
         const refreshToken = jwt.sign({ id: loginUser.id }, process.env.JWT_SECRET, {
           expiresIn: "7d",
         });
 
         const expiresIn = new Date();
-        const expiresInAccessToken = new Date();
         expiresIn.setDate(expiresIn.getDate() + EXPIRE_DAY_REFRESH_TOKEN);
-        expiresInAccessToken.setHours(expiresInAccessToken.getHours() + EXPIRE_DAY_ACCESS_TOKEN);
 
         const cookieStore = cookies();
         cookieStore.set(REFRESH_TOKEN_NAME, String(refreshToken), {
@@ -69,18 +58,12 @@ const handler = NextAuth({
 
         const { password, ...newUser } = await userService.createGoogle(dto, "google");
 
-        const accessToken = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET, {
-          expiresIn: "1h",
-        });
-
         const refreshToken = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET, {
           expiresIn: "7d",
         });
 
         const expiresIn = new Date();
-        const expiresInAccessToken = new Date();
         expiresIn.setDate(expiresIn.getDate() + EXPIRE_DAY_REFRESH_TOKEN);
-        expiresInAccessToken.setHours(expiresInAccessToken.getHours() + EXPIRE_DAY_ACCESS_TOKEN);
 
         const cookieStore = cookies();
         cookieStore.set(REFRESH_TOKEN_NAME, String(refreshToken), {
