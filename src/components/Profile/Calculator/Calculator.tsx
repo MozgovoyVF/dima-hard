@@ -60,7 +60,7 @@ export function Calculator() {
               id="height"
               label="Ваш рост:"
               placeholder="Введите Ваш рост"
-              type="text"
+              type="number"
               isNumber
               state={(errors as FieldErrors<TdeeType | BmiType | BmrType | IbwType>).height ? "error" : "success"}
             />
@@ -70,7 +70,7 @@ export function Calculator() {
                 id="weight"
                 label="Ваш вес:"
                 placeholder="Введите Ваш вес"
-                type="text"
+                type="number"
                 isNumber
                 state={(errors as FieldErrors<TdeeType | BmiType | BmrType>).weight ? "error" : "success"}
               />
@@ -82,7 +82,7 @@ export function Calculator() {
                   id="age"
                   label="Ваш возраст:"
                   placeholder="Введите Ваш возраст"
-                  type="text"
+                  type="number"
                   isNumber
                   state={(errors as FieldErrors<TdeeType | BmrType>).age ? "error" : "success"}
                 />
