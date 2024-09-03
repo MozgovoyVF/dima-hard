@@ -24,6 +24,7 @@ export const Field = forwardRef<HTMLInputElement, InputFieldProps>(
           type={type}
           id={id}
           placeholder={placeholder}
+          className={styles.inp}
           onKeyDown={(event) => {
             if (
               isNumber &&
