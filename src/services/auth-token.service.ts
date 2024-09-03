@@ -8,10 +8,15 @@ export const getAccessToken = () => {
 };
 
 export const saveTokenStorage = (accessToken: string) => {
+  const now = new Date();
+  let time = now.getTime();
+  time += 3600 * 1000;
+  now.setTime(time);
+
   Cookies.set(EnumTokens.ACCESS_TOKEN, accessToken, {
     domain: NEXT_DOMAIN,
     sameSite: "strict",
-    expires: 1,
+    expires: now,
   });
 };
 

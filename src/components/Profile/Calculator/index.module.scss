@@ -1,0 +1,95 @@
+.section {
+  display: flex;
+  height: 100lvh;
+  scroll-snap-align: center;
+  perspective: 500px;
+  border-bottom: 3px solid blueviolet;
+}
+
+.container {
+  padding-top: 130px;
+  flex: 1 1 100%;
+  overflow: hidden;
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+
+    .heading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+
+      .button {
+        padding: 10px 20px;
+        border: 1px solid blueviolet;
+        border-radius: 10px;
+        transition: box-shadow 0.3s ease-in-out;
+        font-size: 16px;
+        color: white;
+
+        &.active {
+          background-color: blueviolet;
+        }
+
+        &:hover {
+          box-shadow: 0 0 15px 5px white;
+        }
+      }
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      color: white;
+
+      & > .input {
+        flex: 0 0;
+        display: flex;
+        width: 100%;
+        gap: 10px;
+        padding: 10px;
+        border: 1px solid blueviolet;
+        border-radius: 10px;
+
+        & input {
+          background-color: transparent;
+          font-size: 16px;
+          color: white;
+        }
+      }
+
+      .button {
+        padding: 10px 20px;
+        border: 1px solid blueviolet;
+        border-radius: 10px;
+        background-color: blueviolet;
+        transition: box-shadow 0.3s ease-in-out;
+        font-size: 16px;
+        color: white;
+
+        &:disabled {
+          cursor: none;
+          background-color: rgba($color: blueviolet, $alpha: .3);
+        }
+
+        &:hover {
+          box-shadow: 0 0 15px 5px white;
+        }
+      }
+    }
+
+    .result {
+      align-self: center;
+      padding-top: 20px;
+      padding-bottom: 2px;
+      font-size: 20px;
+      border-bottom: 2px solid blueviolet;
+      color: white;
+    }
+  }
+}
