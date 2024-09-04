@@ -1,5 +1,6 @@
 import { forwardRef } from "react";
 import styles from "./index.module.scss";
+import { FieldError } from "react-hook-form";
 
 interface InputFieldProps {
   id: string;
@@ -7,7 +8,7 @@ interface InputFieldProps {
   extra?: string;
   placeholder: string;
   variant?: string;
-  state?: "error" | "success";
+  state?: FieldError | null;
   disabled?: boolean;
   type?: string;
   isNumber?: boolean;
@@ -16,7 +17,7 @@ interface InputFieldProps {
 export const Field = forwardRef<HTMLInputElement, InputFieldProps>(
   ({ label, id, extra, type, placeholder, state, disabled, isNumber, ...rest }, ref) => {
     return (
-      <div className={`${styles.input} ${state === "error" ? styles.error : styles.success}`}>
+      <div className={`${styles.input} ${state ? styles.error : styles.success}`}>
         <label htmlFor={id}>{label}</label>
         <input
           ref={ref}
@@ -40,6 +41,7 @@ export const Field = forwardRef<HTMLInputElement, InputFieldProps>(
           }}
           {...rest}
         />
+        {state && <span className={styles.message}>{state.message}</span>}
       </div>
     );
   }

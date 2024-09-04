@@ -4,7 +4,7 @@ import Select from "react-select";
 
 interface ICalcSelect {
   setCalcType: Dispatch<React.SetStateAction<CalculatorType>>;
-  setResult: Dispatch<React.SetStateAction<number | null | undefined>>;
+  setResult: () => void;
 }
 
 export function CalcSelect({ setCalcType, setResult }: ICalcSelect) {
@@ -21,7 +21,7 @@ export function CalcSelect({ setCalcType, setResult }: ICalcSelect) {
       options={options}
       onChange={(newValue) => {
         newValue?.value && setCalcType(newValue.value as CalculatorType);
-        setResult(null);
+        setResult();
       }}
       styles={{
         control: (styles) => ({
