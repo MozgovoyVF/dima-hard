@@ -19,6 +19,7 @@ export function CalcSelect({ setCalcType, setResult }: ICalcSelect) {
     <Select
       defaultValue={options[0]}
       options={options}
+      isSearchable={false}
       onChange={(newValue) => {
         newValue?.value && setCalcType(newValue.value as CalculatorType);
         setResult();

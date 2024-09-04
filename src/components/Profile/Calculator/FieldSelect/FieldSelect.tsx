@@ -26,6 +26,7 @@ export function FieldSelect({
         id={type}
         placeholder="Выберите..."
         options={options}
+        isSearchable={false}
         value={options.find((c) => c.value === value)}
         onChange={(newValue) => {
           onChangeFn(newValue?.value);
