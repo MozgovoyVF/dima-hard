@@ -118,38 +118,38 @@ export function Auth() {
                 {!isLoginForm && (
                   <>
                     <Field
-                      {...register("name", { required: "Name is required!" })}
+                      {...register("name", { required: "Обязательное поле" })}
                       id="name"
                       label="Имя:"
                       placeholder="Введите имя"
                       type="text"
-                      state={(errors as FieldErrors<IRegisterForm>).name ? "error" : "success"}
+                      state={(errors as FieldErrors<IRegisterForm>).name ?? null}
                     />
                     <Field
-                      {...register("lastName", { required: "Last name is required!" })}
+                      {...register("lastName", { required: "Обязательное поле" })}
                       id="lastName"
                       label="Фамилия:"
                       placeholder="Введите фамилию"
                       type="text"
-                      state={(errors as FieldErrors<IRegisterForm>).lastName && "error"}
+                      state={(errors as FieldErrors<IRegisterForm>).lastName ?? null}
                     />
                   </>
                 )}
                 <Field
-                  {...register("email", { required: "Email is required!" })}
+                  {...register("email", { required: "Обязательное поле" })}
                   id="email"
                   label="Email:"
                   placeholder="Введите Email"
                   type="email"
-                  state={errors.email && "error"}
+                  state={errors.email ?? null}
                 />
                 <Field
-                  {...register("password", { required: "Password is required!" })}
+                  {...register("password", { required: "Обязательное поле" })}
                   id="password"
                   label="Пароль:"
                   placeholder="Введите пароль"
                   type="password"
-                  state={errors.password && "error"}
+                  state={errors.password ?? null}
                 />
                 {error && <span className={styles.error}>{error}</span>}
               </motion.div>

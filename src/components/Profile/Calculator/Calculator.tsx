@@ -25,7 +25,7 @@ export function Calculator() {
 
   const [calcType, setCalcType] = useState<CalculatorType>("tdee");
   const [result, setResult] = useState<number | null>();
-  const [error, setError] = useState("");
+  const [serverError, setServerError] = useState("");
 
   console.log(errors);
 
@@ -35,7 +35,7 @@ export function Calculator() {
 
       setResult(response.data.result);
     } catch (error: any) {
-      setError(error);
+      setServerError(error.message);
     }
   };
 
@@ -52,39 +52,64 @@ export function Calculator() {
       <div className={styles.container}>
         <div className={styles.content}>
           <div className={styles.heading}>
-            <CalcSelect setResult={setResult} setCalcType={setCalcType} />
+            <CalcSelect
+              setResult={() => {
+                setResult(null);
+                reset();
+              }}
+              setCalcType={setCalcType}
+            />
           </div>
-          <form onChange={() => setResult(null)} className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+          <form
+            onChange={() => {
+              setResult(null);
+              setServerError("");
+            }}
+            className={styles.form}
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <Field
-              {...register("height", { required: "Height is required!", min: 30, max: 240 })}
+              {...register("height", {
+                required: "Обязательное поле",
+                min: { value: 30, message: "Минимальное значение роста : 30 см" },
+                max: { value: 240, message: "Максимальное значение роста : 240 см" },
+              })}
               id="height"
               label="Ваш рост:"
               placeholder="Введите Ваш рост"
               type="number"
               isNumber
-              state={(errors as FieldErrors<TdeeType | BmiType | BmrType | IbwType>).height ? "error" : "success"}
+              state={(errors as FieldErrors<TdeeType | BmiType | BmrType | IbwType>).height ?? null}
             />
             {calcType !== "ibw" && (
               <Field
-                {...register("weight", { required: "Weight is required!", min: 30, max: 200 })}
+                {...register("weight", {
+                  required: "Обязательное поле",
+                  min: { value: 30, message: "Минимальное значение веса : 30 кг" },
+                  max: { value: 200, message: "Максимальное значение веса : 200 кг" },
+                })}
                 id="weight"
                 label="Ваш вес:"
                 placeholder="Введите Ваш вес"
                 type="number"
                 isNumber
-                state={(errors as FieldErrors<TdeeType | BmiType | BmrType>).weight ? "error" : "success"}
+                state={(errors as FieldErrors<TdeeType | BmiType | BmrType>).weight ?? null}
               />
             )}
             {calcType !== "ibw" && calcType !== "bmi" && (
               <>
                 <Field
-                  {...register("age", { required: "Age is required!", min: 1, max: 120 })}
+                  {...register("age", {
+                    required: "Обязательное поле",
+                    min: { value: 1, message: "Минимальное значение возраста : 1 год" },
+                    max: { value: 120, message: "Максимальное значение возраста : 120 лет" },
+                  })}
                   id="age"
                   label="Ваш возраст:"
                   placeholder="Введите Ваш возраст"
                   type="number"
                   isNumber
-                  state={(errors as FieldErrors<TdeeType | BmrType>).age ? "error" : "success"}
+                  state={(errors as FieldErrors<TdeeType | BmrType>).age ?? null}
                 />
 
                 <Controller
@@ -135,6 +160,9 @@ export function Calculator() {
             <div className={styles.result}>
               Результат расчета: {result} {getCalcResultType(calcType)}
             </div>
+          )}
+          {serverError && (
+            <div className={styles.error}>Возникла ошибка сервера. Пожалуйста, попробуйте повторить запрос позже</div>
           )}
         </div>
       </div>
