@@ -190,7 +190,7 @@ export function Calculator() {
                 Результат расчета: {result} {getCalcResultType(calcType)}
               </div>
               <button onClick={saveResult} className={styles.save}>
-                <BiSave />
+                <BiSave className={styles.saveIcon}/>
                 Сохранить результат в профиль
               </button>
             </>
