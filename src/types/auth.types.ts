@@ -38,4 +38,16 @@ export interface IUser {
   id: number;
   name?: string;
   email: string;
+  profile: IProfile;
+}
+
+export interface IProfile {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  subscribe: boolean;
+  tdee: number | null;
+  bmi: number | null;
+  bmr: number | null;
+  userId: string;
 }

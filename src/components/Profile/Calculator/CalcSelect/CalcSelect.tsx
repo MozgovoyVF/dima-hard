@@ -9,8 +9,8 @@ interface ICalcSelect {
 
 export function CalcSelect({ setCalcType, setResult }: ICalcSelect) {
   const options = [
-    { value: "tdee", label: "Расчет общих суточные затраты энергии" },
-    { value: "ibw", label: "Расчет идеального веса тела" },
+    { value: "tdee", label: "Расчет общих суточных затрат энергии" },
+    // { value: "ibw", label: "Расчет идеального веса тела" },
     { value: "bmi", label: "Расчет индекса массы тела" },
     { value: "bmr", label: "Расчет базовой скорости метаболизма" },
   ];

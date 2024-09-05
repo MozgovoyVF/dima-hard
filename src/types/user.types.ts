@@ -1,3 +1,5 @@
+import { IProfile } from "./auth.types";
+
 export interface UserDto {
   email?: string;
   name?: string;
@@ -10,4 +12,5 @@ export interface IProfileUser {
   lastName?: string;
   email: string;
   avatarUrl?: string;
+  profile: IProfile;
 }

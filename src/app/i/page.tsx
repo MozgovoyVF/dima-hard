@@ -1,5 +1,6 @@
+import { Account } from "@/components/Profile/Account/Account";
 import React from "react";
 
 export default function I() {
-  return <div>IIII</div>;
+  return <Account />;
 }

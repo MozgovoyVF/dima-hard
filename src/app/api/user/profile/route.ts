@@ -1,6 +1,7 @@
-import { headers } from "next/headers";
+import { cookies, headers } from "next/headers";
 import jwt, { UserIDJwtPayload } from "jsonwebtoken";
 import { userService } from "@/services/user.service";
+import { NEXT_DOMAIN, REFRESH_TOKEN_NAME } from "@/constants/global.constants";
 
 export async function GET(req: Request) {
   const header = headers();
@@ -17,6 +18,21 @@ export async function GET(req: Request) {
 
   // @ts-ignore
   const { provider, password, createdAt, updatedAt, ...user } = await userService.getById(id);
+
+  if (!user) {
+    const cookieStore = cookies();
+    cookieStore.set(REFRESH_TOKEN_NAME, "", {
+      httpOnly: true,
+      domain: NEXT_DOMAIN,
+      expires: new Date(0),
+      secure: true,
+      sameSite: "none",
+    });
+
+    return new Response(JSON.stringify({ error: "User not found" }), {
+      status: 404,
+    });
+  }
 
   return new Response(JSON.stringify(user), {
     status: 200,
