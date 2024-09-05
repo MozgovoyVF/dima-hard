@@ -10,6 +10,9 @@ export const userService = {
       where: {
         id,
       },
+      include: {
+        profile: true,
+      },
     });
   },
 
@@ -18,6 +21,9 @@ export const userService = {
       where: {
         email,
         provider,
+      },
+      include: {
+        profile: true,
       },
     });
   },
@@ -32,7 +38,7 @@ export const userService = {
     };
 
     return prisma.user.create({
-      data: user,
+      data: { ...user, profile: { create: {} } },
     });
   },
 
@@ -46,7 +52,7 @@ export const userService = {
     };
 
     return prisma.user.create({
-      data: user,
+      data: { ...user, profile: { create: {} } },
     });
   },
 

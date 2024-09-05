@@ -26,4 +26,4 @@ export type CalculatorResponse = {
   result: number;
 };
 
-export type CalculatorType = "tdee" | "ibw" | "bmi" | "bmr";
+export type CalculatorType = "tdee" | "bmi" | "bmr";

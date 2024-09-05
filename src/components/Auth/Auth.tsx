@@ -41,7 +41,7 @@ export function Auth() {
     mutationKey: ["auth"],
     mutationFn: (data: IAuthForm | IRegisterForm) => authService.main(isLoginForm ? "login" : "register", data),
     onSuccess() {
-      toast.success("Successfully login!");
+      toast.success("Авторизация прошла успешно");
       reset();
       queryClient.invalidateQueries({
         queryKey: ["profile"],
@@ -49,7 +49,6 @@ export function Auth() {
       push(DASHBOARD_PAGES.PERSONAL_ACCOUNT);
     },
     onError: (error) => {
-      console.log(error);
       // @ts-ignore //
       setError(error.response.data.error);
     },

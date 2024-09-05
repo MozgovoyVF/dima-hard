@@ -5,12 +5,17 @@ import styles from "./index.module.scss";
 import { motion } from "framer-motion";
 import { FieldErrors, SubmitHandler, useForm, Controller } from "react-hook-form";
 import { variants } from "@/constants/framer.constants";
-import { BmiType, BmrType, CalculatorType, IbwType, TdeeType } from "@/types/calculator.types";
+import { BmiType, BmrType, CalculatorType, TdeeType } from "@/types/calculator.types";
 import { CalcSelect } from "./CalcSelect/CalcSelect";
 import { FieldSelect } from "./FieldSelect/FieldSelect";
 import { Field } from "@/components/ui/fields/Field";
 import { calculatorService } from "@/services/calculator.service";
 import { getCalcResultType } from "@/utils/getCalcResultType";
+import { BiSave } from "react-icons/bi";
+import { useProfile } from "@/hooks/useProfile";
+import { profileService } from "@/services/profile.service";
+import { toast } from "sonner";
+import { useSaveResult } from "@/hooks/useSaveResult";
 
 export function Calculator() {
   const {
@@ -19,17 +24,32 @@ export function Calculator() {
     reset,
     control,
     formState: { errors },
-  } = useForm<TdeeType | BmiType | BmrType | IbwType>({
+  } = useForm<TdeeType | BmiType | BmrType>({
     mode: "onSubmit",
   });
 
   const [calcType, setCalcType] = useState<CalculatorType>("tdee");
   const [result, setResult] = useState<number | null>();
   const [serverError, setServerError] = useState("");
+  const { data } = useProfile();
+  const { mutate, isPending } = useSaveResult();
 
-  console.log(errors);
+  const saveResult = () => {
+    if (!result) {
+      return setServerError("Произошла непредвиденная ошибка");
+    }
+    try {
+      mutate({ calcType, result });
 
-  const onSubmit: SubmitHandler<TdeeType | BmiType | BmrType | IbwType> = async (data) => {
+      reset();
+      toast.success("Результат успешно сохранен");
+      return setResult(null);
+    } catch (error) {
+      return toast.error("Произошла ошибка при сохранении");
+    }
+  };
+
+  const onSubmit: SubmitHandler<TdeeType | BmiType | BmrType> = async (data) => {
     try {
       const response = await calculatorService.getCalc(calcType, data);
 
@@ -41,7 +61,7 @@ export function Calculator() {
 
   return (
     <motion.section
-      key="auth"
+      key="calc"
       variants={variants}
       initial="hidden"
       animate="enter"
@@ -60,6 +80,15 @@ export function Calculator() {
               setCalcType={setCalcType}
             />
           </div>
+          {data?.profile[calcType] && (
+            <div className={styles.currentResult}>
+              Cохраненный результат расчета:
+              <br />
+              <b>
+                {data?.profile[calcType].toLocaleString("de-DE")} {getCalcResultType(calcType)}
+              </b>
+            </div>
+          )}
           <form
             onChange={() => {
               setResult(null);
@@ -75,28 +104,27 @@ export function Calculator() {
                 max: { value: 240, message: "Максимальное значение роста : 240 см" },
               })}
               id="height"
-              label="Ваш рост:"
-              placeholder="Введите Ваш рост"
+              label="Рост:"
+              placeholder="Введите Ваш рост, см"
               type="number"
               isNumber
-              state={(errors as FieldErrors<TdeeType | BmiType | BmrType | IbwType>).height ?? null}
+              state={(errors as FieldErrors<TdeeType | BmiType | BmrType>).height ?? null}
             />
-            {calcType !== "ibw" && (
-              <Field
-                {...register("weight", {
-                  required: "Обязательное поле",
-                  min: { value: 30, message: "Минимальное значение веса : 30 кг" },
-                  max: { value: 200, message: "Максимальное значение веса : 200 кг" },
-                })}
-                id="weight"
-                label="Ваш вес:"
-                placeholder="Введите Ваш вес"
-                type="number"
-                isNumber
-                state={(errors as FieldErrors<TdeeType | BmiType | BmrType>).weight ?? null}
-              />
-            )}
-            {calcType !== "ibw" && calcType !== "bmi" && (
+            <Field
+              {...register("weight", {
+                required: "Обязательное поле",
+                min: { value: 30, message: "Минимальное значение веса : 30 кг" },
+                max: { value: 200, message: "Максимальное значение веса : 200 кг" },
+              })}
+              id="weight"
+              label="Вес:"
+              placeholder="Введите Ваш вес, кг"
+              type="number"
+              isNumber
+              state={(errors as FieldErrors<TdeeType | BmiType | BmrType>).weight ?? null}
+            />
+
+            {calcType !== "bmi" && (
               <>
                 <Field
                   {...register("age", {
@@ -105,7 +133,7 @@ export function Calculator() {
                     max: { value: 120, message: "Максимальное значение возраста : 120 лет" },
                   })}
                   id="age"
-                  label="Ваш возраст:"
+                  label="Возраст:"
                   placeholder="Введите Ваш возраст"
                   type="number"
                   isNumber
@@ -157,9 +185,15 @@ export function Calculator() {
             </button>
           </form>
           {result && (
-            <div className={styles.result}>
-              Результат расчета: {result} {getCalcResultType(calcType)}
-            </div>
+            <>
+              <div className={styles.result}>
+                Результат расчета: {result} {getCalcResultType(calcType)}
+              </div>
+              <button onClick={saveResult} className={styles.save}>
+                <BiSave />
+                Сохранить результат в профиль
+              </button>
+            </>
           )}
           {serverError && (
             <div className={styles.error}>Возникла ошибка сервера. Пожалуйста, попробуйте повторить запрос позже</div>
