@@ -12,8 +12,8 @@ export const profileService = {
     const response = await axiosWithAuth.get<IProfileResponse>(BASE_URL);
     return response.data;
   },
-  async updateProfile(type: CalculatorType, result: number) {
-    const response = await axiosWithAuth.put<{ id: string }>(BASE_URL + "/update", { type, result });
+  async updateProfile(type: CalculatorType, result: number, desiredResult?: number) {
+    const response = await axiosWithAuth.put<{ id: string }>(BASE_URL + "/update", { type, result, desiredResult });
     return response.data;
   },
 };

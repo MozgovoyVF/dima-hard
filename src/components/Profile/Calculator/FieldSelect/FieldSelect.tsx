@@ -17,17 +17,24 @@ export function FieldSelect({
   onChangeFn: (...event: any[]) => void;
   resetResult: () => void;
   value: any;
-  type: "gender" | "activity";
+  type: "gender" | "activity" | "desiredActivity";
 }) {
   return (
     <>
-      <label htmlFor={type}>{type === "gender" ? "Ваш пол:" : "Ваша дневная активность:"}</label>
+      <label htmlFor={type}>
+        {type === "gender"
+          ? "Ваш пол:"
+          : type === "activity"
+          ? "Ваша текущая дневная активность:"
+          : "Ваша планируемая активность"}
+      </label>
       <Select
         id={type}
         placeholder="Выберите..."
         options={options}
         isSearchable={false}
         value={options.find((c) => c.value === value)}
+        menuPlacement={type === "desiredActivity" ? "top" : "bottom"}
         onChange={(newValue) => {
           onChangeFn(newValue?.value);
           resetResult();

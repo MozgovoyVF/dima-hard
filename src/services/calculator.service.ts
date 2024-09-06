@@ -18,7 +18,21 @@ export const calculatorService = {
     return response;
   },
 
-  async saveResult(type: CalculatorType, result: number, userId: string) {
+  async saveResult(type: CalculatorType, result: number, userId: string, desiredResult?: number) {
+    if (desiredResult) {
+      return prisma.profile.update({
+        where: {
+          userId: userId,
+        },
+        data: {
+          [type]: result,
+          desiredTdee: desiredResult,
+        },
+        select: {
+          id: true,
+        },
+      });
+    }
     return prisma.profile.update({
       where: {
         userId: userId,

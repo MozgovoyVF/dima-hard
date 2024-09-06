@@ -1,21 +1,18 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import styles from "./index.module.scss";
 import { motion } from "framer-motion";
-import { FieldErrors, SubmitHandler, useForm, Controller } from "react-hook-form";
+import { FieldErrors, useForm, Controller } from "react-hook-form";
 import { variants } from "@/constants/framer.constants";
-import { BmiType, BmrType, CalculatorType, TdeeType } from "@/types/calculator.types";
+import { BmiType, BmrType, TdeeType } from "@/types/calculator.types";
 import { CalcSelect } from "./CalcSelect/CalcSelect";
 import { FieldSelect } from "./FieldSelect/FieldSelect";
 import { Field } from "@/components/ui/fields/Field";
-import { calculatorService } from "@/services/calculator.service";
 import { getCalcResultType } from "@/utils/getCalcResultType";
 import { BiSave } from "react-icons/bi";
 import { useProfile } from "@/hooks/useProfile";
-import { profileService } from "@/services/profile.service";
-import { toast } from "sonner";
-import { useSaveResult } from "@/hooks/useSaveResult";
+import { useCalculatorHandlers } from "@/hooks/useCalculatorHandlers";
 
 export function Calculator() {
   const {
@@ -28,36 +25,20 @@ export function Calculator() {
     mode: "onSubmit",
   });
 
-  const [calcType, setCalcType] = useState<CalculatorType>("tdee");
-  const [result, setResult] = useState<number | null>();
-  const [serverError, setServerError] = useState("");
   const { data } = useProfile();
-  const { mutate, isPending } = useSaveResult();
-
-  const saveResult = () => {
-    if (!result) {
-      return setServerError("Произошла непредвиденная ошибка");
-    }
-    try {
-      mutate({ calcType, result });
-
-      reset();
-      toast.success("Результат успешно сохранен");
-      return setResult(null);
-    } catch (error) {
-      return toast.error("Произошла ошибка при сохранении");
-    }
-  };
-
-  const onSubmit: SubmitHandler<TdeeType | BmiType | BmrType> = async (data) => {
-    try {
-      const response = await calculatorService.getCalc(calcType, data);
-
-      setResult(response.data.result);
-    } catch (error: any) {
-      setServerError(error.message);
-    }
-  };
+  const {
+    saveResult,
+    onSubmit,
+    setDesiredResult,
+    setResult,
+    setCalcType,
+    calcType,
+    setServerError,
+    desiredResult,
+    result,
+    serverError,
+    isPending,
+  } = useCalculatorHandlers({ reset });
 
   return (
     <motion.section
@@ -75,6 +56,7 @@ export function Calculator() {
             <CalcSelect
               setResult={() => {
                 setResult(null);
+                setDesiredResult(null);
                 reset();
               }}
               setCalcType={setCalcType}
@@ -92,6 +74,7 @@ export function Calculator() {
           <form
             onChange={() => {
               setResult(null);
+              setDesiredResult(null);
               setServerError("");
             }}
             className={styles.form}
@@ -123,6 +106,21 @@ export function Calculator() {
               isNumber
               state={(errors as FieldErrors<TdeeType | BmiType | BmrType>).weight ?? null}
             />
+            {calcType === "tdee" && (
+              <Field
+                {...register("desired_weight", {
+                  required: "Обязательное поле",
+                  min: { value: 30, message: "Минимальное значение веса : 30 кг" },
+                  max: { value: 200, message: "Максимальное значение веса : 200 кг" },
+                })}
+                id="desired_weight"
+                label="Желаемый вес:"
+                placeholder="Введите желаемый вес, кг"
+                type="number"
+                isNumber
+                state={(errors as FieldErrors<TdeeType>).desired_weight ?? null}
+              />
+            )}
 
             {calcType !== "bmi" && (
               <>
@@ -148,7 +146,10 @@ export function Calculator() {
                     <FieldSelect
                       type="gender"
                       onChangeFn={field.onChange}
-                      resetResult={() => setResult(null)}
+                      resetResult={() => {
+                        setResult(null);
+                        return setDesiredResult(null);
+                      }}
                       options={[
                         { value: "male", label: "Мужской" },
                         { value: "female", label: "Женский" },
@@ -160,27 +161,54 @@ export function Calculator() {
               </>
             )}
             {calcType === "tdee" && (
-              <Controller
-                name="activityLevel"
-                defaultValue="sedentary"
-                control={control}
-                render={({ field: { onChange, value } }) => (
-                  <FieldSelect
-                    type="activity"
-                    onChangeFn={onChange}
-                    resetResult={() => setResult(null)}
-                    value={value}
-                    options={[
-                      { value: "sedentary", label: "Очень низкая" },
-                      { value: "lightlyActive", label: "Низкая" },
-                      { value: "active", label: "Средняя" },
-                      { value: "veryActive", label: "Высокая" },
-                    ]}
-                  />
-                )}
-              />
+              <>
+                <Controller
+                  name="activityLevel"
+                  defaultValue="sedentary"
+                  control={control}
+                  render={({ field: { onChange, value } }) => (
+                    <FieldSelect
+                      type="activity"
+                      onChangeFn={onChange}
+                      resetResult={() => {
+                        setResult(null);
+                        return setDesiredResult(null);
+                      }}
+                      value={value}
+                      options={[
+                        { value: "sedentary", label: "Очень низкая" },
+                        { value: "lightlyActive", label: "Низкая" },
+                        { value: "active", label: "Средняя" },
+                        { value: "veryActive", label: "Высокая" },
+                      ]}
+                    />
+                  )}
+                />
+                <Controller
+                  name="desiredActivityLevel"
+                  defaultValue="sedentary"
+                  control={control}
+                  render={({ field: { onChange, value } }) => (
+                    <FieldSelect
+                      type="desiredActivity"
+                      onChangeFn={onChange}
+                      resetResult={() => {
+                        setDesiredResult(null);
+                        return setResult(null);
+                      }}
+                      value={value}
+                      options={[
+                        { value: "sedentary", label: "Очень низкая" },
+                        { value: "lightlyActive", label: "Низкая" },
+                        { value: "active", label: "Средняя" },
+                        { value: "veryActive", label: "Высокая" },
+                      ]}
+                    />
+                  )}
+                />
+              </>
             )}
-            <button disabled={!!result} className={styles.button} type="submit">
+            <button disabled={!!result || Object.keys(errors).length !== 0} className={styles.button} type="submit">
               Получить результат
             </button>
           </form>
@@ -189,8 +217,17 @@ export function Calculator() {
               <div className={styles.result}>
                 Результат расчета: {result} {getCalcResultType(calcType)}
               </div>
-              <button onClick={saveResult} className={styles.save}>
-                <BiSave className={styles.saveIcon}/>
+              {desiredResult && result - desiredResult !== 0 && (
+                <div className={styles.result}>
+                  Необходимый{" "}
+                  <span className={result - desiredResult < 0 ? styles.positive : styles.negative}>
+                    {result - desiredResult < 0 ? "профицит" : "дефицит"}
+                  </span>{" "}
+                  калорий: {Math.abs(result - desiredResult)} {getCalcResultType(calcType)}
+                </div>
+              )}
+              <button onClick={saveResult} disabled={isPending} className={styles.save}>
+                <BiSave className={styles.saveIcon} />
                 Сохранить результат в профиль
               </button>
             </>

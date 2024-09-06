@@ -41,6 +41,7 @@ model Profile {
   subscribe Boolean @default(false)
 
   tdee Decimal? @db.Decimal(10, 2)
+  desiredTdee Decimal? @db.Decimal(10, 2)
   bmi Decimal? @db.Decimal(10, 2)
   bmr Decimal? @db.Decimal(10, 2)
 
