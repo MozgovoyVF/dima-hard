@@ -3,7 +3,7 @@ import jwt, { UserIDJwtPayload } from "jsonwebtoken";
 import { calculatorService } from "@/services/calculator.service";
 
 export async function PUT(req: Request) {
-  const { type, result } = await req.json();
+  const { type, result, desiredResult } = await req.json();
 
   const header = headers();
   const authToken = (header.get("authorization") || "").split("Bearer ").at(1);
@@ -17,10 +17,15 @@ export async function PUT(req: Request) {
   const decodedToken = jwt.decode(authToken) as UserIDJwtPayload;
   const userId = decodedToken.id;
 
-  // @ts-ignore
-  const { id } = await calculatorService.saveResult(type, result, userId);
-
-  return new Response(JSON.stringify(id), {
-    status: 200,
-  });
+  if (type === "tdee") {
+    const { id } = await calculatorService.saveResult(type, result, userId, desiredResult);
+    return new Response(JSON.stringify(id), {
+      status: 200,
+    });
+  } else {
+    const { id } = await calculatorService.saveResult(type, result, userId);
+    return new Response(JSON.stringify(id), {
+      status: 200,
+    });
+  }
 }

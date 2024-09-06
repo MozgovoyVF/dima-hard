@@ -1,8 +1,10 @@
 export type TdeeType = {
   activityLevel: "sedentary" | "lightlyActive" | "active" | "veryActive";
+  desiredActivityLevel: "sedentary" | "lightlyActive" | "active" | "veryActive";
   gender: "male" | "female";
   age: string;
   weight: string;
+  desired_weight: string;
   height: string;
 };
 
