@@ -28,10 +28,7 @@ export async function POST(req: Request, res: NextResponse) {
   }
 
   const result = process.env.JWT_SECRET
-    ? (jwt.verify(
-        refreshTokenFromCookies,
-        process.env.JWT_SECRET
-      ) as UserIDJwtPayload)
+    ? (jwt.verify(refreshTokenFromCookies, process.env.JWT_SECRET) as UserIDJwtPayload)
     : null;
 
   if (!result)
@@ -45,11 +42,11 @@ export async function POST(req: Request, res: NextResponse) {
   let refreshToken = "";
 
   if (process.env.JWT_SECRET) {
-    accessToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+    accessToken = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
 
-    refreshToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+    refreshToken = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, {
       expiresIn: "7d",
     });
   }

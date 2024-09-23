@@ -1,0 +1,57 @@
+.title {
+  padding: 20px 10px;
+  text-align: center;
+  font-size: 24px;
+  color: blueviolet;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+
+  .button {
+    padding: 10px 20px;
+    text-align: center;
+    border-radius: 20px;
+    color: white;
+    background-color: blueviolet;
+  }
+
+  .accept {
+    padding: 10px 20px;
+    text-align: center;
+    border-radius: 20px;
+    background-color: rgb(51, 178, 75);
+    color: white;
+  }
+
+  .text {
+    color: white;
+    text-align: center;
+  }
+
+  .buttonBlock {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .input {
+    min-width: 200px;
+    border-radius: 20px;
+    padding: 10px 20px;
+    border: 1px solid blueviolet;
+    background-color: transparent;
+    color: white;
+
+    &::placeholder {
+      color: white;
+      font-size: 16px;
+    }
+  }
+}

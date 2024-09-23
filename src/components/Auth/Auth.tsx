@@ -4,7 +4,7 @@ import { MouseEvent, useState } from "react";
 import { FieldErrors, SubmitHandler, useForm } from "react-hook-form";
 import { Field } from "@/components/ui/fields/Field";
 
-import { IAuthForm, IRegisterForm } from "@/types/auth.types";
+import { IAuthForm, IAuthResponse, IRegisterForm } from "@/types/auth.types";
 import { DASHBOARD_PAGES } from "@/config/pages-url.config";
 import { signIn } from "next-auth/react";
 import styles from "./index.module.scss";
@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { authService } from "@/services/auth.service";
 import { toast } from "sonner";
+import { MotionSection } from "../ui/motionSection/MotionSection";
 
 const variants = {
   hidden: { opacity: 0, x: -200, y: 0 },
@@ -40,13 +41,18 @@ export function Auth() {
   const { mutate } = useMutation({
     mutationKey: ["auth"],
     mutationFn: (data: IAuthForm | IRegisterForm) => authService.main(isLoginForm ? "login" : "register", data),
-    onSuccess() {
+    onSuccess({ data }: { data: IAuthResponse }) {
       toast.success("Авторизация прошла успешно");
       reset();
       queryClient.invalidateQueries({
         queryKey: ["profile"],
       });
-      push(DASHBOARD_PAGES.PERSONAL_ACCOUNT);
+
+      if (data.user.role === "admin") {
+        push(DASHBOARD_PAGES.ADMIN_MAIN);
+      } else {
+        push(DASHBOARD_PAGES.PERSONAL_ACCOUNT);
+      }
     },
     onError: (error) => {
       // @ts-ignore //
@@ -72,105 +78,95 @@ export function Auth() {
 
   return (
     <AnimatePresence mode="wait">
-      <motion.section
-        key="auth"
-        variants={variants}
-        initial="hidden"
-        animate="enter"
-        exit="exit"
-        transition={{ type: "easi-in-out", duration: 0.3 }}
-        className={styles.section}
-      >
-        <div className={styles.container}>
-          <div className={styles.content}>
-            <form className={styles.form} onSubmit={handleSubmit(onSubmit)} onChange={() => setError("")}>
-              <div className={styles.heading}>
-                <button
-                  className={`${styles.button} ${isLoginForm && styles.active}`}
-                  onClick={() => {
-                    reset();
-                    setError("");
-                    setIsLoginForm(true);
-                  }}
-                >
-                  Вход
-                </button>
-                <button
-                  className={`${styles.button} ${!isLoginForm && styles.active}`}
-                  onClick={() => {
-                    reset();
-                    setError("");
-                    setIsLoginForm(false);
-                  }}
-                >
-                  Регистрация
-                </button>
-              </div>
-              <motion.div
-                key={isLoginForm ? "login" : "register"}
-                variants={variants}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ type: "linear", duration: 1 }}
-                className={styles.inputs}
+      <MotionSection>
+        <div className={styles.content}>
+          <form className={styles.form} onSubmit={handleSubmit(onSubmit)} onChange={() => setError("")}>
+            <div className={styles.heading}>
+              <button
+                className={`${styles.button} ${isLoginForm && styles.active}`}
+                onClick={() => {
+                  reset();
+                  setError("");
+                  setIsLoginForm(true);
+                }}
               >
-                {!isLoginForm && (
-                  <>
-                    <Field
-                      {...register("name", { required: "Обязательное поле" })}
-                      id="name"
-                      label="Имя:"
-                      placeholder="Введите имя"
-                      type="text"
-                      state={(errors as FieldErrors<IRegisterForm>).name ?? null}
-                    />
-                    <Field
-                      {...register("lastName", { required: "Обязательное поле" })}
-                      id="lastName"
-                      label="Фамилия:"
-                      placeholder="Введите фамилию"
-                      type="text"
-                      state={(errors as FieldErrors<IRegisterForm>).lastName ?? null}
-                    />
-                  </>
-                )}
-                <Field
-                  {...register("email", { required: "Обязательное поле" })}
-                  id="email"
-                  label="Email:"
-                  placeholder="Введите Email"
-                  type="email"
-                  state={errors.email ?? null}
-                />
-                <Field
-                  {...register("password", { required: "Обязательное поле" })}
-                  id="password"
-                  label="Пароль:"
-                  placeholder="Введите пароль"
-                  type="password"
-                  state={errors.password ?? null}
-                />
-                {error && <span className={styles.error}>{error}</span>}
-              </motion.div>
-              <div className={styles.buttonsBlock}>
-                {isLoginForm ? (
-                  <button className={styles.button} onClick={() => setIsLoginForm(true)}>
-                    Войти
-                  </button>
-                ) : (
-                  <button className={styles.button} onClick={() => setIsLoginForm(false)}>
-                    Зарегистрироваться
-                  </button>
-                )}
-                <button className={styles.google} onClick={handleClick}>
-                  <FcGoogle />
-                  Войти с аккаунтом Google
+                Вход
+              </button>
+              <button
+                className={`${styles.button} ${!isLoginForm && styles.active}`}
+                onClick={() => {
+                  reset();
+                  setError("");
+                  setIsLoginForm(false);
+                }}
+              >
+                Регистрация
+              </button>
+            </div>
+            <motion.div
+              key={isLoginForm ? "login" : "register"}
+              variants={variants}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ type: "linear", duration: 1 }}
+              className={styles.inputs}
+            >
+              {!isLoginForm && (
+                <>
+                  <Field
+                    {...register("name", { required: "Обязательное поле" })}
+                    id="name"
+                    label="Имя:"
+                    placeholder="Введите имя"
+                    type="text"
+                    state={(errors as FieldErrors<IRegisterForm>).name ?? null}
+                  />
+                  <Field
+                    {...register("lastName", { required: "Обязательное поле" })}
+                    id="lastName"
+                    label="Фамилия:"
+                    placeholder="Введите фамилию"
+                    type="text"
+                    state={(errors as FieldErrors<IRegisterForm>).lastName ?? null}
+                  />
+                </>
+              )}
+              <Field
+                {...register("email", { required: "Обязательное поле" })}
+                id="email"
+                label="Email:"
+                placeholder="Введите Email"
+                type="email"
+                state={errors.email ?? null}
+              />
+              <Field
+                {...register("password", { required: "Обязательное поле" })}
+                id="password"
+                label="Пароль:"
+                placeholder="Введите пароль"
+                type="password"
+                state={errors.password ?? null}
+              />
+              {error && <span className={styles.error}>{error}</span>}
+            </motion.div>
+            <div className={styles.buttonsBlock}>
+              {isLoginForm ? (
+                <button className={styles.button} onClick={() => setIsLoginForm(true)}>
+                  Войти
                 </button>
-              </div>
-            </form>
-          </div>
+              ) : (
+                <button className={styles.button} onClick={() => setIsLoginForm(false)}>
+                  Зарегистрироваться
+                </button>
+              )}
+              <button className={styles.google} onClick={handleClick}>
+                <FcGoogle />
+                Войти с аккаунтом Google
+              </button>
+            </div>
+          </form>
         </div>
-      </motion.section>
+      </MotionSection>
     </AnimatePresence>
   );
 }

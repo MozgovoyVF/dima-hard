@@ -26,9 +26,12 @@ model User {
   password String?
   avatarUrl String?
 
+  role Role @default(user)
+
   provider Provider @default(credentials)
 
   profile Profile?
+  fatsecret Fatsecret?
 
   @@map("user")
 }
@@ -37,6 +40,8 @@ model Profile {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
+
+  birthday DateTime?
 
   subscribe Boolean @default(false)
 
@@ -51,7 +56,26 @@ model Profile {
    @@map("profile")
 }
 
+model Fatsecret {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  token String?
+  secret String?
+
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String  @unique
+
+   @@map("fatsecret")
+}
+
 enum Provider {
   credentials
   google
+}
+
+enum Role {
+  user
+  admin
 }

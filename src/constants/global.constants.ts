@@ -5,3 +5,5 @@ export const EXPIRE_HOUR_ACCESS_TOKEN = 1;
 export const REFRESH_TOKEN_NAME = "refreshToken";
 export const ACCESS_TOKEN_NAME = "accessToken";
 export const PHONE_NUMBER = "+79110059352";
+export const CONSUMER_KEY = process.env.FATSECRET_CLIENT_ID || "";
+export const CONSUMER_SECRET = process.env.FATSECRET_CLIENT_SECRET || "";

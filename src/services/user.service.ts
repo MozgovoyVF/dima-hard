@@ -1,10 +1,20 @@
-import { GoogleAuthDto, RegisterDto } from "@/types/auth.types";
-import { UserDto } from "@/types/user.types";
+import { DeepPartial, GoogleAuthDto, IUser, RegisterDto } from "@/types/auth.types";
 import { hash } from "argon2";
 import prisma from "./prisma.service";
 import { Provider } from "@prisma/client";
 
 export const userService = {
+  getAllUsers() {
+    return prisma.user.findMany({
+      where: {
+        role: "user",
+      },
+      include: {
+        profile: true,
+        fatsecret: true,
+      },
+    });
+  },
   getById(id: string) {
     return prisma.user.findUnique({
       where: {
@@ -38,7 +48,7 @@ export const userService = {
     };
 
     return prisma.user.create({
-      data: { ...user, profile: { create: {} } },
+      data: { ...user, profile: { create: {} }, fatsecret: { create: {} } },
     });
   },
 
@@ -52,25 +62,45 @@ export const userService = {
     };
 
     return prisma.user.create({
-      data: { ...user, profile: { create: {} } },
+      data: { ...user, profile: { create: {} }, fatsecret: { create: {} } },
     });
   },
 
-  async update(id: string, dto: UserDto) {
-    let data = dto;
+  async update(user: DeepPartial<IUser>) {
+    let { id, profile, fatsecret, ...data } = user;
 
-    if (dto.password) {
-      data = { ...dto, password: await hash(dto.password) };
+    if (data.password) {
+      data = { ...data, password: await hash(data.password) };
     }
 
     return prisma.user.update({
       where: {
-        id,
+        id: String(id),
       },
-      data,
-      select: {
-        name: true,
-        email: true,
+      data: {
+        ...data,
+        profile: {
+          update: {
+            ...profile,
+          },
+        },
+        fatsecret: {
+          update: {
+            ...fatsecret,
+          },
+        },
+      },
+    });
+  },
+
+  async resetFatsecretData(userId: string) {
+    return prisma.fatsecret.update({
+      where: {
+        userId,
+      },
+      data: {
+        token: null,
+        secret: null,
       },
     });
   },

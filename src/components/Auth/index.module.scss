@@ -1,17 +1,3 @@
-.section {
-  display: flex;
-  height: 100lvh;
-  scroll-snap-align: center;
-  perspective: 500px;
-  border-bottom: 3px solid blueviolet;
-}
-
-.section > div {
-  padding-top: 130px;
-  flex: 1 1 100%;
-  overflow: hidden;
-}
-
 .content {
   display: flex;
   align-items: center;

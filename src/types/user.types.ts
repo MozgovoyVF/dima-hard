@@ -12,5 +12,14 @@ export interface IProfileUser {
   lastName?: string;
   email: string;
   avatarUrl?: string;
+  role: "user" | "admin";
   profile: IProfile;
+  fatsecret: IFatSecret;
+}
+
+export interface IFatSecret {
+  id: string;
+
+  token?: string;
+  secret?: string;
 }

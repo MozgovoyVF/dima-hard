@@ -19,8 +19,13 @@ export function Profile({ data }: IProfile) {
 
   return (
     <div className={styles.profile}>
-      <Link href={DASHBOARD_PAGES.PERSONAL_ACCOUNT}>
-        <Image src={data?.avatarUrl ? data.avatarUrl : "/images/user.webp"} alt="profile" width={30} height={30} />
+      <Link href={data.role === "admin" ? DASHBOARD_PAGES.ADMIN_MAIN : DASHBOARD_PAGES.PERSONAL_ACCOUNT}>
+        <Image
+          src={data?.avatarUrl ? data.avatarUrl : "/images/avatars/user.webp"}
+          alt="profile"
+          width={30}
+          height={30}
+        />
       </Link>
       <button onClick={() => logout()} className={styles.button}>
         Выйти
