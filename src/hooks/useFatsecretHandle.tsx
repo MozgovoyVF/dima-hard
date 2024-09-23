@@ -1,5 +1,6 @@
 import { axiosWithAuth } from "@/app/api/interceptors";
 import { DASHBOARD_PAGES } from "@/config/pages-url.config";
+import { NEXT_URL } from "@/constants/global.constants";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 
@@ -13,7 +14,7 @@ export const useFatsecretHandle = () => {
   const handleRequestToken = async () => {
     setError("");
     try {
-      const response = await axiosWithAuth.get("http://localhost:3000/api/fatsecret/request_token");
+      const response = await axiosWithAuth.get(`${NEXT_URL}/api/fatsecret/request_token`);
 
       const data = response.data;
       setLink(data.link);
@@ -28,7 +29,7 @@ export const useFatsecretHandle = () => {
     setError("");
     if (ref.current && ref.current.value) {
       try {
-        await axiosWithAuth.post(`http://localhost:3000/api/fatsecret/access_token`, {
+        await axiosWithAuth.post(`${NEXT_URL}/api/fatsecret/access_token`, {
           body: { code: ref.current.value, token: tokens?.token, secret: tokens?.secret },
         });
 
