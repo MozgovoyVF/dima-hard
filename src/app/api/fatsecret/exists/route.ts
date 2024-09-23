@@ -1,9 +1,8 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import { headers } from "next/headers";
 import jwt, { UserIDJwtPayload } from "jsonwebtoken";
 import { fatsecretService } from "@/services/fatsecret.service";
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
+export async function GET() {
   const header = headers();
   const authToken = (header.get("authorization") || "").split("Bearer ").at(1);
 

@@ -1,9 +1,8 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import { FatSecretOauth1 } from "../../../../services/fatsecret.service";
 import axios from "axios";
 import { headers } from "next/headers";
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
+export async function GET() {
   const header = headers();
   const authToken = (header.get("authorization") || "").split("Bearer ").at(1);
 
