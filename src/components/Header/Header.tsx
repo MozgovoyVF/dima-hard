@@ -40,7 +40,7 @@ export function Header() {
       {isShowModal ? (
         <AnimatePresence mode="wait" initial={true}>
           <ClientOnlyPortal selector={"#modal"}>
-            <MenuModal closeFn={() => setIsShowModal(false)} />
+            <MenuModal closeFn={() => setIsShowModal(false)} subscribe={data?.profile.subscribe || false} />
           </ClientOnlyPortal>
         </AnimatePresence>
       ) : null}

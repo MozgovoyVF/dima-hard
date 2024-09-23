@@ -1,8 +1,4 @@
-import {
-  EXPIRE_DAY_REFRESH_TOKEN,
-  NEXT_DOMAIN,
-  REFRESH_TOKEN_NAME,
-} from "@/constants/global.constants";
+import { EXPIRE_DAY_REFRESH_TOKEN, NEXT_DOMAIN, REFRESH_TOKEN_NAME } from "@/constants/global.constants";
 import { userService } from "@/services/user.service";
 import { GoogleAuthDto } from "@/types/auth.types";
 import jwt from "jsonwebtoken";
@@ -18,16 +14,13 @@ export async function POST(req: Request) {
     avatarUrl: profile?.picture,
   };
 
-  const { password, ...user } = await userService.createGoogle(
-    dto,
-    "credentials"
-  );
+  const { password, ...user } = await userService.createGoogle(dto, "credentials");
 
-  const accessToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+  const accessToken = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, {
     expiresIn: "1h",
   });
 
-  const refreshToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+  const refreshToken = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, {
     expiresIn: "7d",
   });
 

@@ -1,0 +1,47 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+.title {
+  padding: 20px 10px;
+  text-align: center;
+  font-size: 24px;
+  color: blueviolet;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.button {
+  padding: 10px 20px;
+  color: white;
+  border: 2px solid blueviolet;
+  box-shadow: 0 0 12px 4px blueviolet;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+
+  & > div {
+    width: 100%;
+  }
+}
+
+.infoBlock {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.infoMessage {
+  text-align: center;
+  color: white;
+}

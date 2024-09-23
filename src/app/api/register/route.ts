@@ -16,11 +16,11 @@ export async function POST(req: Request) {
 
   const { password, ...user } = await userService.create(dto, "credentials");
 
-  const accessToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+  const accessToken = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, {
     expiresIn: "1h",
   });
 
-  const refreshToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+  const refreshToken = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, {
     expiresIn: "7d",
   });
 

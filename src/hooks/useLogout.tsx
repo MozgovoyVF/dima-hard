@@ -12,7 +12,7 @@ export function useLogout() {
     mutationKey: ["logout"],
     mutationFn: () => authService.logout(),
     onSuccess() {
-      toast.success("Successfully logout!");
+      toast.success("Вы успешно вышли из аккаунта!");
       queryClient.invalidateQueries({
         queryKey: ["profile"],
       });

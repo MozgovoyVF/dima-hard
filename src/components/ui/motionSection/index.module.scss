@@ -1,0 +1,13 @@
+.section {
+  display: flex;
+  min-height: 100lvh;
+  scroll-snap-align: center;
+  perspective: 500px;
+  border-bottom: 3px solid blueviolet;
+}
+
+.container {
+  padding-top: 130px;
+  flex: 1 1 100%;
+  overflow: hidden;
+}
