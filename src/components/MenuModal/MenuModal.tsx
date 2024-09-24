@@ -15,7 +15,10 @@ interface IModal {
 
 export const MenuModal = ({ closeFn, subscribe }: IModal) => {
   const path = usePathname();
-  const { data } = useFatsecret();
+  let data = null;
+
+  const { data: fatsecretData } = useFatsecret();
+  data = fatsecretData;
 
   useEffect(() => {
     document.body.style.overflow = "hidden";

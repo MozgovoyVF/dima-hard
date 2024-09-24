@@ -13,7 +13,7 @@ export function useFatsecretReset() {
     },
     onSuccess() {
       toast.success("Вы успешно обновили данные!");
-      queryClient.invalidateQueries({ queryKey: ["users"] });
+      queryClient.invalidateQueries({ queryKey: ["users", "profile"] });
     },
   });
 

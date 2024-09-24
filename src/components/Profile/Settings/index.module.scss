@@ -105,6 +105,7 @@
       border-right: 2px solid blueviolet;
       color: white;
       font-size: 16px;
+      text-align: center;
     }
 
     .value {
@@ -145,10 +146,18 @@
 
     .buttonSave {
       background-color: blueviolet;
+      &:disabled {
+        opacity: 0.5;
+        pointer-events: none;
+      }
     }
 
     .buttonCancel {
       background-color: rgb(197, 57, 57);
+      &:disabled {
+        opacity: 0.5;
+        pointer-events: none;
+      }
     }
   }
 }

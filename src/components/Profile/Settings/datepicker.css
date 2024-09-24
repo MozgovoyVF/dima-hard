@@ -1,0 +1,38 @@
+/* Увеличиваем размеры элементов календаря */
+.react-datepicker {
+  font-size: 18px; /* Изменяем размер текста в календаре */
+}
+
+.react-datepicker__input-container input {
+  color: white;
+}
+
+.react-datepicker__day,
+.react-datepicker__month-text,
+.react-datepicker__quarter-text,
+.react-datepicker__year-text {
+  width: 30px; /* Ширина дня/месяца/года */
+  height: 30px; /* Высота дня/месяца/года */
+  line-height: 30px;
+  margin: 0.5rem; /* Увеличиваем отступы между днями */
+}
+
+.react-datepicker__current-month,
+.react-datepicker-time__header,
+.react-datepicker-year-header {
+  font-size: 20px; /* Изменяем размер шрифта для заголовка месяца */
+}
+
+.react-datepicker__navigation {
+  top: 12px; /* Корректируем расположение стрелок навигации */
+}
+
+.react-datepicker__navigation-icon::before {
+  font-size: 1.5rem; /* Увеличиваем размер иконки навигации (стрелки) */
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  background-color: blueviolet; /* Цвет выделенного дня */
+  color: white;
+}
