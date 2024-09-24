@@ -16,7 +16,7 @@ export async function POST(request: Request): Promise<NextResponse> {
   try {
     const resultList = await list({ prefix: "avatars/" + id + "/" });
 
-    if (resultList.blobs) {
+    if (resultList.blobs.length > 0) {
       await del(resultList.blobs.map((blob) => blob.url));
     }
 
