@@ -13,7 +13,7 @@ export function useUpdateAvatar() {
       return result;
     },
     onSuccess() {
-      toast.success("Вы успешно обновили данные!");
+      // toast.success("Вы успешно обновили данные!");
       // queryClient.invalidateQueries({ queryKey: ["profile"] });
     },
   });

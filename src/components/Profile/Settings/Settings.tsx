@@ -38,6 +38,7 @@ export function Settings() {
   const { mutate: updateMutate, isPending: updatePending, mutateAsync: updateMutateAsync } = useUpdateUser();
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
   const [error, setError] = useState("");
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
   const {
     register,
@@ -58,6 +59,12 @@ export function Settings() {
 
   useEffect(() => {
     if (profileData) {
+      reset({
+        name: profileData.name ?? "",
+        lastName: profileData.lastName ?? "",
+        birthday: profileData.profile.birthday ?? undefined,
+        file: undefined,
+      });
       setSelectedFile(profileData.avatarUrl || "/images/avatars/user.webp");
       setValue("name", profileData.name ?? "");
       setValue("lastName", profileData.lastName ?? "");
@@ -68,6 +75,7 @@ export function Settings() {
 
   const onSubmit: SubmitHandler<ISettings> = async (data) => {
     let url = "";
+    console.log(dirtyFields, data.file);
     if (data.file && data.file[0]) {
       const imageFile = data.file[0];
       const options = {
@@ -123,8 +131,7 @@ export function Settings() {
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     setError("");
     const file = e.target.files?.[0];
-
-    console.log(file);
+    console.log(getValues("file"));
 
     if (file) {
       if (
@@ -197,7 +204,8 @@ export function Settings() {
                 <div className={styles.label}>Фамилия</div>
                 <input {...register("lastName")} className={styles.value} />
               </div>
-              <div className={styles.row}>
+              <div className={`${styles.row} ${styles.datepickerContainer}`}>
+                {isCalendarOpen && <div className={styles.overlay} onClick={() => setIsCalendarOpen(false)}></div>}
                 <label className={styles.label} htmlFor="birthDate">
                   Дата рождения
                 </label>
@@ -209,13 +217,17 @@ export function Settings() {
                       id="birthday"
                       locale="ru"
                       selected={field.value}
-                      onChange={(date) => field.onChange(date)}
+                      onChange={(date) => {
+                        field.onChange(date);
+                        setIsCalendarOpen(false);
+                      }}
                       placeholderText="Выберите дату"
                       dateFormat="dd.MM.yyyy"
                       maxDate={new Date()} // Отключает выбор дат в будущем
                       showYearDropdown
                       showMonthDropdown
                       dropdownMode="select"
+                      calendarClassName={styles.centeredCalendar}
                     />
                   )}
                 />
@@ -223,10 +235,12 @@ export function Settings() {
               <div className={styles.submits}>
                 <button
                   disabled={
-                    !dirtyFields.name &&
-                    !dirtyFields.lastName &&
-                    !dirtyFields.birthday &&
-                    selectedFile === "/images/avatars/user.webp"
+                    (!dirtyFields.name &&
+                      !dirtyFields.lastName &&
+                      !dirtyFields.birthday &&
+                      selectedFile === profileData.avatarUrl) ||
+                    avatarPending ||
+                    updatePending
                   }
                   className={styles.buttonSave}
                   type="submit"
@@ -235,10 +249,12 @@ export function Settings() {
                 </button>
                 <button
                   disabled={
-                    !dirtyFields.name &&
-                    !dirtyFields.lastName &&
-                    !dirtyFields.birthday &&
-                    selectedFile === "/images/avatars/user.webp"
+                    (!dirtyFields.name &&
+                      !dirtyFields.lastName &&
+                      !dirtyFields.birthday &&
+                      selectedFile === profileData.avatarUrl) ||
+                    avatarPending ||
+                    updatePending
                   }
                   type="button"
                   className={styles.buttonCancel}
@@ -249,6 +265,7 @@ export function Settings() {
               </div>
               {fatsecretData && (
                 <button
+                  disabled={avatarPending || updatePending}
                   type="button"
                   onClick={handleFatsecretBlock}
                   className={`${styles.button} ${styles.fatsecretButton}`}
