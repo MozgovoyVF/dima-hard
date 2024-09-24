@@ -17,10 +17,8 @@ export const MenuModal = ({ closeFn, subscribe }: IModal) => {
   const path = usePathname();
   let data = null;
 
-  if (path.startsWith("/i")) {
-    const { data: fatsecretData } = useFatsecret();
-    data = fatsecretData;
-  }
+  const { data: fatsecretData } = useFatsecret();
+  data = fatsecretData;
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
