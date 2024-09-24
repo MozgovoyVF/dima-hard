@@ -15,7 +15,6 @@ export async function POST(request: Request): Promise<NextResponse> {
   }
   try {
     const resultList = await list({ prefix: "avatars/" + id + "/" });
-    console.log(resultList.blobs);
 
     if (resultList.blobs) {
       await del(resultList.blobs.map((blob) => blob.url));
@@ -27,6 +26,7 @@ export async function POST(request: Request): Promise<NextResponse> {
 
     return NextResponse.json(blob);
   } catch (error) {
+    console.log(error);
     return new NextResponse(JSON.stringify({ error: "Ошибка сервера" }), {
       status: 500,
     });

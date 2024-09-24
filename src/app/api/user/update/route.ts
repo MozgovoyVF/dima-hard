@@ -19,8 +19,9 @@ export async function POST(req: Request, res: NextApiResponse) {
 
   const decodedToken = jwt.decode(authToken) as UserIDJwtPayload;
   const role = decodedToken.role;
+  const id = decodedToken.id;
 
-  if (role !== "admin") {
+  if (role !== "admin" && id !== String(user.id)) {
     return new Response(JSON.stringify({ error: "Доступ к ресурсу запрещен" }), {
       status: 403,
     });
