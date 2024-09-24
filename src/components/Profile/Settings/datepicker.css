@@ -8,12 +8,13 @@
 }
 
 .react-datepicker__day,
+.react-datepicker__day-name,
 .react-datepicker__month-text,
 .react-datepicker__quarter-text,
 .react-datepicker__year-text {
-  width: 30px; /* Ширина дня/месяца/года */
-  height: 30px; /* Высота дня/месяца/года */
-  line-height: 30px;
+  width: 25px; /* Ширина дня/месяца/года */
+  height: 25px; /* Высота дня/месяца/года */
+  line-height: 25px;
   margin: 0.5rem; /* Увеличиваем отступы между днями */
 }
 
@@ -28,6 +29,7 @@
 }
 
 .react-datepicker__navigation-icon::before {
+  color: blueviolet;
   font-size: 1.5rem; /* Увеличиваем размер иконки навигации (стрелки) */
 }
 
@@ -35,4 +37,45 @@
 .react-datepicker__day--keyboard-selected {
   background-color: blueviolet; /* Цвет выделенного дня */
   color: white;
+}
+
+select {
+  font-family: inherit;
+  font-size: 20px;
+  color: black;
+  background-color: transparent;
+}
+
+.react-datepicker__month-dropdown,
+.react-datepicker__year-dropdown {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+}
+
+.react-datepicker__month-option,
+.react-datepicker__year-option {
+  padding: 5px;
+  cursor: pointer;
+  color: #333;
+}
+
+/* Стили для выделенных элементов */
+.react-datepicker__month-option--selected,
+.react-datepicker__year-option--selected {
+  background-color: #007bff;
+  color: white;
+}
+
+.react-datepicker__month-option:hover,
+.react-datepicker__year-option:hover {
+  background-color: #f0f0f0;
+}
+
+/* Стили для выпадающего списка в виде select */
+.react-datepicker__month-dropdown-container,
+.react-datepicker__year-dropdown-container {
+  padding: 5px;
 }
