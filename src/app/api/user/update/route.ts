@@ -27,10 +27,9 @@ export async function POST(req: Request, res: NextApiResponse) {
   }
 
   try {
-    console.log(user);
     if (user) {
-      const updateUser = await userService.update(user);
-      console.log(updateUser);
+      const { password, ...updateUser } = await userService.update(user);
+
       return new Response(JSON.stringify(updateUser), {
         status: 200,
       });

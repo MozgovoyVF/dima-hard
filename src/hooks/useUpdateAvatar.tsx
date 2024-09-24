@@ -1,22 +1,23 @@
 import { userClientService } from "@/services/userClient.service";
-import { DeepPartial, IUser } from "@/types/auth.types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { PutBlobResult } from "@vercel/blob";
 import { toast } from "sonner";
 
-export function useUpdateUser() {
+export function useUpdateAvatar() {
   const queryClient = useQueryClient();
 
-  const { mutate, isPending, mutateAsync } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationKey: ["user update"],
-    mutationFn: async (user: DeepPartial<IUser>): Promise<IUser> => {
-      return await userClientService.update(user);
+    mutationFn: async ({ file, id }: { file: File; id: number }): Promise<PutBlobResult> => {
+      const result = await userClientService.uploadAvatar(file, id);
+      return result;
     },
     onSuccess() {
       toast.success("Вы успешно обновили данные!");
-      queryClient.invalidateQueries({ queryKey: ["users", "profile"] });
+      // queryClient.invalidateQueries({ queryKey: ["profile"] });
     },
   });
 
   // Возвращаем mutate и isPending с правильной типизацией
-  return { mutate, isPending, mutateAsync };
+  return { mutateAsync, isPending };
 }
