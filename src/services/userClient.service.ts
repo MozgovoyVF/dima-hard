@@ -28,6 +28,21 @@ export const userClientService = {
     }
   },
 
+  async resetPassword(oldPassword: string, newPassword: string): Promise<boolean> {
+    try {
+      const response = await axiosWithAuth.post<boolean>(BASE_URL + "/resetPassword", {
+        body: {
+          oldPassword,
+          newPassword,
+        },
+      });
+      return response.data;
+    } catch (error: any) {
+      console.log(error);
+      return error;
+    }
+  },
+
   async uploadAvatar(file: File, id: number): Promise<PutBlobResult> {
     const formData = new FormData();
 

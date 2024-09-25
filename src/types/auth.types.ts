@@ -37,7 +37,7 @@ export interface IAuthResponse {
 }
 
 export interface IUser {
-  id: number;
+  id: number | string;
   name?: string;
   lastName?: string;
   password?: string;
