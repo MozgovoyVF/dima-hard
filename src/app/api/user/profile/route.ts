@@ -19,7 +19,7 @@ export async function GET(req: Request, res: NextResponse) {
 
   try {
     //@ts-ignore
-    const { provider, password, createdAt, updatedAt, ...user } = await userService.getById(id);
+    const { password, createdAt, updatedAt, ...user } = await userService.getById(id);
 
     if (!user) {
       const cookieStore = cookies();

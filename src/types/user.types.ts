@@ -15,6 +15,7 @@ export interface IProfileUser {
   role: "user" | "admin";
   profile: IProfile;
   fatsecret: IFatSecret;
+  provider?: "credentials" | "google";
 }
 
 export interface IFatSecret {

@@ -3,9 +3,23 @@
   font-size: 18px; /* Изменяем размер текста в календаре */
 }
 
+.react-datepicker-wrapper {
+  flex: 1 1 100%;
+  padding: 10px 20px;
+}
+
+label {
+  cursor: default;
+}
+
 .react-datepicker__input-container input {
   color: white;
   cursor: pointer;
+}
+
+.react-datepicker__input-container input::placeholder {
+  color: white;
+  font-size: 16px;
 }
 
 .react-datepicker__day,
