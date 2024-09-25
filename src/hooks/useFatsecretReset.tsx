@@ -5,7 +5,7 @@ import { toast } from "sonner";
 export function useFatsecretReset() {
   const queryClient = useQueryClient();
 
-  const { mutate, isPending } = useMutation({
+  const { mutate, isPending, mutateAsync } = useMutation({
     mutationKey: ["fatsecret reset"],
     // Добавим типизацию для функции мутации
     mutationFn: async (userId: number) => {
@@ -18,5 +18,5 @@ export function useFatsecretReset() {
   });
 
   // Возвращаем mutate и isPending с правильной типизацией
-  return { mutate, isPending };
+  return { mutate, isPending, mutateAsync };
 }

@@ -15,10 +15,6 @@ interface IModal {
 
 export const MenuModal = ({ closeFn, subscribe }: IModal) => {
   const path = usePathname();
-  let data = null;
-
-  const { data: fatsecretData } = useFatsecret();
-  data = fatsecretData;
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -45,7 +41,6 @@ export const MenuModal = ({ closeFn, subscribe }: IModal) => {
           <ul className={styles.list}>
             {path.startsWith("/i")
               ? PROFILE_MENU_CONTENT.map((item) => {
-                  if ((data || !subscribe) && item.link === DASHBOARD_PAGES.FATSECRET) return;
                   return (
                     <li key={item.title} onClick={() => closeFn()} className="item">
                       <Link className={styles.link} href={item.link}>

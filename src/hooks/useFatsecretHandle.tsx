@@ -3,6 +3,7 @@ import { DASHBOARD_PAGES } from "@/config/pages-url.config";
 import { NEXT_URL } from "@/constants/global.constants";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
+import { toast } from "sonner";
 
 export const useFatsecretHandle = () => {
   const { push } = useRouter();
@@ -33,6 +34,7 @@ export const useFatsecretHandle = () => {
           body: { code: ref.current.value, token: tokens?.token, secret: tokens?.secret },
         });
 
+        toast.success("Аккаунт FatSecret успешно подтвержден!");
         push(DASHBOARD_PAGES.PERSONAL_ACCOUNT);
       } catch (error: any) {
         setError(error.response.data.error);
