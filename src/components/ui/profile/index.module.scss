@@ -8,6 +8,11 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
+    border: 1px solid blueviolet;
+
+    &:hover {
+      box-shadow: 0 0 20px 2px white;
+    }
   }
 
   .button {
@@ -15,5 +20,9 @@
     border: 1px solid blueviolet;
     border-radius: 20px;
     padding: 10px;
+
+    &:hover {
+      box-shadow: 0 0 20px 2px white;
+    }
   }
 }

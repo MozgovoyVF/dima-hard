@@ -15,12 +15,7 @@ export async function GET(req: NextRequest) {
 
   const decodedToken = jwt.decode(authToken) as UserIDJwtPayload;
   const role = decodedToken.role;
-
-  if (role !== "admin") {
-    return new Response(JSON.stringify({ error: "Доступ запрещен" }), {
-      status: 403,
-    });
-  }
+  const id = decodedToken.id;
 
   const params = new URL(req.url).searchParams;
 
@@ -29,6 +24,12 @@ export async function GET(req: NextRequest) {
   if (!fatsecretUserId) {
     return new Response(JSON.stringify({ error: "Неверные параметры запроса" }), {
       status: 400,
+    });
+  }
+
+  if (role !== "admin" && id !== fatsecretUserId) {
+    return new Response(JSON.stringify({ error: "Доступ запрещен" }), {
+      status: 403,
     });
   }
 

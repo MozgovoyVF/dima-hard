@@ -9,6 +9,7 @@
 .content {
   display: flex;
   flex-direction: column;
+  padding: 0 20px;
   gap: 20px;
   align-items: center;
   justify-content: center;
@@ -29,9 +30,16 @@
     color: white;
   }
 
+  .link {
+    color: green;
+    font-size: 16px;
+    line-height: 2;
+  }
+
   .text {
     color: white;
     text-align: center;
+    line-height: 2;
   }
 
   .buttonBlock {

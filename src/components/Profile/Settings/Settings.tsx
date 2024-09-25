@@ -33,7 +33,7 @@ interface ISettings {
 export function Settings() {
   const { data: profileData, isLoading, isRefetching, refetch } = useProfile();
   const { data: fatsecretData, isLoading: fatsecretIsLoading } = useFatsecret();
-  const { mutate, isPending } = useFatsecretReset();
+  const { mutate, isPending, mutateAsync } = useFatsecretReset();
   const { mutateAsync: avatarMutate, isPending: avatarPending } = useUpdateAvatar();
   const { mutate: updateMutate, isPending: updatePending, mutateAsync: updateMutateAsync } = useUpdateUser();
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
@@ -170,9 +170,11 @@ export function Settings() {
     setError("");
   };
 
-  const handleFatsecretBlock = () => {
+  const handleFatsecretBlock = async () => {
     try {
-      if (profileData?.id) mutate(profileData?.id);
+      if (profileData?.id) await mutateAsync(profileData?.id);
+      const button = document.getElementById("fatsecretButton");
+      if (button !== null) button.style.display = "none";
     } catch (error) {
       console.log(error);
     }
@@ -225,6 +227,8 @@ export function Settings() {
                       id="birthday"
                       locale="ru"
                       selected={field.value}
+                      onFocus={(e) => e.target.blur()}
+                      onKeyDown={(e) => e.preventDefault()} // Блокируем ввод с клавиатуры
                       onChange={(date) => {
                         field.onChange(date);
                         setIsCalendarOpen(false);
@@ -250,7 +254,8 @@ export function Settings() {
                     avatarPending ||
                     updatePending ||
                     !!error ||
-                    isSubmit
+                    isSubmit ||
+                    isPending
                   }
                   className={styles.buttonSave}
                   type="submit"
@@ -266,7 +271,8 @@ export function Settings() {
                     avatarPending ||
                     updatePending ||
                     !!error ||
-                    isSubmit
+                    isSubmit ||
+                    isPending
                   }
                   type="button"
                   className={styles.buttonCancel}
@@ -277,8 +283,9 @@ export function Settings() {
               </div>
               {fatsecretData && (
                 <button
-                  disabled={avatarPending || updatePending || isSubmit}
+                  disabled={avatarPending || updatePending || isSubmit || isPending}
                   type="button"
+                  id="fatsecretButton"
                   onClick={handleFatsecretBlock}
                   className={`${styles.button} ${styles.fatsecretButton}`}
                 >

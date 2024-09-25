@@ -16,12 +16,12 @@ import { MotionSection } from "@/components/ui/motionSection/MotionSection";
 
 export function Account() {
   const { data, isLoading } = useProfile();
-  const { data: fatSecretData } = useFatsecret();
+  const { data: fatSecretData, isLoading: isFatsecretLoading } = useFatsecret();
 
   return (
     <MotionSection>
       <h1 className={styles.title}>Личный кабинет</h1>
-      {isLoading ? (
+      {isLoading || isFatsecretLoading ? (
         <Loader />
       ) : (
         <>

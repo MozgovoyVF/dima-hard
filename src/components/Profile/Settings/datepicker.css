@@ -5,6 +5,7 @@
 
 .react-datepicker__input-container input {
   color: white;
+  cursor: pointer;
 }
 
 .react-datepicker__day,
@@ -29,7 +30,7 @@
 }
 
 .react-datepicker__navigation-icon::before {
-  color: blueviolet;
+  border-color: blueviolet;
   font-size: 1.5rem; /* Увеличиваем размер иконки навигации (стрелки) */
 }
 

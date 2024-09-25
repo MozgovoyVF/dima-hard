@@ -1,33 +1,39 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./index.module.scss";
 import Link from "next/link";
 import { useFatsecretHandle } from "@/hooks/useFatsecretHandle";
 import { useFatsecret } from "@/hooks/useFatsecret";
-import { DASHBOARD_PAGES } from "@/config/pages-url.config";
-import { useRouter } from "next/navigation";
 import { MotionSection } from "@/components/ui/motionSection/MotionSection";
+import Loader from "@/components/ui/loader/Loader";
+import { DASHBOARD_PAGES } from "@/config/pages-url.config";
 
 export function FatSecret() {
   const { error, handleAccessToken, handleRequestToken, link, ref } = useFatsecretHandle();
-  const { data } = useFatsecret();
-  const [loading, setLoading] = useState(true);
-  const { push } = useRouter();
-
-  useEffect(() => {
-    if (data) {
-      push(DASHBOARD_PAGES.PERSONAL_ACCOUNT);
-    } else {
-      setLoading(false);
-    }
-  }, [push, data]);
+  const { data, isLoading } = useFatsecret();
 
   return (
     <>
-      {!loading && (
+      {isLoading ? (
+        <Loader />
+      ) : data ? (
         <MotionSection>
-          <h1 className={styles.title}>Настройки</h1>
+          <h1 className={styles.title}>FatSecret</h1>
+          <div className={styles.content}>
+            <p className={styles.text}>
+              Ваш аккаунт FatSecret подтвержден!
+              <br />
+              Если вы хотите отвязать его от Вашего личного кабинета, то перейдите на страницу{" "}
+              <Link className={styles.link} href={DASHBOARD_PAGES.SETTINGS}>
+                настроек
+              </Link>
+            </p>
+          </div>
+        </MotionSection>
+      ) : (
+        <MotionSection>
+          <h1 className={styles.title}>FatSecret</h1>
           <div className={styles.content}>
             {link ? (
               <>
