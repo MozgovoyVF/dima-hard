@@ -117,6 +117,22 @@ export function UserFieldsForm({ profileData, refetch, isLoading }: IUserFieldsF
                 onFocus={() => setIsCalendarOpen(true)}
                 open={isCalendarOpen} // Управляем открытием календаря
                 onClickOutside={() => setIsCalendarOpen(false)}
+                popperProps={{
+                  modifiers: [
+                    {
+                      name: "preventOverflow",
+                      options: {
+                        enabled: false, // отключаем `preventOverflow`, чтобы избежать добавления `transform`
+                      },
+                    },
+                    {
+                      name: "offset",
+                      options: {
+                        offset: [0, 10], // настроить смещение поппера по необходимости
+                      },
+                    },
+                  ],
+                }}
               />
             )}
           />
