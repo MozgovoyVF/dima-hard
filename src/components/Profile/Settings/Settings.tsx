@@ -37,8 +37,10 @@ export function Settings() {
   const { mutateAsync: avatarMutate, isPending: avatarPending } = useUpdateAvatar();
   const { mutate: updateMutate, isPending: updatePending, mutateAsync: updateMutateAsync } = useUpdateUser();
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
+  const [selectedFileList, setSelectedFileList] = useState<FileList | null>(null);
   const [error, setError] = useState("");
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+  const [isSubmit, setIsSubmit] = useState(false);
 
   const {
     register,
@@ -46,7 +48,6 @@ export function Settings() {
     control,
     formState: { dirtyFields },
     setValue,
-    getValues,
     reset,
   } = useForm<ISettings>({
     mode: "onSubmit",
@@ -66,21 +67,20 @@ export function Settings() {
         file: undefined,
       });
       setSelectedFile(profileData.avatarUrl || "/images/avatars/user.webp");
-      setValue("name", profileData.name ?? "");
-      setValue("lastName", profileData.lastName ?? "");
-      setValue("birthday", profileData.profile.birthday ?? undefined);
-      setValue("file", undefined);
+      setSelectedFileList(null);
     }
   }, [profileData, setValue, refetch]);
 
   const onSubmit: SubmitHandler<ISettings> = async (data) => {
+    setIsSubmit(true);
     let url = "";
     console.log(dirtyFields, data.file);
-    if (data.file && data.file[0]) {
-      const imageFile = data.file[0];
+    console.log(selectedFileList);
+    if (selectedFileList && selectedFileList[0]) {
+      const imageFile = selectedFileList[0];
       const options = {
         maxSizeMB: 0.3,
-        maxWidthOrHeight: 1920,
+        maxWidthOrHeight: 100,
         useWebWorker: true,
       };
       try {
@@ -90,6 +90,8 @@ export function Settings() {
           url = response.url || "";
         }
       } catch (error) {
+        setIsSubmit(false);
+        setError("Возникла ошибка при обработке файла");
         console.log(error);
       }
     }
@@ -125,15 +127,17 @@ export function Settings() {
       await updateMutateAsync(result);
 
       refetch();
+    } else {
+      setError("Возникла ошибка при загрузке аватарки");
     }
+    setIsSubmit(false);
   };
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     setError("");
     const file = e.target.files?.[0];
-    console.log(getValues("file"));
 
-    if (file) {
+    if (e.target.files && file) {
       if (
         file.type !== "image/png" &&
         file.type !== "image/jpeg" &&
@@ -142,6 +146,8 @@ export function Settings() {
       ) {
         return setError("Возможные форматы изображений : PNG, JPG, JPEG и WEBP");
       }
+
+      setSelectedFileList(e.target.files);
 
       const reader = new FileReader();
 
@@ -158,7 +164,9 @@ export function Settings() {
       name: profileData?.name ?? "",
       lastName: profileData?.lastName ?? "",
       birthday: profileData?.profile.birthday ?? undefined,
+      file: undefined,
     });
+    setSelectedFileList(null);
     setError("");
   };
 
@@ -240,7 +248,9 @@ export function Settings() {
                       !dirtyFields.birthday &&
                       selectedFile === profileData.avatarUrl) ||
                     avatarPending ||
-                    updatePending
+                    updatePending ||
+                    !!error ||
+                    isSubmit
                   }
                   className={styles.buttonSave}
                   type="submit"
@@ -254,7 +264,9 @@ export function Settings() {
                       !dirtyFields.birthday &&
                       selectedFile === profileData.avatarUrl) ||
                     avatarPending ||
-                    updatePending
+                    updatePending ||
+                    !!error ||
+                    isSubmit
                   }
                   type="button"
                   className={styles.buttonCancel}
@@ -265,7 +277,7 @@ export function Settings() {
               </div>
               {fatsecretData && (
                 <button
-                  disabled={avatarPending || updatePending}
+                  disabled={avatarPending || updatePending || isSubmit}
                   type="button"
                   onClick={handleFatsecretBlock}
                   className={`${styles.button} ${styles.fatsecretButton}`}
