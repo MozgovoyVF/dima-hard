@@ -12,7 +12,7 @@ import styles from "./index.module.scss";
 import { RxCrossCircled } from "react-icons/rx";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { MdPhotoSizeSelectLarge } from "react-icons/md";
+import { MdDeleteForever, MdPhotoSizeSelectLarge } from "react-icons/md";
 import Loader from "@/components/ui/loader/Loader";
 
 interface IGaleryCarousel {
@@ -85,12 +85,15 @@ export default function GaleryCarousel({
                 </span>
               ) : (
                 <span className={styles.cross} onClick={() => handleDelete(index)}>
-                  <RxCrossCircled />
+                  <MdDeleteForever />
                 </span>
               )}
 
               <span className={styles.size} onClick={() => handleImageClick(item)}>
                 <MdPhotoSizeSelectLarge />
+              </span>
+              <span className={styles.number}>
+                {index + 1} / {responsive.length}
               </span>
               <Image priority={true} width={300} height={300} src={item} alt="slides" className={styles.image} />
             </div>
@@ -100,11 +103,10 @@ export default function GaleryCarousel({
       {isOpen && (
         <div className={styles.modal} onClick={closeModal}>
           <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-            {" "}
             {/* Остановить всплытие клика */}
             <span className={styles.close} onClick={closeModal}>
               &times;
-            </span>{" "}
+            </span>
             {/* Крестик для закрытия */}
             <Image
               priority={true}

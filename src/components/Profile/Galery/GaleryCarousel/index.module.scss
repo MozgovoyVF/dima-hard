@@ -51,8 +51,8 @@
 .cross,
 .loader {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 10px;
+  right: 5px;
   color: white;
   cursor: pointer;
 
@@ -62,10 +62,18 @@
   }
 }
 
+.number {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  color: white;
+  font-size: 12px;
+}
+
 .size {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 10px;
+  left: 10px;
   color: white;
   cursor: pointer;
 
