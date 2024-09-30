@@ -23,8 +23,6 @@ export interface IGaleryPage {
   extraFiles?: FileList;
 }
 
-const today = new Date().toISOString().split("T")[0];
-
 export function Galery() {
   const { data: profileData, isLoading: isProfileLoading } = useProfile();
   const { data: galeryData, isLoading: isGaleryLoading, refetch, isRefetching: isGaleryRefetching } = useGalery();
@@ -75,7 +73,7 @@ export function Galery() {
             <p className={styles.text}>
               В настоящий момент Ваша подписка неактивна!
               <br />
-              Для подтверждения Вашего аккаунта FatSecret свяжитесь со мной в{" "}
+              Для оформления подписки свяжитесь со мной в{" "}
               <Link className={styles.link} target="_blank" href={`https://t.me/${PHONE_NUMBER}`}>
                 Telegtam
               </Link>{" "}
@@ -93,6 +91,9 @@ export function Galery() {
             {typeof galeryData === "object" && Object.keys(galeryData).find((e) => e === "error") && (
               <>
                 <h2 className={styles.subtitle}>Ваша галерея результатов пуста</h2>
+                <p className={styles.text}>
+                  Добавляйте до 4-х Ваших фото с результатами каждую неделю и следите за Вашим прогрессом!
+                </p>
 
                 {isFilesAdd && <Loader />}
                 <AddForm setIsFilesAdd={setIsFilesAdd} setSubmitError={setSubmitError} refetch={refetch} />
@@ -103,8 +104,11 @@ export function Galery() {
 
             {filteredGalery && Object.keys(filteredGalery).length !== 0 && !isDateInCurrentWeek(filteredGalery) && (
               <>
-                ({isFilesAdd && <Loader />}
-                <AddForm setIsFilesAdd={setIsFilesAdd} setSubmitError={setSubmitError} refetch={refetch} />)
+                <p className={styles.text}>
+                  Добавляйте до 4-х Ваших фото с результатами каждую неделю и следите за Вашим прогрессом!
+                </p>
+                {isFilesAdd && <Loader />}
+                <AddForm setIsFilesAdd={setIsFilesAdd} setSubmitError={setSubmitError} refetch={refetch} />
                 {submitError && <span className={styles.error}>{submitError}</span>}
               </>
             )}

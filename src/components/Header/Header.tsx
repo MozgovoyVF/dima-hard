@@ -46,10 +46,10 @@ export function Header() {
       ) : null}
       <div className={styles.top}>
         <Hamburger toggled={isShowModal} size={20} toggle={!isShowModal ? appear : fade} />
+        <a href="https://www.fatsecret.com">
+          <img src="https://platform.fatsecret.com/api/static/images/powered_by_fatsecret.svg" />
+        </a>
         <div className={styles.social}>
-          <a target="_blank" href={`https://wa.me/${PHONE_NUMBER}`}>
-            <FaWhatsapp className={styles.whatsapp} />
-          </a>
           <a target="_blank" href={`https://t.me/${PHONE_NUMBER}`}>
             <FaTelegram className={styles.telegram} />
           </a>
