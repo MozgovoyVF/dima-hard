@@ -26,6 +26,7 @@ export default function ResponsiveCarousel() {
         showThumbs={false}
         showStatus={false}
         className={styles.mySwiper}
+        emulateTouch={true}
       >
         {responsive.map((item, index) => (
           <div key={index} className={styles.swipItem}>

@@ -11,6 +11,7 @@ export const DASHBOARD_PAGES = {
   CALC: profile + "calc",
   SETTINGS: profile + "settings",
   FATSECRET: profile + "fatsecret",
+  GALERY: profile + "galery",
 
   ADMIN_MAIN: admin,
   ADMIN_WEIGHT: admin + "weight",

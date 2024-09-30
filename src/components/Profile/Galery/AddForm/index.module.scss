@@ -1,0 +1,106 @@
+.form {
+  display: flex;
+  width: 100%;
+}
+
+.images {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.galery {
+  display: flex;
+  flex-direction: column-reverse;
+  width: 100%;
+  align-items: center;
+  justify-content: space-around;
+  gap: 20px;
+
+  .file {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    display: inline-block;
+    padding: 20px 20px;
+    color: white;
+    background: blueviolet;
+    border-radius: 20px;
+    cursor: pointer;
+
+    &[aria-disabled="true"] {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    &:hover {
+      box-shadow: 0 0 20px 2px white;
+    }
+
+    .fileText {
+      text-align: center;
+      color: white;
+      display: inline-block;
+    }
+
+    input[type="file"] {
+      position: absolute;
+      z-index: -1;
+      opacity: 0;
+      display: block;
+      width: 0;
+      height: 0;
+    }
+  }
+
+  .image {
+    flex: 0 0 150px;
+    position: relative;
+    width: 150px;
+    height: 150px;
+
+    img {
+      position: absolute;
+      border-radius: 10px;
+      border: 1px solid blueviolet;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+.error {
+  font-size: 16px;
+  text-align: center;
+  color: rgb(197, 57, 57);
+}
+
+.buttons {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.button {
+  display: inline-block;
+  padding: 20px 20px;
+  color: white;
+  background: blueviolet;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  &:hover {
+    box-shadow: 0 0 20px 2px white;
+  }
+}

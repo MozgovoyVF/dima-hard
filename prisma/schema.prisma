@@ -32,6 +32,7 @@ model User {
 
   profile Profile?
   fatsecret Fatsecret?
+  galery Galery[]
 
   @@map("user")
 }
@@ -68,6 +69,19 @@ model Fatsecret {
   userId String  @unique
 
    @@map("fatsecret")
+}
+
+model Galery {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  photoUrl String
+
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String 
+
+  @@map("galery")
 }
 
 enum Provider {

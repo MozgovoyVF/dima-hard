@@ -249,7 +249,7 @@ export function Users() {
                         <PiKeyholeFill /> Отвязать аккаунт Fatsecret
                       </button>
                     )}
-                    <button disabled={Object.entries(dirtyFields).length === 0} type="submit" className={styles.button}>
+                    <button disabled={isPendingUpdate} type="submit" className={styles.button}>
                       Сохранить
                     </button>
                   </div>

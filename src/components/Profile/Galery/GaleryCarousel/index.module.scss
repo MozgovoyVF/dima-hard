@@ -1,0 +1,108 @@
+/* Galery.module.css */
+.container {
+  width: 100%;
+  height: 300px; /* Ограничиваем высоту контейнера */
+  overflow: hidden; /* Скрываем излишки */
+  position: relative;
+
+  .counter {
+    position: absolute;
+    left: 10px;
+    bottom: 0;
+    font-size: 16px;
+    color: white;
+    z-index: 100;
+
+    &.max {
+      color: rgb(197, 57, 57);
+    }
+  }
+}
+
+.mySwiper {
+  width: 100%;
+  height: 100%; /* Задаем высоту слайдера */
+}
+
+.swipItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* Задаем ширину для каждого слайда */
+  height: 100%; /* Задаем высоту для каждого слайда */
+}
+
+.imgBox {
+  position: relative;
+  width: 300px; /* Фиксированная ширина */
+  height: 300px; /* Фиксированная высота */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Скрываем изображения, выходящие за границы контейнера */
+}
+
+.imgBox img {
+  width: 100%; /* Заполняем контейнер по ширине */
+  height: 100%; /* Заполняем контейнер по высоте */
+  object-fit: cover; /* Обрезаем изображения для сохранения пропорций */
+}
+
+.cross,
+.loader {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: white;
+  cursor: pointer;
+
+  & svg {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.size {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: white;
+  cursor: pointer;
+
+  & svg {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+//========================================================================================================================================================
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding-top: 130px;
+  background-color: rgba(0, 0, 0, 0.8); /* Полупрозрачный фон */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Убедитесь, что модальное окно на переднем плане */
+}
+
+.modalContent {
+  position: relative;
+  width: 100%; /* Ширина модального окна */
+  height: 100%; /* Высота модального окна */
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+  z-index: 10;
+}

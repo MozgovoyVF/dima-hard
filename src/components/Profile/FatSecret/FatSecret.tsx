@@ -8,15 +8,36 @@ import { useFatsecret } from "@/hooks/useFatsecret";
 import { MotionSection } from "@/components/ui/motionSection/MotionSection";
 import Loader from "@/components/ui/loader/Loader";
 import { DASHBOARD_PAGES } from "@/config/pages-url.config";
+import { useProfile } from "@/hooks/useProfile";
+import { PHONE_NUMBER } from "@/constants/global.constants";
 
 export function FatSecret() {
   const { error, handleAccessToken, handleRequestToken, link, ref } = useFatsecretHandle();
+  const { data: profileData, isLoading: isProfileLoading } = useProfile();
   const { data, isLoading } = useFatsecret();
 
   return (
     <>
-      {isLoading ? (
+      {isLoading || isProfileLoading ? (
         <Loader />
+      ) : !profileData?.profile.subscribe ? (
+        <MotionSection>
+          <h1 className={styles.title}>FatSecret</h1>
+          <div className={styles.content}>
+            <p className={styles.text}>
+              В настоящий момент Ваша подписка неактивна!
+              <br />
+              Для подтверждения Вашего аккаунта FatSecret свяжитесь со мной в{" "}
+              <Link className={styles.link} target="_blank" href={`https://t.me/${PHONE_NUMBER}`}>
+                Telegtam
+              </Link>{" "}
+              или{" "}
+              <Link className={styles.link} target="_blank" href={`tel:${PHONE_NUMBER}`}>
+                по телефону
+              </Link>
+            </p>
+          </div>
+        </MotionSection>
       ) : data ? (
         <MotionSection>
           <h1 className={styles.title}>FatSecret</h1>
