@@ -1,8 +1,7 @@
 import { DASHBOARD_PAGES } from "@/config/pages-url.config";
 import { FaCalculator, FaWeightScale } from "react-icons/fa6";
-import { FcSettings } from "react-icons/fc";
 import { GiStrong } from "react-icons/gi";
-import { GrSettingsOption, GrUserManager } from "react-icons/gr";
+import { GrGallery, GrSettingsOption, GrUserManager } from "react-icons/gr";
 import { IoFitnessSharp } from "react-icons/io5";
 import { MdOnlinePrediction, MdOutlineAdminPanelSettings, MdOutlineModelTraining } from "react-icons/md";
 import { PiKeyholeFill } from "react-icons/pi";
@@ -41,6 +40,11 @@ export const PROFILE_MENU_CONTENT = [
     title: "FatSecret",
     link: DASHBOARD_PAGES.FATSECRET,
     icon: PiKeyholeFill,
+  },
+  {
+    title: "Галерея результатов",
+    link: DASHBOARD_PAGES.GALERY,
+    icon: GrGallery,
   },
 ];
 

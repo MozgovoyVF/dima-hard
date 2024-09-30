@@ -66,8 +66,33 @@ export const userService = {
     });
   },
 
+  async getGalery(id: string) {
+    return await prisma.galery.findMany({
+      where: {
+        userId: id,
+      },
+    });
+  },
+
+  async createGalery(urls: string[], userId: string) {
+    return await prisma.galery.createMany({
+      data: urls.map((url) => ({
+        photoUrl: url,
+        userId: userId,
+      })),
+    });
+  },
+
+  async deleteGalery(photoId: string) {
+    return await prisma.galery.delete({
+      where: {
+        id: photoId,
+      },
+    });
+  },
+
   async update(user: DeepPartial<IUser>) {
-    let { id, profile, fatsecret, ...data } = user;
+    let { id, profile, fatsecret, galery, ...data } = user;
 
     if (data.password) {
       data = { ...data, password: await hash(data.password) };

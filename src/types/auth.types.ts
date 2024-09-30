@@ -47,6 +47,7 @@ export interface IUser {
   role: "user" | "admin";
   profile: IProfile;
   fatsecret: IFatSecret;
+  galery?: IGalery[];
 }
 
 export interface IUserLock {
@@ -59,6 +60,7 @@ export interface IUserLock {
   role: "user" | "admin";
   profile: IProfile;
   fatsecret: boolean;
+  galery?: IGalery[];
 }
 
 export interface IProfile {
@@ -69,6 +71,12 @@ export interface IProfile {
   bmr: number | null;
   userId: string;
   birthday?: Date;
+}
+
+export interface IGalery {
+  id: string;
+  photoUrl: string;
+  createdAt: Date;
 }
 
 export type DeepPartial<T> = {
