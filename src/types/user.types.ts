@@ -1,4 +1,4 @@
-import { IGalery, IProfile } from "./auth.types";
+import { IGalery, IProfile, ITask } from "./auth.types";
 
 export interface UserDto {
   email?: string;
@@ -17,6 +17,7 @@ export interface IProfileUser {
   fatsecret: IFatSecret;
   provider?: "credentials" | "google";
   galery?: IGalery[];
+  task?: ITask[];
 }
 
 export interface IFatSecret {

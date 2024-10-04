@@ -48,6 +48,7 @@ export interface IUser {
   profile: IProfile;
   fatsecret: IFatSecret;
   galery?: IGalery[];
+  task?: ITask[];
 }
 
 export interface IUserLock {
@@ -61,6 +62,7 @@ export interface IUserLock {
   profile: IProfile;
   fatsecret: boolean;
   galery?: IGalery[];
+  task?: ITask[];
 }
 
 export interface IProfile {
@@ -77,6 +79,15 @@ export interface IGalery {
   id: string;
   photoUrl: string;
   createdAt: Date;
+}
+
+export interface ITask {
+  id: string;
+  title: string;
+  description?: string;
+  completed: boolean;
+  createdAt: Date;
+  userId: string;
 }
 
 export type DeepPartial<T> = {

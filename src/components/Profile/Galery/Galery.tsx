@@ -14,9 +14,9 @@ import { groupByDay } from "@/utils/groupByDay";
 import { AddForm } from "./AddForm/AddForm";
 import GaleryCarousel from "./GaleryCarousel/GaleryCarousel";
 import { motion } from "framer-motion";
-import { FaArrowDown, FaArrowUp } from "react-icons/fa6";
+import { FaArrowDown } from "react-icons/fa6";
 import { useDeletePhoto } from "@/hooks/useDeletePhoto";
-import { isDateInCurrentWeek } from "@/utils/isDateinCurrentWeek";
+import { isDateInCurrentMonth } from "@/utils/isDateInCurrentMonth";
 
 export interface IGaleryPage {
   files?: FileList;
@@ -92,7 +92,7 @@ export function Galery() {
               <>
                 <h2 className={styles.subtitle}>Ваша галерея результатов пуста</h2>
                 <p className={styles.text}>
-                  Добавляйте до 4-х Ваших фото с результатами каждую неделю и следите за Вашим прогрессом!
+                  Добавляйте до 4-х Ваших фото с результатами каждый месяц и следите за Вашим прогрессом!
                 </p>
 
                 {isFilesAdd && <Loader />}
@@ -102,10 +102,10 @@ export function Galery() {
               </>
             )}
 
-            {filteredGalery && Object.keys(filteredGalery).length !== 0 && !isDateInCurrentWeek(filteredGalery) && (
+            {filteredGalery && Object.keys(filteredGalery).length !== 0 && !isDateInCurrentMonth(filteredGalery) && (
               <>
                 <p className={styles.text}>
-                  Добавляйте до 4-х Ваших фото с результатами каждую неделю и следите за Вашим прогрессом!
+                  Добавляйте до 4-х Ваших фото с результатами каждый месяц и следите за Вашим прогрессом!
                 </p>
                 {isFilesAdd && <Loader />}
                 <AddForm setIsFilesAdd={setIsFilesAdd} setSubmitError={setSubmitError} refetch={refetch} />

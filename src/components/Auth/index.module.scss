@@ -35,6 +35,11 @@
         &:hover {
           box-shadow: 0 0 15px 5px white;
         }
+
+        &:disabled {
+          opacity: 0.5;
+          pointer-events: none;
+        }
       }
     }
 
@@ -80,6 +85,11 @@
         &:hover {
           box-shadow: 0 0 15px 5px white;
         }
+
+        &:disabled {
+          opacity: 0.5;
+          pointer-events: none;
+        }
       }
 
       .google {
@@ -94,6 +104,11 @@
 
         &:hover {
           box-shadow: 0 0 15px 5px white;
+        }
+
+        &:disabled {
+          opacity: 0.5;
+          pointer-events: none;
         }
       }
     }

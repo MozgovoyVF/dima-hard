@@ -1,5 +1,5 @@
 import { axiosWithAuth } from "@/app/api/interceptors";
-import { DeepPartial, IGalery, IUser, IUserLock } from "@/types/auth.types";
+import { DeepPartial, IGalery, ITask, IUser, IUserLock } from "@/types/auth.types";
 import { PutBlobResult } from "@vercel/blob";
 
 const BASE_URL = "/user";
@@ -125,6 +125,38 @@ export const userClientService = {
   async getUserGalery(): Promise<IGalery[] | { error: string }> {
     try {
       const response = await axiosWithAuth.get<IGalery[] | { error: string }>(BASE_URL + "/galery");
+      return response.data;
+    } catch (error: any) {
+      console.log(error);
+      return error.message;
+    }
+  },
+
+  async createTask(userId: string, title: string, description?: string): Promise<ITask> {
+    try {
+      const response = await axiosWithAuth.post<ITask>(BASE_URL + "/task/create", {
+        body: {
+          userId,
+          title,
+          description,
+        },
+      });
+      return response.data;
+    } catch (error: any) {
+      console.log(error);
+      return error.message;
+    }
+  },
+
+  async updateTask(userId: string, taskId: string, completed: boolean): Promise<ITask> {
+    try {
+      const response = await axiosWithAuth.put<ITask>(BASE_URL + "/task/update", {
+        body: {
+          userId,
+          taskId,
+          completed,
+        },
+      });
       return response.data;
     } catch (error: any) {
       console.log(error);

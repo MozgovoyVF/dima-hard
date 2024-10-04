@@ -17,7 +17,7 @@ import Loader from "@/components/ui/loader/Loader";
 
 interface IGaleryCarousel {
   responsive: string[];
-  handleDelete: (index: number) => void;
+  handleDelete?: (index: number) => void;
   showCounter?: boolean;
   isDeletePending?: boolean;
 }
@@ -84,9 +84,11 @@ export default function GaleryCarousel({
                   <Loader />
                 </span>
               ) : (
-                <span className={styles.cross} onClick={() => handleDelete(index)}>
-                  <MdDeleteForever />
-                </span>
+                handleDelete && (
+                  <span className={styles.cross} onClick={() => handleDelete(index)}>
+                    <MdDeleteForever />
+                  </span>
+                )
               )}
 
               <span className={styles.size} onClick={() => handleImageClick(item)}>

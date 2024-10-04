@@ -1,5 +1,11 @@
 import { axiosWithAuth } from "@/app/api/interceptors";
-import type { TFatSecretMontsWeigth } from "@/types/fatsecret.types";
+import type {
+  TFatSecretDayFood,
+  TFatSecretExercise,
+  TFatSecretMonthFood,
+  TFatSecretMontsWeigth,
+  TFatSecretProfile,
+} from "@/types/fatsecret.types";
 
 const BASE_URL = "/fatsecret";
 
@@ -10,12 +16,32 @@ interface RequestConfig<T> {
 
 export interface IFatsecretRequests {
   weight_monts: RequestConfig<TFatSecretMontsWeigth>;
+  food_month: RequestConfig<TFatSecretMonthFood>;
+  food_day: RequestConfig<TFatSecretDayFood>;
+  exercise: RequestConfig<TFatSecretExercise>;
+  profile: RequestConfig<TFatSecretProfile>;
 }
 
 export const fatsecretClientService = {
   requests: {
     weight_monts: {
       url: "https://platform.fatsecret.com/rest/weight/month/v2",
+      method: "GET",
+    },
+    food_month: {
+      url: "https://platform.fatsecret.com/rest/food-entries/month/v1",
+      method: "GET",
+    },
+    food_day: {
+      url: "https://platform.fatsecret.com/rest/food-entries/v2",
+      method: "GET",
+    },
+    exercise: {
+      url: "https://platform.fatsecret.com/rest/exercise-entries/month/v2",
+      method: "GET",
+    },
+    profile: {
+      url: "https://platform.fatsecret.com/rest/profile/v1",
       method: "GET",
     },
   } as IFatsecretRequests,

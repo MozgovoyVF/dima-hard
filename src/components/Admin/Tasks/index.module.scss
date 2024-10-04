@@ -1,0 +1,106 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  padding-bottom: 20px;
+}
+
+.title {
+  padding: 20px 10px;
+  text-align: center;
+  font-size: 24px;
+  color: blueviolet;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.block {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.form {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  width: 100%;
+
+  & input {
+    background-color: transparent;
+    font-size: 16px;
+    color: white;
+  }
+}
+
+.addForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  width: 100%;
+  gap: 20px;
+
+  .label {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 15px;
+    box-shadow: 0 0 20px 2px blueviolet;
+    color: white;
+    font-size: 16px;
+    text-align: center;
+
+    &.error {
+      box-shadow: 0 0 20px 2px red;
+    }
+  }
+
+  .input {
+    flex: 1 1 100%;
+    color: white;
+    font-size: 16px;
+
+    &::placeholder {
+      font-size: 16px;
+      color: rgba($color: #fff, $alpha: 0.5);
+    }
+  }
+}
+
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 16px;
+  color: red;
+}
+
+.button,
+.addButton {
+  padding: 8.25px 20px;
+  min-height: 100%;
+  color: white;
+  border: 2px solid blueviolet;
+  box-shadow: 0 0 12px 4px blueviolet;
+  text-align: center;
+}
+
+.empty {
+  text-align: center;
+  color: white;
+  font-size: 16px;
+}
+
+.tasks {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

@@ -12,6 +12,13 @@ export const userService = {
       include: {
         profile: true,
         fatsecret: true,
+        task: {
+          orderBy: [
+            { completed: "asc" }, // false идут первыми
+            { createdAt: "desc" }, // сортировка по дате создания в порядке убывания
+          ],
+        },
+        galery: true,
       },
     });
   },
@@ -22,6 +29,12 @@ export const userService = {
       },
       include: {
         profile: true,
+        task: {
+          orderBy: [
+            { completed: "asc" }, // false идут первыми
+            { createdAt: "desc" }, // сортировка по дате создания в порядке убывания
+          ],
+        },
       },
     });
   },
@@ -92,7 +105,7 @@ export const userService = {
   },
 
   async update(user: DeepPartial<IUser>) {
-    let { id, profile, fatsecret, galery, ...data } = user;
+    let { id, profile, fatsecret, galery, task, ...data } = user;
 
     if (data.password) {
       data = { ...data, password: await hash(data.password) };
@@ -126,6 +139,27 @@ export const userService = {
       data: {
         token: null,
         secret: null,
+      },
+    });
+  },
+
+  async createTask(userId: string, title: string, description?: string) {
+    return await prisma.task.create({
+      data: {
+        title,
+        description,
+        userId,
+      },
+    });
+  },
+
+  async updateTask(taskId: string, completed: boolean) {
+    return await prisma.task.update({
+      where: {
+        id: taskId,
+      },
+      data: {
+        completed,
       },
     });
   },

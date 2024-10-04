@@ -38,7 +38,7 @@ export function Auth() {
   const { push } = useRouter();
   const queryClient = useQueryClient();
 
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationKey: ["auth"],
     mutationFn: (data: IAuthForm | IRegisterForm) => authService.main(isLoginForm ? "login" : "register", data),
     onSuccess({ data }: { data: IAuthResponse }) {
@@ -151,15 +151,23 @@ export function Auth() {
             </motion.div>
             <div className={styles.buttonsBlock}>
               {isLoginForm ? (
-                <button className={styles.button} onClick={() => setIsLoginForm(true)}>
+                <button
+                  disabled={isPending || Object.keys(errors).length > 0}
+                  className={styles.button}
+                  onClick={() => setIsLoginForm(true)}
+                >
                   Войти
                 </button>
               ) : (
-                <button className={styles.button} onClick={() => setIsLoginForm(false)}>
+                <button
+                  disabled={isPending || Object.keys(errors).length > 0}
+                  className={styles.button}
+                  onClick={() => setIsLoginForm(false)}
+                >
                   Зарегистрироваться
                 </button>
               )}
-              <button className={styles.google} onClick={handleClick}>
+              <button disabled={isPending} className={styles.google} onClick={handleClick}>
                 <FcGoogle />
                 Войти с аккаунтом Google
               </button>
