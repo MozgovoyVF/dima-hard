@@ -1,0 +1,85 @@
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 10px;
+  box-shadow: 0 0 20px 2px blueviolet;
+  border: 1px solid blueviolet;
+
+  &.completed {
+    opacity: 0.5;
+  }
+
+  .content {
+    flex: 1 1 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .taskTitle {
+    flex: 1 1 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    font-size: 16px;
+    color: white;
+    border-bottom: 2px solid blueviolet;
+  }
+
+  .taskDescription {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    text-align: center;
+    font-size: 16px;
+    color: white;
+  }
+
+  .taskCheckbox {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .taskCheckbox + label {
+    position: relative;
+    height: 35px;
+    padding-left: 25px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .taskCheckbox + label::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 35px;
+    height: 35px;
+    border: 2px solid blueviolet;
+    border-radius: 50%;
+    background-color: white;
+  }
+
+  .taskCheckbox:checked + label::before {
+    background-color: blueviolet;
+  }
+
+  .taskCheckbox + label::after {
+    content: "✔";
+    position: absolute;
+    left: 10px;
+    top: 4px;
+    font-size: 20px;
+    color: white;
+    opacity: 0;
+  }
+
+  .taskCheckbox:checked + label::after {
+    opacity: 1;
+  }
+}

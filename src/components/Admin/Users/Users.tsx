@@ -15,6 +15,10 @@ import { FcGoogle } from "react-icons/fc";
 import { PiKeyholeFill } from "react-icons/pi";
 import { useFatsecretReset } from "@/hooks/useFatsecretReset";
 import { useUpdateUser } from "@/hooks/useUpdateUser";
+import { useFatsecretRequest } from "@/hooks/useFatsecretRequest";
+import { TFatSecretProfile } from "@/types/fatsecret.types";
+import { useFatsecretUsers } from "@/hooks/useFatsecretUsers";
+import { convertDaysToDate } from "@/utils/convertDaysToDate";
 
 export interface IAdminUsers {
   userId: number;
@@ -24,8 +28,15 @@ export interface IAdminUserUpdate extends DeepPartial<IUserLock> {}
 
 export function Users() {
   const { data: usersData, isLoading, isRefetching } = useGetAllUsers();
+  const {
+    data: fatsecretData,
+    isLoading: isfatsecretLoading,
+    isRefetching: isFatsecretRefetching,
+  } = useFatsecretUsers();
+
   const { mutate, isPending } = useFatsecretReset();
   const { mutate: mutateUpdate, isPending: isPendingUpdate } = useUpdateUser();
+  const { mutateAsync, isPending: fatsecretPending } = useFatsecretRequest<"profile", TFatSecretProfile>();
 
   const {
     handleSubmit,
@@ -36,6 +47,7 @@ export function Users() {
 
   const [data, setData] = useState<IUserLock | undefined>();
   const [users, setUsers] = useState(usersData);
+  const [fatsecretProfile, setFatsecretProfile] = useState<TFatSecretProfile | undefined>();
 
   const {
     handleSubmit: handleUpdateSubmit,
@@ -62,10 +74,28 @@ export function Users() {
     }
   }, [data, setValue, usersData]);
 
-  const onSubmit: SubmitHandler<IAdminUsers> = ({ userId }) => {
+  const onSubmit: SubmitHandler<IAdminUsers> = async ({ userId }) => {
     reset();
+    setFatsecretProfile(undefined);
     if (users) {
-      setData(users.find((user) => user.id === userId));
+      const user = users.find((user) => user.id === userId);
+      setData(user);
+
+      if (user?.fatsecret && fatsecretData) {
+        const fatsecretUser = fatsecretData.find((user) => user.id === userId);
+
+        if (fatsecretUser && fatsecretUser.fatsecret.secret && fatsecretUser.fatsecret.token) {
+          const result = await mutateAsync({
+            request: "profile",
+            token: fatsecretUser.fatsecret.token,
+            secret: fatsecretUser.fatsecret.secret,
+          });
+
+          setFatsecretProfile(result);
+        } else {
+          setFatsecretProfile(undefined);
+        }
+      }
     }
   };
 
@@ -106,7 +136,7 @@ export function Users() {
       <div className={styles.content}>
         <h1 className={styles.title}>Изменение данных пользователей</h1>
 
-        {isLoading ? (
+        {isLoading || isfatsecretLoading ? (
           <Loader />
         ) : users ? (
           <>
@@ -135,7 +165,7 @@ export function Users() {
               </button>
             </form>
 
-            {isRefetching ? (
+            {isRefetching || fatsecretPending ? (
               <Loader />
             ) : (
               data?.id && (
@@ -216,6 +246,28 @@ export function Users() {
                       )}
                     </div>
                   </div>
+                  {fatsecretProfile && (
+                    <>
+                      <div className={styles.row}>
+                        <div className={styles.label}>Рост</div>
+                        <div className={styles.value}>{Number(fatsecretProfile.profile.height_cm)} см</div>
+                      </div>
+                      <div className={styles.row}>
+                        <div className={styles.label}>Желаемый вес</div>
+                        <div className={styles.value}>{Number(fatsecretProfile.profile.goal_weight_kg)} кг</div>
+                      </div>
+                      <div className={styles.row}>
+                        <div className={styles.label}>Текущий вес</div>
+                        <div className={styles.value}>{Number(fatsecretProfile.profile.last_weight_kg)} кг</div>
+                      </div>
+                      <div className={styles.row}>
+                        <div className={styles.label}>Дата последнего взвешивания</div>
+                        <div className={styles.value}>
+                          {convertDaysToDate(Number(fatsecretProfile.profile.last_weight_date_int))}
+                        </div>
+                      </div>
+                    </>
+                  )}
                   <div className={styles.row}>
                     <div className={styles.label}>Подписка</div>
                     <div className={styles.value}>
@@ -246,7 +298,7 @@ export function Users() {
                         onClick={handleFatsecretBlock}
                         className={`${styles.button} ${styles.fatsecretButton}`}
                       >
-                        <PiKeyholeFill /> Отвязать аккаунт Fatsecret
+                        <PiKeyholeFill /> Отвязать Fatsecret
                       </button>
                     )}
                     <button disabled={isPendingUpdate} type="submit" className={styles.button}>

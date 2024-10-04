@@ -1,0 +1,172 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+.title {
+  padding: 20px 10px;
+  text-align: center;
+  font-size: 24px;
+  color: blueviolet;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.button {
+  padding: 10px 20px;
+  color: white;
+  border: 2px solid blueviolet;
+  box-shadow: 0 0 12px 4px blueviolet;
+
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+
+  & > div {
+    width: 100%;
+  }
+}
+
+.infoBlock {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.infoMessage {
+  text-align: center;
+  color: white;
+}
+
+.result {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  gap: 20px;
+
+  & canvas {
+    max-width: 500px;
+  }
+}
+
+.consume {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .subtitle:first-child {
+    color: rgb(38, 38, 233);
+  }
+
+  .subtitle:last-child {
+    color: rgb(184, 7, 7);
+  }
+}
+.subtitle {
+  text-align: center;
+  font-size: 20px;
+  color: blueviolet;
+}
+
+.foods {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+
+  .meal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .mealTitle {
+    font-size: 18px;
+    color: white;
+  }
+  .food {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .top {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr); // Количество колонок// Интервал между колонками
+
+      // Общие стили для всех элементов
+      & > div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        border: 2px solid blueviolet;
+        font-size: 16px;
+        color: white;
+        height: 100px; // Можно изменить на нужную высоту
+        text-align: center;
+      }
+
+      .header {
+        background-color: rgba(100, 100, 100, 0.6); // Фон для заголовка
+      }
+
+      .calories {
+        background-color: rgba(255, 206, 86, 0.6); // Фон для калорий
+      }
+
+      .protein {
+        background-color: rgba(54, 162, 235, 0.6); // Фон для белков
+      }
+
+      .fat {
+        background-color: rgba(255, 99, 132, 0.6); // Фон для жиров
+      }
+
+      .carbohydrate {
+        background-color: rgba(75, 192, 192, 0.6); // Фон для углеводов
+      }
+    }
+    .bottom {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+
+      & > div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        border: 2px solid blueviolet;
+        font-size: 16px;
+        color: white;
+        min-height: 100px;
+        text-align: center;
+      }
+
+      .name {
+        background-color: rgba(9, 9, 10, 0.6); // Фон для заголовка
+      }
+
+      .size {
+        background-color: rgba(255, 206, 86, 0.6); // Фон для калорий
+      }
+    }
+  }
+}

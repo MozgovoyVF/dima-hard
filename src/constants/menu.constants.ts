@@ -1,11 +1,13 @@
 import { DASHBOARD_PAGES } from "@/config/pages-url.config";
+import { BiFoodMenu } from "react-icons/bi";
+import { FaTasks } from "react-icons/fa";
 import { FaCalculator, FaWeightScale } from "react-icons/fa6";
 import { GiStrong } from "react-icons/gi";
 import { GrGallery, GrSettingsOption, GrUserManager } from "react-icons/gr";
-import { IoFitnessSharp } from "react-icons/io5";
+import { IoFitnessSharp, IoSettings } from "react-icons/io5";
 import { MdOnlinePrediction, MdOutlineAdminPanelSettings, MdOutlineModelTraining } from "react-icons/md";
 import { PiKeyholeFill } from "react-icons/pi";
-import { RiContactsBook2Fill } from "react-icons/ri";
+import { RiContactsBook2Fill, RiWeightFill } from "react-icons/ri";
 
 export const MENU_CONTENT = [
   {
@@ -32,9 +34,9 @@ export const PROFILE_MENU_CONTENT = [
     icon: FaCalculator,
   },
   {
-    title: "Настройки",
-    link: DASHBOARD_PAGES.SETTINGS,
-    icon: GrSettingsOption,
+    title: "Задачи",
+    link: DASHBOARD_PAGES.TASK,
+    icon: FaTasks,
   },
   {
     title: "FatSecret",
@@ -45,6 +47,11 @@ export const PROFILE_MENU_CONTENT = [
     title: "Галерея результатов",
     link: DASHBOARD_PAGES.GALERY,
     icon: GrGallery,
+  },
+  {
+    title: "Настройки",
+    link: DASHBOARD_PAGES.SETTINGS,
+    icon: GrSettingsOption,
   },
 ];
 
@@ -57,16 +64,31 @@ export const ADMIN_MENU_CONTENT = [
   {
     title: "Показатели веса",
     link: DASHBOARD_PAGES.ADMIN_WEIGHT,
-    icon: FaWeightScale,
+    icon: RiWeightFill,
   },
   {
-    title: "Изменение данных пользователей",
+    title: "Данные пользователей",
     link: DASHBOARD_PAGES.ADMIN_USERS,
     icon: GrUserManager,
   },
   {
+    title: "Информация о питании",
+    link: DASHBOARD_PAGES.ADMIN_FOOD_MONTH,
+    icon: BiFoodMenu,
+  },
+  {
+    title: "Задачи",
+    link: DASHBOARD_PAGES.ADMIN_TASKS,
+    icon: FaTasks,
+  },
+  {
+    title: "Галерея результатов",
+    link: DASHBOARD_PAGES.ADMIN_GALERY,
+    icon: GrGallery,
+  },
+  {
     title: "Настройки",
     link: DASHBOARD_PAGES.SETTINGS,
-    icon: GrSettingsOption,
+    icon: IoSettings,
   },
 ];

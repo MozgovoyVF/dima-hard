@@ -5,15 +5,15 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { useFatsecret } from "@/hooks/useFatsecret";
-import { DASHBOARD_PAGES } from "@/config/pages-url.config";
+import { ITask } from "@/types/auth.types";
 
 interface IModal {
   closeFn: () => void;
   subscribe: boolean;
+  tasks?: ITask[];
 }
 
-export const MenuModal = ({ closeFn, subscribe }: IModal) => {
+export const MenuModal = ({ closeFn, subscribe, tasks }: IModal) => {
   const path = usePathname();
 
   useEffect(() => {
@@ -42,23 +42,26 @@ export const MenuModal = ({ closeFn, subscribe }: IModal) => {
             {path.startsWith("/i")
               ? PROFILE_MENU_CONTENT.map((item) => {
                   return (
-                    <li key={item.title} onClick={() => closeFn()} className="item">
+                    <li key={item.title} onClick={() => closeFn()} className={styles.item}>
                       <Link className={styles.link} href={item.link}>
-                        {<item.icon />} {item.title}
+                        {<item.icon />} {item.title}{" "}
+                        {item.title === "Задачи" && tasks && tasks.length > 0 && (
+                          <span className={styles.taskCount}>{tasks.filter((task) => !task.completed).length}</span>
+                        )}
                       </Link>
                     </li>
                   );
                 })
               : path.startsWith("/admin")
               ? ADMIN_MENU_CONTENT.map((item) => (
-                  <li key={item.title} onClick={() => closeFn()} className="item">
+                  <li key={item.title} onClick={() => closeFn()} className={styles.item}>
                     <Link className={styles.link} href={item.link}>
                       {<item.icon />} {item.title}
                     </Link>
                   </li>
                 ))
               : MENU_CONTENT.map((item) => (
-                  <li key={item.title} onClick={() => closeFn()} className="item">
+                  <li key={item.title} onClick={() => closeFn()} className={styles.item}>
                     <Link className={styles.link} href={item.link}>
                       {<item.icon />} {item.title}
                     </Link>

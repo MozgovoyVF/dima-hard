@@ -51,16 +51,19 @@ export function UserSelect({
             ...styles,
             backgroundColor: "rgba(138,43,226, 0.9)",
             boxShadow: "0 0 12px 4px blueviolet",
+            zIndex: 11,
           }),
           singleValue: (styles) => ({ ...styles, color: "white" }),
-          menuList: (styles) => ({ ...styles, color: "white", border: "2px solid blueviolet" }),
-          container: (styles) => ({ ...styles, width: "100%" }),
+          menuList: (styles) => ({ ...styles, color: "white", border: "2px solid blueviolet", zIndex: 11 }),
+          container: (styles) => ({ ...styles, width: "100%", zIndex:10 }),
           menuPortal: (styles) => ({ ...styles, backgroundColor: "white" }),
           option: (styles, { isSelected }) => ({
             ...styles,
             ":hover": { backgroundColor: "blueviolet" },
             backgroundColor: isSelected ? "rgba(75,20,126, 1)" : "transparent",
+            zIndex: 11,
           }),
+          placeholder: (styles) => ({ ...styles, textAlign: "center" }),
         }}
       />
     </>

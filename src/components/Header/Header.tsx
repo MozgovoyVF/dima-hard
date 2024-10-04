@@ -40,14 +40,18 @@ export function Header() {
       {isShowModal ? (
         <AnimatePresence mode="wait" initial={true}>
           <ClientOnlyPortal selector={"#modal"}>
-            <MenuModal closeFn={() => setIsShowModal(false)} subscribe={data?.profile.subscribe || false} />
+            <MenuModal
+              closeFn={() => setIsShowModal(false)}
+              subscribe={data?.profile.subscribe || false}
+              tasks={data?.task}
+            />
           </ClientOnlyPortal>
         </AnimatePresence>
       ) : null}
       <div className={styles.top}>
         <Hamburger toggled={isShowModal} size={20} toggle={!isShowModal ? appear : fade} />
         <a href="https://www.fatsecret.com">
-          <img src="https://platform.fatsecret.com/api/static/images/powered_by_fatsecret.svg" />
+          <img src="https://platform.fatsecret.com/api/static/images/powered_by_fatsecret.svg" alt="Fatsecret" />
         </a>
         <div className={styles.social}>
           <a target="_blank" href={`https://t.me/${PHONE_NUMBER}`}>
