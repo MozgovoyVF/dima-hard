@@ -44,6 +44,7 @@ export function Header() {
               closeFn={() => setIsShowModal(false)}
               subscribe={data?.profile.subscribe || false}
               tasks={data?.task}
+              role={data?.role}
             />
           </ClientOnlyPortal>
         </AnimatePresence>

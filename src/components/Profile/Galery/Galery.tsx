@@ -35,7 +35,7 @@ export function Galery() {
 
   useEffect(() => {
     if (galeryData && Object.keys(galeryData).every((value) => value !== "error")) {
-      const result = groupByDay(galeryData as IGalery[]);
+      const result = groupByDay<IGalery>(galeryData as IGalery[]);
       setFilteredGalery(result);
 
       const openState = Object.keys(result).reduce((acc, key) => {
@@ -75,7 +75,7 @@ export function Galery() {
               <br />
               Для оформления подписки свяжитесь со мной в{" "}
               <Link className={styles.link} target="_blank" href={`https://t.me/${PHONE_NUMBER}`}>
-                Telegtam
+                Telegram
               </Link>{" "}
               или{" "}
               <Link className={styles.link} target="_blank" href={`tel:${PHONE_NUMBER}`}>
@@ -111,6 +111,12 @@ export function Galery() {
                 <AddForm setIsFilesAdd={setIsFilesAdd} setSubmitError={setSubmitError} refetch={refetch} />
                 {submitError && <span className={styles.error}>{submitError}</span>}
               </>
+            )}
+
+            {filteredGalery && isDateInCurrentMonth(filteredGalery) && (
+              <p className={styles.text}>
+                Вы сможете обновить Вашу галерею свежими результатами уже в следующем месяце!
+              </p>
             )}
 
             {filteredGalery && (

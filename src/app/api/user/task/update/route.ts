@@ -32,6 +32,7 @@ export async function PUT(req: Request, res: NextApiResponse) {
   try {
     if (taskId && typeof completed === "boolean") {
       const task = await userService.updateTask(taskId, completed);
+      await userService.createChange(id, "Пользователь обновил поставленную задачу");
 
       return new Response(JSON.stringify(task), {
         status: 200,

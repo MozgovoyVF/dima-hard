@@ -29,7 +29,7 @@ export function FatSecret() {
               <br />
               Для подтверждения Вашего аккаунта FatSecret свяжитесь со мной в{" "}
               <Link className={styles.link} target="_blank" href={`https://t.me/${PHONE_NUMBER}`}>
-                Telegtam
+                Telegram
               </Link>{" "}
               или{" "}
               <Link className={styles.link} target="_blank" href={`tel:${PHONE_NUMBER}`}>

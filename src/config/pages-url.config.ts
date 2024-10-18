@@ -13,6 +13,7 @@ export const DASHBOARD_PAGES = {
   FATSECRET: profile + "fatsecret",
   GALERY: profile + "galery",
   TASK: profile + "task",
+  MEASURE: profile + "measure",
 
   ADMIN_MAIN: admin,
   ADMIN_WEIGHT: admin + "weight",
@@ -20,4 +21,5 @@ export const DASHBOARD_PAGES = {
   ADMIN_FOOD_MONTH: admin + "food_month",
   ADMIN_TASKS: admin + "tasks",
   ADMIN_GALERY: admin + "galery",
+  ADMIN_MEASURE: admin + "measure",
 };

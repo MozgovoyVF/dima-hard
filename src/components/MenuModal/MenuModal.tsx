@@ -11,9 +11,10 @@ interface IModal {
   closeFn: () => void;
   subscribe: boolean;
   tasks?: ITask[];
+  role?: "admin" | "user";
 }
 
-export const MenuModal = ({ closeFn, subscribe, tasks }: IModal) => {
+export const MenuModal = ({ closeFn, subscribe, tasks, role }: IModal) => {
   const path = usePathname();
 
   useEffect(() => {
@@ -39,7 +40,15 @@ export const MenuModal = ({ closeFn, subscribe, tasks }: IModal) => {
       <div className={styles.window}>
         <div className={styles.content}>
           <ul className={styles.list}>
-            {path.startsWith("/i")
+            {path.startsWith("/admin") || role === "admin"
+              ? ADMIN_MENU_CONTENT.map((item) => (
+                  <li key={item.title} onClick={() => closeFn()} className={styles.item}>
+                    <Link className={styles.link} href={item.link}>
+                      {<item.icon />} {item.title}
+                    </Link>
+                  </li>
+                ))
+              : path.startsWith("/i")
               ? PROFILE_MENU_CONTENT.map((item) => {
                   return (
                     <li key={item.title} onClick={() => closeFn()} className={styles.item}>
@@ -52,14 +61,6 @@ export const MenuModal = ({ closeFn, subscribe, tasks }: IModal) => {
                     </li>
                   );
                 })
-              : path.startsWith("/admin")
-              ? ADMIN_MENU_CONTENT.map((item) => (
-                  <li key={item.title} onClick={() => closeFn()} className={styles.item}>
-                    <Link className={styles.link} href={item.link}>
-                      {<item.icon />} {item.title}
-                    </Link>
-                  </li>
-                ))
               : MENU_CONTENT.map((item) => (
                   <li key={item.title} onClick={() => closeFn()} className={styles.item}>
                     <Link className={styles.link} href={item.link}>

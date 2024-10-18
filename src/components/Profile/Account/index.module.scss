@@ -100,13 +100,16 @@
 
     .item {
       width: 100%;
+      gap: 10px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       .name {
+        flex: 0 0 60%;
         color: white;
       }
       .value {
+        flex: 0 0 40%;
         color: blueviolet;
       }
     }

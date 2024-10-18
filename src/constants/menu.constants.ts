@@ -8,6 +8,7 @@ import { IoFitnessSharp, IoSettings } from "react-icons/io5";
 import { MdOnlinePrediction, MdOutlineAdminPanelSettings, MdOutlineModelTraining } from "react-icons/md";
 import { PiKeyholeFill } from "react-icons/pi";
 import { RiContactsBook2Fill, RiWeightFill } from "react-icons/ri";
+import { TbRulerMeasure } from "react-icons/tb";
 
 export const MENU_CONTENT = [
   {
@@ -49,6 +50,11 @@ export const PROFILE_MENU_CONTENT = [
     icon: GrGallery,
   },
   {
+    title: "Антропометрия",
+    link: DASHBOARD_PAGES.MEASURE,
+    icon: TbRulerMeasure,
+  },
+  {
     title: "Настройки",
     link: DASHBOARD_PAGES.SETTINGS,
     icon: GrSettingsOption,
@@ -85,6 +91,11 @@ export const ADMIN_MENU_CONTENT = [
     title: "Галерея результатов",
     link: DASHBOARD_PAGES.ADMIN_GALERY,
     icon: GrGallery,
+  },
+  {
+    title: "Антропометрия",
+    link: DASHBOARD_PAGES.ADMIN_MEASURE,
+    icon: TbRulerMeasure,
   },
   {
     title: "Настройки",

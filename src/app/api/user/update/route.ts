@@ -31,6 +31,8 @@ export async function POST(req: Request, res: NextApiResponse) {
     if (user) {
       const { password, ...updateUser } = await userService.update(user);
 
+      await userService.createChange(updateUser.id, "Пользовательские данные обновлены");
+
       return new Response(JSON.stringify(updateUser), {
         status: 200,
       });

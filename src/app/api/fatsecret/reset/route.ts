@@ -35,6 +35,7 @@ export async function GET(req: NextRequest) {
 
   try {
     const updateUser = await userService.resetFatsecretData(fatsecretUserId);
+    await userService.createChange(fatsecretUserId, "Пользователь отвязал свой аккаунт Fatsecret");
 
     return new Response(JSON.stringify(!!updateUser.token), {
       status: 200,

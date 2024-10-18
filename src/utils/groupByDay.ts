@@ -1,6 +1,8 @@
-import { IGalery } from "@/types/auth.types";
+interface HasCreatedAt {
+  createdAt: string | Date; // Указываем, что поле createdAt может быть строкой или объектом Date
+}
 
-export function groupByDay(items: IGalery[]) {
+export function groupByDay<T extends HasCreatedAt>(items: T[]) {
   return items.reduce((acc, item) => {
     // Извлекаем дату в формате "YYYY-MM-DD" из поля createdAt
     const date = new Date(item.createdAt).toISOString().split("T")[0];
@@ -14,5 +16,5 @@ export function groupByDay(items: IGalery[]) {
     acc[date].push(item);
 
     return acc;
-  }, {} as Record<string, IGalery[]>); // Возвращаем объект с ключами-датами и значениями-массивами объектов
+  }, {} as Record<string, T[]>); // Возвращаем объект с ключами-датами и значениями-массивами объектов
 }
