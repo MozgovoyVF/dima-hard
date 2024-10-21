@@ -15,6 +15,7 @@ export async function POST(req: Request) {
     });
 
   const { password, ...user } = await userService.create(dto, "credentials");
+  await userService.createChange(user.id, "Пользователь зарегистрировался в приложении");
 
   const accessToken = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, {
     expiresIn: "1h",

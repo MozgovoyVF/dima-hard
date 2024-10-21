@@ -2,6 +2,7 @@ import { headers } from "next/headers";
 import { FatSecretOauth1, fatsecretService } from "../../../../services/fatsecret.service";
 import jwt, { UserIDJwtPayload } from "jsonwebtoken";
 import axios from "axios";
+import { userService } from "@/services/user.service";
 
 export async function POST(req: Request, res: Response) {
   const { body } = await req.json();
@@ -76,6 +77,7 @@ export async function POST(req: Request, res: Response) {
 
   try {
     await fatsecretService.saveTokens(userId, oauth.oauth_token, oauth.oauth_token_secret);
+    await userService.createChange(userId, "Пользователь привязал свой аккаунт Fatsecret");
 
     return new Response(JSON.stringify("OK"), {
       status: 200,

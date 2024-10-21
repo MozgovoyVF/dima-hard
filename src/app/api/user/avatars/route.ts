@@ -1,3 +1,4 @@
+import { userService } from "@/services/user.service";
 import { del, put, list } from "@vercel/blob";
 import { NextResponse } from "next/server";
 
@@ -23,6 +24,8 @@ export async function POST(request: Request): Promise<NextResponse> {
     const blob = await put(`avatars/${id}/${filename}`, file, {
       access: "public",
     });
+
+    await userService.createChange(id, "Пользователь обновил аватарку");
 
     return NextResponse.json(blob);
   } catch (error) {

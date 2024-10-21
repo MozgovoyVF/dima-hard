@@ -24,6 +24,8 @@ export async function POST(req: Request, res: NextApiResponse) {
     if (urls && urls.length !== 0) {
       const galery = await userService.createGalery(urls, id);
 
+      await userService.createChange(id, "Пользователь добавил новые фото в галерею результатов");
+
       return new Response(JSON.stringify(galery), {
         status: 200,
       });

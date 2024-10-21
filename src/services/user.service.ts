@@ -19,6 +19,11 @@ export const userService = {
           ],
         },
         galery: true,
+        measure: {
+          orderBy: [
+            { createdAt: "asc" }, // сортировка по дате создания в порядке убывания
+          ],
+        },
       },
     });
   },
@@ -33,6 +38,11 @@ export const userService = {
           orderBy: [
             { completed: "asc" }, // false идут первыми
             { createdAt: "desc" }, // сортировка по дате создания в порядке убывания
+          ],
+        },
+        measure: {
+          orderBy: [
+            { createdAt: "asc" }, // сортировка по дате создания в порядке убывания
           ],
         },
       },
@@ -105,7 +115,7 @@ export const userService = {
   },
 
   async update(user: DeepPartial<IUser>) {
-    let { id, profile, fatsecret, galery, task, ...data } = user;
+    let { id, profile, fatsecret, galery, task, measure, changes, ...data } = user;
 
     if (data.password) {
       data = { ...data, password: await hash(data.password) };
@@ -160,6 +170,64 @@ export const userService = {
       },
       data: {
         completed,
+      },
+    });
+  },
+
+  async createMeasure(
+    userId: string,
+    chest: string,
+    arms: string,
+    waist: string,
+    lowerAbdomen: string,
+    hips: string,
+    legsUnderButtock: string,
+    calves: string
+  ) {
+    return await prisma.measure.create({
+      data: {
+        chest,
+        arms,
+        waist,
+        lowerAbdomen,
+        hips,
+        legsUnderButtock,
+        calves,
+        userId,
+      },
+    });
+  },
+
+  async getChanges(limit: number, offset: number) {
+    const [changes, total] = await Promise.all([
+      prisma.changes.findMany({
+        skip: offset,
+        take: limit,
+        orderBy: {
+          createdAt: "desc",
+        },
+        include: {
+          user: {
+            select: {
+              avatarUrl: true,
+              name: true,
+              lastName: true,
+              email: true,
+            },
+          },
+        },
+      }),
+      prisma.changes.count(), // Получаем общее количество записей
+    ]);
+
+    return { changes, total };
+  },
+
+  async createChange(userId: string, description: string) {
+    return await prisma.changes.create({
+      data: {
+        description,
+        userId,
       },
     });
   },

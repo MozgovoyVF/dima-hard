@@ -18,10 +18,12 @@ export function Task() {
 
   const handleToggleComplete = async (userId: string, taskId: string, isComplete: boolean) => {
     setUpdateTask(taskId);
+
     if (userId && taskId) {
       await updateMutateAsync({ userId, taskId, completed: isComplete });
       setUpdateTask("");
     }
+
     setUpdateTask("");
   };
 
@@ -31,14 +33,14 @@ export function Task() {
         <Loader />
       ) : !profileData?.profile.subscribe ? (
         <MotionSection>
-          <h1 className={styles.title}>FatSecret</h1>
+          <h1 className={styles.title}>Мои Задачи</h1>
           <div className={styles.content}>
             <p className={styles.text}>
               В настоящий момент Ваша подписка неактивна!
               <br />
               Для подтверждения Вашего аккаунта FatSecret свяжитесь со мной в{" "}
               <Link className={styles.link} target="_blank" href={`https://t.me/${PHONE_NUMBER}`}>
-                Telegtam
+                Telegram
               </Link>{" "}
               или{" "}
               <Link className={styles.link} target="_blank" href={`tel:${PHONE_NUMBER}`}>

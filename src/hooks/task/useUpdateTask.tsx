@@ -22,6 +22,7 @@ export function useUpdateTask() {
     onSuccess() {
       toast.success("Вы успешно обновили задачу!");
       queryClient.invalidateQueries({ queryKey: ["users"] });
+      queryClient.invalidateQueries({ queryKey: ["profile"] });
     },
   });
 

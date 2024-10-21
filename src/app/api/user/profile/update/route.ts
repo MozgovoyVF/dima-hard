@@ -1,6 +1,7 @@
 import { headers } from "next/headers";
 import jwt, { UserIDJwtPayload } from "jsonwebtoken";
 import { calculatorService } from "@/services/calculator.service";
+import { userService } from "@/services/user.service";
 
 export async function PUT(req: Request) {
   const { type, result, desiredResult } = await req.json();
@@ -19,6 +20,7 @@ export async function PUT(req: Request) {
 
   if (type === "tdee") {
     const { id } = await calculatorService.saveResult(type, result, userId, desiredResult);
+    await userService.createChange(userId, "Пользователь привязал новые данные через калькулятор калорий");
     return new Response(JSON.stringify(id), {
       status: 200,
     });

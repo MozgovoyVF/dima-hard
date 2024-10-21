@@ -90,6 +90,7 @@ const WeightChart: React.FC<WeightChartProps> = ({ month }) => {
     plugins: {
       legend: {
         position: "top" as const,
+        display: false,
       },
       title: {
         display: true,
@@ -104,7 +105,11 @@ const WeightChart: React.FC<WeightChartProps> = ({ month }) => {
     },
   };
 
-  return <Line data={data} options={options} />;
+  return (
+    <div style={{ minHeight: "200px", width: "100%" }}>
+      <Line data={data} options={options} height={200} />
+    </div>
+  );
 };
 
 export default WeightChart;

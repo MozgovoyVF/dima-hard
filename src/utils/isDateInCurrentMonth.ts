@@ -1,6 +1,6 @@
 import { IGalery } from "@/types/auth.types";
 
-export function isDateInCurrentMonth(datesObj: Record<string, IGalery[]>) {
+export function isDateInCurrentMonth(datesObj: Record<string, IGalery[] | any>) {
   const today = new Date();
 
   // Находим первый день текущего месяца

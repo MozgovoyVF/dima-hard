@@ -49,6 +49,8 @@ export interface IUser {
   fatsecret: IFatSecret;
   galery?: IGalery[];
   task?: ITask[];
+  measure?: IMeasure[];
+  changes?: IChanges[];
 }
 
 export interface IUserLock {
@@ -63,6 +65,8 @@ export interface IUserLock {
   fatsecret: boolean;
   galery?: IGalery[];
   task?: ITask[];
+  measure?: IMeasure[];
+  changes?: IChanges[];
 }
 
 export interface IProfile {
@@ -88,6 +92,29 @@ export interface ITask {
   completed: boolean;
   createdAt: Date;
   userId: string;
+}
+
+export interface IMeasure {
+  id: string;
+  createdAt: Date;
+  userId: string;
+
+  chest: string;
+  arms: string;
+  waist: string;
+  lowerAbdomen: string;
+  hips: string;
+  legsUnderButtock: string;
+  calves: string;
+}
+
+export interface IChanges {
+  id: string;
+  description: string;
+  createdAt: Date;
+  userId: string;
+
+  user?: DeepPartial<IUser>;
 }
 
 export type DeepPartial<T> = {

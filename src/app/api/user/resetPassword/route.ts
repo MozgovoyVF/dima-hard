@@ -40,6 +40,7 @@ export async function POST(req: Request, res: NextApiResponse) {
       });
     }
     const updateUser = await userService.update({ id, password: newPassword });
+    await userService.createChange(id, "Пользователь сменил пароль");
 
     return new Response(JSON.stringify(true), { status: 200 });
   } catch (error) {

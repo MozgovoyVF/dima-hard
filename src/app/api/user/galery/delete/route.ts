@@ -25,6 +25,7 @@ export async function POST(req: Request, res: NextApiResponse) {
     if (photo && photoId) {
       await del(photo);
       await userService.deleteGalery(photoId);
+      await userService.createChange(id, "Пользователь удалил фото из галерею результатов");
 
       return new Response(JSON.stringify(true), {
         status: 200,

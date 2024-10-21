@@ -88,6 +88,7 @@ const FoodMonthChart: React.FC<WeightChartProps> = ({ month }) => {
         labels: {
           color: "white",
         },
+        display: false,
       },
       title: {
         display: true,

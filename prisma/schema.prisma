@@ -34,6 +34,8 @@ model User {
   fatsecret Fatsecret?
   galery Galery[]
   task Task[]
+  measure Measure[]
+  changes Changes[]
 
   @@map("user")
 }
@@ -98,6 +100,38 @@ model Task {
   userId String 
 
   @@map("task")
+}
+
+model Measure {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  chest String
+  arms String
+  waist String
+  lowerAbdomen String
+  hips String
+  legsUnderButtock String
+  calves String
+
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String 
+
+  @@map("measure")
+}
+
+model Changes {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  description String
+
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String 
+
+  @@map("changes")
 }
 
 enum Provider {

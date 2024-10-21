@@ -1,6 +1,7 @@
 import { axiosWithAuth } from "@/app/api/interceptors";
-import { DeepPartial, IGalery, ITask, IUser, IUserLock } from "@/types/auth.types";
+import { DeepPartial, IChanges, IGalery, IMeasure, ITask, IUser, IUserLock } from "@/types/auth.types";
 import { PutBlobResult } from "@vercel/blob";
+import { AxiosError } from "axios";
 
 const BASE_URL = "/user";
 
@@ -132,6 +133,21 @@ export const userClientService = {
     }
   },
 
+  async getChanges(page: number, limit: number = 10): Promise<{ changes: IChanges[]; total: number } | string> {
+    try {
+      const response = await axiosWithAuth.get<{ changes: IChanges[]; total: number }>(
+        `${BASE_URL}/changes?page=${page}&limit=${limit}`
+      );
+      return response.data;
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        return error.response?.data;
+      }
+      console.log("Неизвестная ошибка", error);
+      return "Произошла неизвестная ошибка";
+    }
+  },
+
   async createTask(userId: string, title: string, description?: string): Promise<ITask> {
     try {
       const response = await axiosWithAuth.post<ITask>(BASE_URL + "/task/create", {
@@ -155,6 +171,36 @@ export const userClientService = {
           userId,
           taskId,
           completed,
+        },
+      });
+      return response.data;
+    } catch (error: any) {
+      console.log(error);
+      return error.message;
+    }
+  },
+
+  async createMeasure(
+    userId: string,
+    chest: string,
+    arms: string,
+    waist: string,
+    lowerAbdomen: string,
+    hips: string,
+    legsUnderButtock: string,
+    calves: string
+  ): Promise<IMeasure> {
+    try {
+      const response = await axiosWithAuth.post<IMeasure>(BASE_URL + "/measure/create", {
+        body: {
+          userId,
+          chest,
+          arms,
+          waist,
+          lowerAbdomen,
+          hips,
+          legsUnderButtock,
+          calves,
         },
       });
       return response.data;

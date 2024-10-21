@@ -57,6 +57,7 @@ const handler = NextAuth({
         };
 
         const { password, ...newUser } = await userService.createGoogle(dto, "google");
+        await userService.createChange(newUser.id, "Регистрация нового пользователя через Google");
 
         const refreshToken = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET, {
           expiresIn: "7d",
