@@ -9,7 +9,6 @@ import {
   Title,
   Tooltip,
   Legend,
-  TimeScale,
 } from "chart.js";
 import zoomPlugin from "chartjs-plugin-zoom";
 

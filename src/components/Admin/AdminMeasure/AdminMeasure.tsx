@@ -6,14 +6,23 @@ import { MotionSection } from "@/components/ui/motionSection/MotionSection";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { UserSelect } from "../Users/UserSelect/UserSelect";
 import Loader from "@/components/ui/loader/Loader";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useGetAllUsers } from "@/hooks/useGetAllUsers";
 import { IUserLock } from "@/types/auth.types";
-import { MeasureTable } from "@/components/Profile/Measure/MeasureTable/MeasureTable";
-import MeasureChart from "@/components/Profile/Measure/MeasureChart";
+// import { MeasureTable } from "@/components/Profile/Measure/MeasureTable/MeasureTable";
+// import MeasureChart from "@/components/Profile/Measure/MeasureChart";
 import { groupByMeasures } from "@/utils/groupByMeasures";
+import dynamic from "next/dynamic";
 
-export interface IAdminGalery {
+const MeasureTable = dynamic(() => import("../../Profile/Measure/MeasureTable/MeasureTable"), {
+  ssr: false,
+});
+
+const MeasureChart = dynamic(() => import("../../Profile/Measure/MeasureChart"), {
+  ssr: false,
+});
+
+export interface IAdminMeasure {
   userId: number;
 }
 
@@ -31,7 +40,7 @@ export function AdminMeasure() {
     setValue,
     control,
     formState: { errors },
-  } = useForm<IAdminGalery>({ mode: "onSubmit" });
+  } = useForm<IAdminMeasure>({ mode: "onSubmit" });
 
   useEffect(() => {
     setUsers(usersData);
@@ -40,7 +49,7 @@ export function AdminMeasure() {
     }
   }, [data, setValue, usersData]);
 
-  const onSubmit: SubmitHandler<IAdminGalery> = async ({ userId }) => {
+  const onSubmit: SubmitHandler<IAdminMeasure> = async ({ userId }) => {
     setGroupedMeasures(undefined);
     setCurrentChart(undefined);
     if (users) {

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import styles from "./index.module.scss";
 import { MotionSection } from "@/components/ui/motionSection/MotionSection";
 import { useProfile } from "@/hooks/useProfile";
@@ -15,8 +15,9 @@ import GaleryCarousel from "../Galery/GaleryCarousel/GaleryCarousel";
 import { isDateInCurrentMonth } from "@/utils/isDateInCurrentMonth";
 import { groupByDay } from "@/utils/groupByDay";
 import { groupByMeasures } from "@/utils/groupByMeasures";
-import MeasureChart from "./MeasureChart";
-import { MeasureTable } from "./MeasureTable/MeasureTable";
+// import MeasureChart from "./MeasureChart";
+// import { MeasureTable } from "./MeasureTable/MeasureTable";
+import dynamic from "next/dynamic";
 
 export interface IFormMeasure {
   chest: string;
@@ -27,6 +28,14 @@ export interface IFormMeasure {
   legsUnderButtock: string;
   calves: string;
 }
+
+const MeasureTable = dynamic(() => import("./MeasureTable/MeasureTable"), {
+  ssr: false,
+});
+
+const MeasureChart = dynamic(() => import("./MeasureChart"), {
+  ssr: false,
+});
 
 export function Measure() {
   const { data: profileData, isLoading: isProfileLoading } = useProfile();
