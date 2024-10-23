@@ -70,13 +70,18 @@
   }
 
   .taskCheckbox + label::after {
-    content: "✔";
+    content: "";
+    background: url("/images/done.svg") no-repeat center; /* Выравнивание по центру */
+    background-size: contain; /* Подгоняем размер */
+    width: 30px; /* Убедитесь, что размеры достаточно велики */
+    height: 30px;
     position: absolute;
-    left: 10px;
-    top: 4px;
+    left: 3px; /* Измените значение для корректного отображения */
+    top: 2px; /* Измените значение для корректного отображения */
     font-size: 20px;
     color: white;
     opacity: 0;
+    transition: opacity 0.3s; /* Плавный переход */
   }
 
   .taskCheckbox:checked + label::after {

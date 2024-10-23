@@ -1,5 +1,6 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
+import ChartDataLabels from "chartjs-plugin-datalabels";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -13,7 +14,17 @@ import {
 import zoomPlugin from "chartjs-plugin-zoom";
 
 // Регистрация компонентов Chart.js
-ChartJS.register(CategoryScale, LinearScale, LineElement, PointElement, Title, Tooltip, Legend, zoomPlugin);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  LineElement,
+  PointElement,
+  Title,
+  Tooltip,
+  Legend,
+  zoomPlugin,
+  ChartDataLabels
+);
 
 interface MeasureChart {
   dates: string[];
@@ -109,6 +120,11 @@ const MeasureChart: React.FC<MeasureChart> = ({ dates, measure, title }) => {
           },
           mode: "x" as const, // Зум по оси X
         },
+      },
+      datalabels: {
+        color: "white", // Устанавливаем белый цвет для подписей на столбцах
+        anchor: "end" as const,
+        align: "top" as const,
       },
     },
   };

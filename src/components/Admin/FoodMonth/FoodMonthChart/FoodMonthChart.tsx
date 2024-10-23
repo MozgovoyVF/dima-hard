@@ -1,10 +1,11 @@
 import React from "react";
-import { Bar, Line } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
+import ChartDataLabels from "chartjs-plugin-datalabels";
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js";
 import { convertDaysToDate } from "../../../../utils/convertDaysToDate";
 
 // Регистрация компонентов Chart.js
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ChartDataLabels);
 
 export interface DayData {
   calories: string;
@@ -57,6 +58,7 @@ const FoodMonthChart: React.FC<WeightChartProps> = ({ month }) => {
         data: calories, // Данные (калории)
         backgroundColor: "blueviolet", // Цвет столбцов
         borderColor: "white",
+        color: "white",
         borderWidth: 1,
       },
     ],
@@ -96,6 +98,11 @@ const FoodMonthChart: React.FC<WeightChartProps> = ({ month }) => {
           Number(month.to_date_int)
         )}`,
         color: "white",
+      },
+      datalabels: {
+        color: "white", // Устанавливаем белый цвет для подписей на столбцах
+        // anchor: "end",
+        // align: "top",
       },
     },
   };

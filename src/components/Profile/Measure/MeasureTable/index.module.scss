@@ -15,9 +15,15 @@
     width: 30px;
     height: 30px;
     z-index: 11;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
 
     & svg {
       width: 30px;
+    }
+
+    &:hover {
+      box-shadow: 0 0 20px 12px blueviolet;
     }
   }
 
@@ -38,6 +44,8 @@
       text-align: center;
       border-bottom: 1px solid blueviolet;
       transition: all 0.3s ease-in-out;
+      background-color: rgba($color: #000, $alpha: 0.7);
+      box-shadow: 0 0 12px 8px rgba($color: #000000, $alpha: 0.7);
 
       &:not(:first-child) {
         cursor: pointer;
@@ -64,10 +72,6 @@
     overflow-y: auto;
     scrollbar-color: blueviolet;
 
-    &.overflow {
-      border-top: 2px solid blueviolet;
-    }
-
     .row {
       display: flex;
       justify-content: flex-start;
@@ -75,6 +79,11 @@
       gap: 10px;
       flex: 0 0 40px;
       border-bottom: 1px solid blueviolet;
+
+      &:first-child {
+        background-color: rgba($color: blueviolet, $alpha: 0.7);
+        border-radius: 10px;
+      }
     }
 
     .value {

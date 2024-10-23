@@ -45,6 +45,7 @@
       .phone {
         width: 25px;
         height: 25px;
+        transition: all 0.3s ease-in-out;
 
         &:hover {
           color: green;
@@ -152,6 +153,7 @@
       .phone {
         width: 25px;
         height: 25px;
+        transition: all .3s ease-in-out;
 
         &:hover {
           color: green;

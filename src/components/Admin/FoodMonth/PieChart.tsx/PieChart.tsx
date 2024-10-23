@@ -39,7 +39,7 @@ const PieChart: React.FC<{ currentDay: CurrentDayData }> = ({ currentDay }) => {
     responsive: true,
     plugins: {
       legend: {
-        position: "top" as const, // Легенда сверху
+        position: "top" as const,
         labels: {
           color: "white", // Цвет текста легенды
         },
@@ -51,7 +51,6 @@ const PieChart: React.FC<{ currentDay: CurrentDayData }> = ({ currentDay }) => {
           },
         },
       },
-      // Настройки для отображения значений на диаграмме
       datalabels: {
         color: "white", // Цвет текста
         font: {
@@ -61,15 +60,8 @@ const PieChart: React.FC<{ currentDay: CurrentDayData }> = ({ currentDay }) => {
           `${value} гр. (${Math.round(
             (value / (Number(currentDay.carbohydrate) + Number(currentDay.fat) + Number(currentDay.protein))) * 100
           )}%)`, // Формат отображения значений
-        anchor: "center" as const, // Позиция текста, исправлено: "end"
-        align: "center" as const, // Положение текста относительно сектора
-        rotation: (context: any) => {
-          // Вычисляем угол поворота для каждого сектора
-          const { startAngle, endAngle } = context.chart.getDatasetMeta(context.datasetIndex).data[context.dataIndex];
-          const middleAngle = (startAngle + endAngle) / 2; // Средний угол сектора
-          const degrees = (middleAngle * 180) / Math.PI; // Преобразование в градусы
-          return degrees; // Угол поворота текста
-        },
+        anchor: "end" as const, // Позиция текста, чтобы был снаружи сектора
+        align: "start" as const, // Выравнивание текста относительно сектора
       },
     },
   };

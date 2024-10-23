@@ -33,6 +33,14 @@ export default function MeasureTable({ groupedMeasures, setCurrentChart }: IMeas
     }
   }, []);
 
+  const handleScroll = () => {
+    if (typeof window !== "undefined") {
+      if (ref.current && ref.current.firstChild instanceof HTMLElement) {
+        ref.current.scrollTo({ left: 100, behavior: "smooth" });
+      }
+    }
+  };
+
   const measurementKeys = [
     { title: "Обхват груди", measureKey: "chest" },
     { title: "Обхват рук", measureKey: "arms" },
@@ -46,7 +54,7 @@ export default function MeasureTable({ groupedMeasures, setCurrentChart }: IMeas
   return (
     <div className={styles.table}>
       {isOverflow && (
-        <span className={styles.arrow}>
+        <span onClick={handleScroll} className={styles.arrow}>
           <FaArrowAltCircleRight />
         </span>
       )}

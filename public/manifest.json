@@ -1,6 +1,6 @@
 {
   "name": "Better Every Day",
-  "short_name": "NextApp",
+  "short_name": "Better Every Day",
   "description": "Прогрессивное веб-приложение на Next.js",
   "start_url": "/",
   "display": "standalone",

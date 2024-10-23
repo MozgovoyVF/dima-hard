@@ -27,6 +27,7 @@ const DaySelect: React.FC<DaySelectProps> = ({ control, errors, options, value, 
           <Select
             options={options}
             placeholder="Выберите день"
+            isSearchable={false}
             menuPlacement="top"
             value={options.find((c) => c.value === value) || null}
             onChange={(newValue) => {

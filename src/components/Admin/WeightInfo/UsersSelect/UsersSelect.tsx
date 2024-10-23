@@ -25,7 +25,7 @@ export function UsersSelect({
         id="usersSelect"
         placeholder="Выберите пользователя"
         options={options}
-        isSearchable
+        isSearchable={false}
         menuPlacement={"bottom"}
         value={options.find((c) => c.value.token === value?.token) || null}
         onChange={(newValue) => {
@@ -52,11 +52,11 @@ export function UsersSelect({
             backgroundColor: "rgba(138,43,226, 0.9)",
             boxShadow: "0 0 12px 4px blueviolet",
           }),
-          singleValue: (styles) => ({ ...styles, color: "white", textAlign: 'center' }),
+          singleValue: (styles) => ({ ...styles, color: "white", textAlign: "center" }),
           menuList: (styles) => ({ ...styles, color: "white", border: "2px solid blueviolet" }),
           container: (styles) => ({ ...styles, width: "100%" }),
           menuPortal: (styles) => ({ ...styles, backgroundColor: "white" }),
-          placeholder: (styles) => ({...styles, textAlign: 'center'}),
+          placeholder: (styles) => ({ ...styles, textAlign: "center" }),
           option: (styles, { isSelected }) => ({
             ...styles,
             ":hover": { backgroundColor: "blueviolet" },
