@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { DASHBOARD_PAGES } from "./config/pages-url.config";
 import { EnumTokens } from "./services/auth.service";
 import jwt, { UserIDJwtPayload } from "jsonwebtoken";
+import { removeFromStorage } from "./services/auth-token.service";
 
 export async function middleware(request: NextRequest, response: NextResponse) {
   const { url, cookies } = request;
@@ -17,10 +18,13 @@ export async function middleware(request: NextRequest, response: NextResponse) {
   }
 
   if (isAuthPage) {
+    const token = request.cookies.get("accessToken")?.value || request.headers.get("Authorization")?.split(" ")[1];
+    if (token) removeFromStorage();
     return NextResponse.next();
   }
 
   if (!refreshToken) {
+    removeFromStorage();
     return NextResponse.redirect(new URL("/auth", url));
   }
 
@@ -42,8 +46,6 @@ export async function middleware(request: NextRequest, response: NextResponse) {
     } catch (error) {
       return NextResponse.json({ message: "jwt must be provided" }, { status: 401 });
     }
-
-    return NextResponse.next();
   }
 
   return NextResponse.next();

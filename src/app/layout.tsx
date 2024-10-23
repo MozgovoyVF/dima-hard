@@ -8,8 +8,14 @@ import { Header } from "@/components/Header/Header";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Muscle Explosion",
+  title: "Better Every Day",
   description: "A professional approach to your training",
+  themeColor: "#000000",
+  manifest: "/manifest.json",
+  icons: {
+    icon: "/icons/logo-192.png",
+    apple: "/icons/logo-192.png",
+  },
 };
 
 export default function RootLayout({

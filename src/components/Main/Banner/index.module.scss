@@ -2,8 +2,13 @@
   height: 100%;
   padding-top: 130px;
 
+  @media (min-width: 920px) {
+    padding-top: 180px;
+  }
+
   .banner {
     display: flex;
+    position: relative;
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
@@ -11,6 +16,10 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+
+    @media (min-width: 920px) {
+      background-position: right;
+    }
 
     .title {
       padding: 20px 10px;
@@ -27,10 +36,19 @@
       justify-self: flex-end;
       position: relative;
       gap: 20px;
-      padding: 20px 5px 40px 5px;
+      padding: 20px 10px 40px 10px;
       background-color: rgba(0, 0, 0, 0.7);
       border: 1px solid blueviolet;
       box-shadow: 0 0 20px 4px blueviolet;
+
+      @media (min-width: 920px) {
+        position: absolute;
+        padding: 30px;
+        left: 0;
+        top: 20%;
+        width: 50%;
+        gap: 30px;
+      }
 
       .me {
         display: flex;
