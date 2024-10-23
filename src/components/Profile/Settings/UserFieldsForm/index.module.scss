@@ -53,11 +53,12 @@
       justify-content: center;
       position: relative;
       display: inline-block;
-      padding: 10px 15px;
+      padding: 20px 15px;
       color: white;
       background: blueviolet;
       border-radius: 20px;
       cursor: pointer;
+      transition: box-shadow 0.3s ease-in-out;
 
       &[aria-disabled="true"] {
         opacity: 0.5;
@@ -194,6 +195,7 @@
     .buttonSave {
       background-color: blueviolet;
       font-size: 16px;
+      transition: box-shadow 0.3s ease-in-out;
       &:disabled {
         opacity: 0.5;
         pointer-events: none;
@@ -206,6 +208,7 @@
     .buttonCancel {
       background-color: rgb(197, 57, 57);
       font-size: 16px;
+      transition: box-shadow 0.3s ease-in-out;
       &:disabled {
         opacity: 0.5;
         pointer-events: none;

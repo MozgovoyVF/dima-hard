@@ -25,7 +25,7 @@ export function UserSelect({
         id="usersSelect"
         placeholder="Выберите пользователя"
         options={options}
-        isSearchable
+        isSearchable={false}
         menuPlacement={"bottom"}
         value={options.find((c) => c.value === value) || null}
         onChange={(newValue) => {
@@ -53,7 +53,7 @@ export function UserSelect({
             boxShadow: "0 0 12px 4px blueviolet",
             zIndex: 11,
           }),
-          singleValue: (styles) => ({ ...styles, color: "white", textAlign: 'center' }),
+          singleValue: (styles) => ({ ...styles, color: "white", textAlign: "center" }),
           menuList: (styles) => ({
             ...styles,
             color: "white",

@@ -1,5 +1,6 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
+import ChartDataLabels from "chartjs-plugin-datalabels";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -13,7 +14,7 @@ import {
 import { convertDaysToDate } from "../../../../utils/convertDaysToDate";
 
 // Регистрация компонентов Chart.js
-ChartJS.register(CategoryScale, LinearScale, LineElement, PointElement, Title, Tooltip, Legend);
+ChartJS.register(CategoryScale, LinearScale, LineElement, PointElement, Title, Tooltip, Legend, ChartDataLabels);
 
 interface DayData {
   date_int: string;
@@ -101,6 +102,11 @@ const WeightChart: React.FC<WeightChartProps> = ({ month }) => {
         font: {
           size: 16, // Размер шрифта значений по оси Y
         },
+      },
+      datalabels: {
+        color: "white", // Устанавливаем белый цвет для подписей на столбцах
+        anchor: "end" as const,
+        align: "top" as const,
       },
     },
   };

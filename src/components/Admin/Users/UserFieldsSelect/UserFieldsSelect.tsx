@@ -31,6 +31,7 @@ export function UserFieldsSelect<T>({
         id="usersSelect"
         placeholder="Выберите пользователя"
         options={options}
+        isSearchable={false}
         menuPlacement={"bottom"}
         // value={options.find((c) => c.value === value) || null}
         // onChange={(newValue) => {

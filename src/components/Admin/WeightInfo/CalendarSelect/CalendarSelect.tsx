@@ -44,6 +44,7 @@ const CalendarSelect: React.FC<{ control: any; errors: FieldErrors<IWeightInfoFo
           <Select
             options={monthOptions}
             placeholder="Выберите месяц"
+            isSearchable={false}
             value={monthOptions.find((c) => c.value === value) || null}
             onChange={(newValue) => {
               onChange(newValue?.value || null);
@@ -69,7 +70,7 @@ const CalendarSelect: React.FC<{ control: any; errors: FieldErrors<IWeightInfoFo
                 backgroundColor: "rgba(138,43,226, 0.9)",
                 boxShadow: "0 0 12px 4px blueviolet",
               }),
-              singleValue: (styles) => ({ ...styles, color: "white", textAlign: 'center' }),
+              singleValue: (styles) => ({ ...styles, color: "white", textAlign: "center" }),
               menuList: (styles) => ({ ...styles, color: "white", border: "2px solid blueviolet" }),
               container: (styles) => ({ ...styles, width: "100%" }),
               menuPortal: (styles) => ({ ...styles, backgroundColor: "white" }),
@@ -91,6 +92,7 @@ const CalendarSelect: React.FC<{ control: any; errors: FieldErrors<IWeightInfoFo
           <Select
             options={yearOptions}
             placeholder="Выберите год"
+            isSearchable={false}
             value={yearOptions.find((c) => c.value === value) || null}
             onChange={(newValue) => {
               onChange(newValue?.value || null);
@@ -116,7 +118,7 @@ const CalendarSelect: React.FC<{ control: any; errors: FieldErrors<IWeightInfoFo
                 backgroundColor: "rgba(138,43,226, 0.9)",
                 boxShadow: "0 0 12px 4px blueviolet",
               }),
-              singleValue: (styles) => ({ ...styles, color: "white", textAlign: 'center' }),
+              singleValue: (styles) => ({ ...styles, color: "white", textAlign: "center" }),
               menuList: (styles) => ({ ...styles, color: "white", border: "2px solid blueviolet" }),
               container: (styles) => ({ ...styles, width: "100%" }),
               menuPortal: (styles) => ({ ...styles, backgroundColor: "white" }),
