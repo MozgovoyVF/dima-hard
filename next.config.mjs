@@ -1,4 +1,7 @@
-/** @type {import('next').NextConfig} */
+import withPWA from "next-pwa"; // Используем import вместо require
+
+const isProd = process.env.NODE_ENV === "production";
+
 const nextConfig = {
   images: {
     remotePatterns: [
@@ -36,7 +39,7 @@ const nextConfig = {
           {
             key: "Access-Control-Allow-Headers",
             value:
-              "X-CSRF-Token, X-Requested-With, Accept, Accept- Version, Content - Length, Content - MD5, Content - Type, Date, X - Api - Version",
+              "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
           },
         ],
       },
@@ -44,4 +47,11 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+// Экспорт конфигурации PWA только для продакшн-сборки
+export default isProd
+  ? withPWA({
+      dest: "public", // Указываем директорию для Service Worker
+      register: true,
+      skipWaiting: true,
+    })(nextConfig)
+  : nextConfig;
