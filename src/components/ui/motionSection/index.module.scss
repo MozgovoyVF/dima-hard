@@ -10,4 +10,8 @@
   padding-top: 130px;
   flex: 1 1 100%;
   overflow: hidden;
+
+  @media (width > 920px) {
+    padding-top: 180px;
+  }
 }

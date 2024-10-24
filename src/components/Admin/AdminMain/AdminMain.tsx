@@ -32,6 +32,23 @@ export function AdminMain() {
           <>
             {typeof data === "string" && <div className={styles.error}>{data}</div>}
 
+            <div className={styles.pagination}>
+              <button
+                disabled={currentPage === 1}
+                onClick={() => handlePageChange(currentPage - 1)}
+                className={styles.pageButton}
+              >
+                Назад
+              </button>
+              <button
+                disabled={!hasNextPage}
+                onClick={() => handlePageChange(currentPage + 1)}
+                className={styles.pageButton}
+              >
+                Вперед
+              </button>
+            </div>
+            
             {typeof data !== "string" && Array.isArray(data?.changes) && (
               <ul className={styles.changes}>
                 {data.changes.map((change) => (

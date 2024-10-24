@@ -20,6 +20,7 @@
   gap: 20px;
   align-items: center;
   justify-content: center;
+  padding-bottom: 30px;
 }
 
 .text {
@@ -35,6 +36,10 @@
   align-items: stretch;
   justify-content: space-between;
   gap: 20px;
+
+  @media (width > 920px) {
+    max-width: 70%;
+  }
 }
 
 .form {
@@ -59,6 +64,11 @@
   border: 2px solid blueviolet;
   box-shadow: 0 0 12px 4px blueviolet;
   text-align: center;
+  transition: box-shadow 0.3s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 0 12px 4px white;
+  }
 }
 
 .measure {

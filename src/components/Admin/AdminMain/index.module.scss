@@ -5,6 +5,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 5vw; /* Используем относительные единицы */
+  padding-bottom: 30px;
 }
 
 .title,
@@ -33,6 +34,11 @@
   gap: 20px;
   max-width: 1200px; /* Ограничение ширины для больших экранов */
   padding: 10px;
+
+  @media (width > 920px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .change {
@@ -79,6 +85,11 @@
       justify-content: center;
       gap: 5px;
 
+      @media (width > 920px) {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
       span {
         color: white;
         font-size: 1rem;
@@ -87,6 +98,12 @@
         white-space: nowrap;
         overflow: hidden; /* Скрывает переполнение текста */
         text-overflow: ellipsis; /* Добавляет многоточие */
+      }
+
+      @media (width > 920px) {
+        .name {
+          grid-column: 1 / 3;
+        }
       }
     }
   }

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { DASHBOARD_PAGES } from "@/config/pages-url.config";
 import { useLogout } from "@/hooks/useLogout";
 import { IProfileUser } from "@/types/user.types";
+import { ImExit } from "react-icons/im";
 
 interface IProfile {
   data: IProfileUser;
@@ -28,7 +29,7 @@ export function Profile({ data }: IProfile) {
         />
       </Link>
       <button onClick={() => logout()} className={styles.button}>
-        Выйти
+        <ImExit />
       </button>
     </div>
   );

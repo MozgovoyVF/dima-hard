@@ -6,11 +6,9 @@ import { MotionSection } from "@/components/ui/motionSection/MotionSection";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { UserSelect } from "../Users/UserSelect/UserSelect";
 import Loader from "@/components/ui/loader/Loader";
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useGetAllUsers } from "@/hooks/useGetAllUsers";
 import { IUserLock } from "@/types/auth.types";
-// import { MeasureTable } from "@/components/Profile/Measure/MeasureTable/MeasureTable";
-// import MeasureChart from "@/components/Profile/Measure/MeasureChart";
 import { groupByMeasures } from "@/utils/groupByMeasures";
 import dynamic from "next/dynamic";
 

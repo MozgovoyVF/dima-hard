@@ -47,6 +47,11 @@
     justify-content: space-around;
     gap: 20px;
 
+    @media (width > 920px) {
+      flex-direction: column-reverse;
+      flex: 0 0 30%;
+    }
+
     .file {
       display: flex;
       align-items: center;
@@ -133,6 +138,12 @@
     justify-content: space-between;
     align-items: center;
     gap: 10px;
+
+    @media (width > 920px) {
+      flex-direction: row;
+      align-items: stretch;
+      gap: 20px;
+    }
   }
 
   .rows {
@@ -142,6 +153,12 @@
     width: 100%;
     height: 100%;
     gap: 20px;
+
+    @media (width > 920px) {
+      display: grid;
+      grid-template-columns: 1fr;
+      height: unset;
+    }
   }
 
   .row {
@@ -163,7 +180,8 @@
     }
 
     .value {
-      flex: 1 1 100%;
+      flex: 1 1 calc(100% - 100px);
+      width: 100%;
       padding: 0 20px;
       color: white;
       font-size: 16px;

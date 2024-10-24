@@ -20,7 +20,7 @@ export const MenuBlock = ({ closeFn, tasks, role, setIsVisible, isVisible }: IMo
 
   return (
     <div className={styles.content}>
-      <button onClick={setIsVisible} className={styles.button}>
+      <button onClick={setIsVisible} className={`${styles.button} ${isVisible && styles.visible}`}>
         Меню <CgMenuRound />
       </button>
       <AnimatePresence>
@@ -39,7 +39,7 @@ export const MenuBlock = ({ closeFn, tasks, role, setIsVisible, isVisible }: IMo
             {path.startsWith("/admin") || role === "admin"
               ? ADMIN_MENU_CONTENT.map((item) => (
                   <li key={item.title} onClick={() => closeFn()} className={styles.item}>
-                    <Link className={styles.link} href={item.link}>
+                    <Link className={styles.link} href={item.link} onClick={setIsVisible}>
                       {<item.icon />}
                       {item.title}
                     </Link>
@@ -49,7 +49,7 @@ export const MenuBlock = ({ closeFn, tasks, role, setIsVisible, isVisible }: IMo
               ? PROFILE_MENU_CONTENT.map((item) => {
                   return (
                     <li key={item.title} onClick={() => closeFn()} className={styles.item}>
-                      <Link className={styles.link} href={item.link}>
+                      <Link className={styles.link} href={item.link} onClick={setIsVisible}>
                         {<item.icon />}
                         {item.title}{" "}
                         {item.title === "Задачи" && tasks && tasks.length > 0 && (
@@ -61,7 +61,7 @@ export const MenuBlock = ({ closeFn, tasks, role, setIsVisible, isVisible }: IMo
                 })
               : MENU_CONTENT.map((item) => (
                   <li key={item.title} onClick={() => closeFn()} className={styles.item}>
-                    <Link className={styles.link} href={item.link}>
+                    <Link className={styles.link} href={item.link} onClick={setIsVisible}>
                       {<item.icon />}
                       {item.title}
                     </Link>

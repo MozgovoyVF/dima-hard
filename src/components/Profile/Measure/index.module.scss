@@ -13,6 +13,12 @@
   gap: 20px;
   align-items: center;
   justify-content: center;
+
+  .canvas {
+    @media (width > 920px) {
+      width: 80% !important;
+    }
+  }
 }
 
 .buttonsBlock {
@@ -120,4 +126,8 @@
 
 .measure {
   width: 100%;
+
+  @media (width > 920px) {
+    width: 70%;
+  }
 }
