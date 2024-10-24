@@ -97,6 +97,10 @@
   justify-content: center;
   align-items: center;
   z-index: 1000; /* Убедитесь, что модальное окно на переднем плане */
+
+  @media (width > 920px) {
+    padding-top: 180px;
+  }
 }
 
 .modalContent {

@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./index.module.scss";
 import { Line } from "react-chartjs-2";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import {
@@ -106,21 +107,6 @@ const MeasureChart: React.FC<MeasureChart> = ({ dates, measure, title }) => {
           size: 16, // Размер шрифта значений по оси Y
         },
       },
-      zoom: {
-        pan: {
-          enabled: true, // Включаем панорамирование (скролл)
-          mode: "x" as const, // Панорамирование по оси X
-        },
-        zoom: {
-          wheel: {
-            enabled: true, // Включаем зум на колесе мыши
-          },
-          pinch: {
-            enabled: true, // Включаем зум через pinch на тачпадах
-          },
-          mode: "x" as const, // Зум по оси X
-        },
-      },
       datalabels: {
         color: "white", // Устанавливаем белый цвет для подписей на столбцах
         anchor: "end" as const,
@@ -130,7 +116,7 @@ const MeasureChart: React.FC<MeasureChart> = ({ dates, measure, title }) => {
   };
 
   return (
-    <div style={{ minHeight: "200px", width: "100%" }}>
+    <div style={{ minHeight: "200px", width: "100%" }} className={styles.canvas}>
       <Line data={data} options={options} height={200} />
     </div>
   );

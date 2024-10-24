@@ -58,7 +58,7 @@ export const useUserFieldsFormHandlers = (
     if (selectedFileList && selectedFileList[0]) {
       const imageFile = selectedFileList[0];
       const options = {
-        maxSizeMB: 0.3,
+        maxSizeMB: 1,
         maxWidthOrHeight: 300,
         useWebWorker: true,
       };

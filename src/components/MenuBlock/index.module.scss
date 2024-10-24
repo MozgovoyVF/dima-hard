@@ -17,7 +17,7 @@
   grid-template-columns: 1fr 1fr;
   grid-gap: 30px;
   padding: 30px 20px;
-  background-color: rgba($color: #000000, $alpha: 0.5);
+  background-color: rgba($color: #000000, $alpha: 0.8);
 }
 
 .item {
@@ -76,6 +76,10 @@
   border-radius: 20px;
   background-color: rgba($color: blueviolet, $alpha: 0.2);
 
+  &.visible svg {
+    transform: rotate(90deg);
+  }
+
   & svg {
     font-size: 30px;
     transition: all 0.3s ease-in-out;
@@ -87,6 +91,6 @@
 
   &:hover svg {
     color: blueviolet;
-    transform: rotate(180deg);
+    transform: rotate(90deg);
   }
 }

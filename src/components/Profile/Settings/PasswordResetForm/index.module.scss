@@ -4,10 +4,19 @@
   position: relative;
   gap: 20px;
 
+  @media (width > 920px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
   & input {
     background-color: transparent;
     font-size: 16px;
     color: white;
+
+    @media (width > 920px) {
+      width: 100%;
+    }
   }
 
   .row {
@@ -49,9 +58,13 @@
     }
   }
 
-  .error {
+  span.error {
     text-align: center;
     color: rgb(197, 57, 57);
+
+    @media (width > 920px) {
+      grid-column: 1 / 4;
+    }
   }
 
   .submits {
@@ -59,6 +72,10 @@
     align-items: center;
     justify-content: space-around;
     gap: 10px;
+
+    @media (width > 920px) {
+      grid-column: 1 / 4;
+    }
 
     button {
       padding: 15px 20px;

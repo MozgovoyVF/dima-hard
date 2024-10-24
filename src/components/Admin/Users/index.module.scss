@@ -9,6 +9,7 @@
 }
 
 .title {
+  width: 100%;
   padding: 20px 10px;
   text-align: center;
   font-size: 24px;
@@ -21,6 +22,10 @@
   justify-content: space-between;
   align-items: stretch;
   width: 100%;
+
+  @media (width > 920px) {
+    width: 70%;
+  }
 }
 
 .button {
@@ -30,6 +35,11 @@
   font-size: 16px;
   border: 2px solid blueviolet;
   box-shadow: 0 0 12px 4px blueviolet;
+  transition: box-shadow 0.3s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 0 12px 4px white;
+  }
 }
 
 .buttonsBlock {
@@ -39,6 +49,14 @@
   gap: 20px;
   margin-top: 30px;
 
+  @media (width > 920px) {
+    grid-column: 1 / 3;
+  }
+
+  @media (width > 1300px) {
+    grid-column: 1 / 4;
+  }
+
   .fatsecretButton {
     display: flex;
     align-items: center;
@@ -47,6 +65,11 @@
     border: 2px solid #33b24b;
     background-color: #33b24b;
     box-shadow: none;
+    transition: box-shadow 0.3s ease-in-out;
+
+    &:hover {
+      box-shadow: 0 0 12px 4px white;
+    }
 
     & svg {
       width: 40px;
@@ -73,6 +96,16 @@
   justify-content: space-between;
   align-items: center;
   gap: 10px;
+
+  @media (width > 920px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+  }
+
+  @media (width > 1300px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 
   .row {
     width: 100%;

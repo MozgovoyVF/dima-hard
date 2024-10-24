@@ -37,8 +37,11 @@ export function UserSelect({
               ...styles,
               backgroundColor: "transparent",
               border: "2px solid blueviolet",
-              ":hover": { borderColor: "blueviolet" },
+              ":hover": { borderColor: "blueviolet", boxShadow: "0 0 12px 4px white" },
+              transition: "all 0.3s ease-in-out",
               boxShadow: "0 0 12px 4px blueviolet",
+              cursor: "pointer",
+              minHeight: "50px",
             };
 
             if (errors && errors.userId) {
@@ -67,6 +70,7 @@ export function UserSelect({
           option: (styles, { isSelected }) => ({
             ...styles,
             ":hover": { backgroundColor: "blueviolet" },
+            cursor: "pointer",
             backgroundColor: isSelected ? "rgba(75,20,126, 1)" : "transparent",
             zIndex: 11,
           }),

@@ -23,7 +23,7 @@ export interface IAdminTasksAdd {
 
 export function Tasks() {
   const { data: usersData, isLoading, isRefetching } = useGetAllUsers();
-  const { mutateAsync } = useCreateTask();
+  const { mutateAsync, isPending } = useCreateTask();
   const { mutateAsync: updateMutateAsync, isPending: isUpdatePending } = useUpdateTask();
   const [data, setData] = useState<IUserLock | undefined>();
   const [users, setUsers] = useState(usersData);
@@ -120,7 +120,10 @@ export function Tasks() {
                         Название
                         <input
                           className={styles.input}
-                          {...register("title", { required: "Поле обязательно для заполнения", maxLength: 40 })}
+                          {...register("title", {
+                            required: "Поле обязательно для заполнения",
+                            maxLength: { value: 40, message: "Максимальная длина названия задачи - 40 символов" },
+                          })}
                           placeholder="Введите название ..."
                         />
                       </label>
@@ -128,17 +131,15 @@ export function Tasks() {
                         Описание
                         <input
                           className={styles.input}
-                          {...register("description", { maxLength: 200 })}
+                          {...register("description", {
+                            maxLength: { value: 200, message: "Максимальная длина описания задачи - 200 символов" },
+                          })}
                           placeholder="Введите описание ..."
                         />
                       </label>
-                      {addErrors.title && (
-                        <span className={styles.error}>Максимальная длина названия задачи - 40 символов </span>
-                      )}
-                      {addErrors.description && (
-                        <span className={styles.error}>Максимальная длина описания задачи - 200 символов </span>
-                      )}
-                      <button className={styles.button} type="submit">
+                      {addErrors.title && <span className={styles.error}>{addErrors.title.message}</span>}
+                      {addErrors.description && <span className={styles.error}>{addErrors.description.message}</span>}
+                      <button disabled={isPending} className={styles.button} type="submit">
                         Создать
                       </button>
                     </form>
