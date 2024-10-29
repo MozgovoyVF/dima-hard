@@ -149,10 +149,12 @@ export function Auth() {
                 state={errors.password ?? null}
               />
               {error && <span className={styles.error}>{error}</span>}
-              <div className={styles.agreement}>
-                Продолжая регистрацию, я соглашаюсь с{" "}
-                <Link href={DASHBOARD_PAGES.USER_AGREEMENT}>Пользовательским соглашением</Link>
-              </div>
+              {!isLoginForm && (
+                <div className={styles.agreement}>
+                  Продолжая регистрацию, я соглашаюсь с{" "}
+                  <Link href={DASHBOARD_PAGES.USER_AGREEMENT}>Пользовательским соглашением</Link>
+                </div>
+              )}
             </motion.div>
             <div className={styles.buttonsBlock}>
               {isLoginForm ? (
