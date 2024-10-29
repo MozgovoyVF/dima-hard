@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 40px;
+  padding: 40px 20px;
   .form {
     display: flex;
     flex-direction: column;
@@ -12,6 +12,10 @@
 
     @media (max-width: 450px) {
       min-width: auto;
+    }
+
+    @media (width > 600px) {
+      max-width: 400px;
     }
 
     .heading {
@@ -63,6 +67,19 @@
         background-color: transparent;
         font-size: 16px;
         color: white;
+      }
+
+      .agreement {
+        display: block;
+        font-size: 16px;
+        color: white;
+        text-align: center;
+        border: none;
+
+        & a {
+          color: blueviolet;
+          font-size: 16px;
+        }
       }
     }
 
