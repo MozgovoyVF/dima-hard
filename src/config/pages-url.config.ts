@@ -6,6 +6,7 @@ const admin = "/admin/";
 
 export const DASHBOARD_PAGES = {
   HOME: root,
+  USER_AGREEMENT: root + "agreement",
   PERSONAL_ACCOUNT: profile,
   AUTH: root + "auth",
   CALC: profile + "calc",
