@@ -20,7 +20,7 @@ export function Cards() {
           viewport={{ once: true }}
           className={styles.card}
         >
-          <Image alt="card" height={150} width={100} src="/images/cards/result1.jpg" />
+          <Image alt="card" height={150} width={100} src="/images/cards/result1.webp" />
           <h4 className={styles.description}>Для достижения спортивных результатов</h4>
         </motion.div>
         <motion.div
@@ -32,7 +32,7 @@ export function Cards() {
           viewport={{ once: true }}
           className={styles.card}
         >
-          <Image alt="card" height={150} width={100} src="/images/cards/result2.jpg" />
+          <Image alt="card" height={150} width={100} src="/images/cards/result2.webp" />
           <h4>Для восстановления после травм</h4>
         </motion.div>
         <motion.div
@@ -44,7 +44,7 @@ export function Cards() {
           viewport={{ once: true }}
           className={styles.card}
         >
-          <Image alt="card" height={150} width={100} src="/images/cards/result3.jpeg" />
+          <Image alt="card" height={150} width={100} src="/images/cards/result3.webp" />
           <h4>Для восстановления после родов</h4>
         </motion.div>
       </ul>

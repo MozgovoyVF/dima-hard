@@ -63,7 +63,7 @@ export function Header() {
       </div>
       <div className={styles.main}>
         <Link href={DASHBOARD_PAGES.HOME} className={styles.logo}>
-          <Image src="/images/logo2.png" alt="logo" width={70} height={70} />
+          <Image src="/images/logo.png" alt="logo" width={70} height={70} />
           <div className={styles.info}>
             <h3 className={styles.name}>Дмитрий</h3>
             <h3 className={styles.lastName}>Песчальников</h3>

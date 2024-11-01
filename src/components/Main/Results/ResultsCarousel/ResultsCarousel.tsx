@@ -6,15 +6,15 @@ import Image from "next/image";
 
 export default function ResponsiveCarousel() {
   const responsive = [
-    "/images/results/result1.JPG",
-    "/images/results/result2.JPG",
-    "/images/results/result3.JPG",
-    "/images/results/result4.JPG",
-    "/images/results/result5.JPG",
-    "/images/results/result6.JPG",
-    "/images/results/result7.PNG",
-    "/images/results/result8.PNG",
-    "/images/results/result9.PNG",
+    "/images/results/result1.webp",
+    "/images/results/result2.webp",
+    "/images/results/result3.webp",
+    "/images/results/result4.webp",
+    "/images/results/result5.webp",
+    "/images/results/result6.webp",
+    "/images/results/result7.webp",
+    "/images/results/result8.webp",
+    "/images/results/result9.webp",
   ];
   return (
     <div className={styles.container}>

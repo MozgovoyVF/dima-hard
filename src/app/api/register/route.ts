@@ -22,7 +22,7 @@ export async function POST(req: Request) {
   });
 
   const refreshToken = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, {
-    expiresIn: "7d",
+    expiresIn: "30d",
   });
 
   const expiresIn = new Date();

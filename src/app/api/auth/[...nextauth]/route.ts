@@ -32,7 +32,7 @@ const handler = NextAuth({
 
       if (loginUser) {
         const refreshToken = jwt.sign({ id: loginUser.id }, process.env.JWT_SECRET, {
-          expiresIn: "7d",
+          expiresIn: "30d",
         });
 
         const expiresIn = new Date();
@@ -60,7 +60,7 @@ const handler = NextAuth({
         await userService.createChange(newUser.id, "Регистрация нового пользователя через Google");
 
         const refreshToken = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET, {
-          expiresIn: "7d",
+          expiresIn: "30d",
         });
 
         const expiresIn = new Date();
