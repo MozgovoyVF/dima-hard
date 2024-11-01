@@ -47,7 +47,7 @@ export function Program() {
           className={styles.block}
         >
           <div className={styles.heading}>
-            <Image alt="program" src="/images/program/program2.jpg" width={100} height={50} />
+            <Image alt="program" src="/images/program/program2.webp" width={100} height={50} />
             <h4 className={styles.subtitle}>Индивидуальная план питания</h4>
           </div>
           <div className={styles.info}>

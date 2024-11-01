@@ -100,6 +100,10 @@
         text-overflow: ellipsis; /* Добавляет многоточие */
       }
 
+      & .date {
+        color: blueviolet;
+      }
+
       @media (width > 920px) {
         .name {
           grid-column: 1 / 3;
@@ -200,6 +204,7 @@
   margin: 0 5px;
   cursor: pointer;
   border-radius: 10px;
+  font-size: 16px;
 
   &:disabled {
     opacity: 0.5;

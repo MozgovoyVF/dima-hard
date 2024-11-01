@@ -47,7 +47,7 @@ export async function POST(req: Request, res: NextResponse) {
     });
 
     refreshToken = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, {
-      expiresIn: "7d",
+      expiresIn: "30d",
     });
   }
 

@@ -1,6 +1,6 @@
 .container {
   height: 100%;
-  padding-top: 130px;
+  padding-top: 150px;
 
   @media (min-width: 920px) {
     padding-top: 180px;
@@ -12,7 +12,7 @@
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
-    background-image: url("/images/background2.png");
+    background-image: url("/images/background2.webp");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;

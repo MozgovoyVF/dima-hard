@@ -11,7 +11,7 @@ export function Regals() {
   return (
     <div id="about" className={styles.regals}>
       <h2 className={styles.title}>Обо мне</h2>
-      <Image src={"/images/about/about.JPG"} alt="about photo" width={200} height={100} />
+      <Image src={"/images/about/about.webp"} alt="about photo" width={200} height={100} />
       <div className={styles.content}>
         <ul className={styles.list}>
           <motion.li
