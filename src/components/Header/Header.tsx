@@ -16,25 +16,19 @@ import { useProfile } from "@/hooks/useProfile";
 import Loader from "@/components/ui/loader/Loader";
 import { Profile } from "@/components/ui/profile/Profile";
 import { MenuBlock } from "../MenuBlock/MenuBlock";
+import { useSwipeMenu } from "@/hooks/useSwipeMenu";
 
 export function Header() {
-  const [isShowModal, setIsShowModal] = useState(false);
   const { data, isLoading, error, isRefetching } = useProfile();
   const [user, setUser] = useState(data);
   const [isVisible, setIsVisible] = useState(false);
+
+  const { isShowModal, setIsShowModal } = useSwipeMenu();
 
   useEffect(() => {
     if (error) setUser(undefined);
     else setUser(data);
   }, [data, error]);
-
-  const appear = () => {
-    setIsShowModal(true);
-  };
-
-  const fade = () => {
-    setIsShowModal(false);
-  };
 
   return (
     <div className={styles.header}>
@@ -48,9 +42,16 @@ export function Header() {
         />
       </ClientOnlyPortal>
       <div className={styles.top}>
-        <Hamburger toggled={isShowModal} size={20} toggle={!isShowModal ? appear : fade} />
+        <span onTouchEnd={(e) => e.stopPropagation()}>
+          <Hamburger toggled={isShowModal} toggle={() => setIsShowModal((prev) => !prev)} size={20} />
+        </span>
         <a className={styles.fatsecret} href="https://www.fatsecret.com">
-          <img src="https://platform.fatsecret.com/api/static/images/powered_by_fatsecret.svg" alt="Fatsecret" />
+          <Image
+            src="https://platform.fatsecret.com/api/static/images/powered_by_fatsecret.svg"
+            width={130}
+            height={30}
+            alt="Fatsecret"
+          />
         </a>
         <div className={styles.social}>
           <a target="_blank" href={`https://t.me/${PHONE_NUMBER}`}>
