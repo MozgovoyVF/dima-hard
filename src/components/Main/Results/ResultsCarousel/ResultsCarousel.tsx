@@ -16,8 +16,18 @@ export default function ResponsiveCarousel() {
     "/images/results/result8.webp",
     "/images/results/result9.webp",
   ];
+
+  const handleTouchEvent = (e: React.TouchEvent) => {
+    e.stopPropagation();
+  };
+
   return (
-    <div className={styles.container}>
+    <div
+      className={styles.container}
+      onTouchStart={handleTouchEvent}
+      onTouchMove={handleTouchEvent}
+      onTouchEnd={handleTouchEvent}
+    >
       <Carousel
         showArrows={true}
         showIndicators={true}
