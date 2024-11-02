@@ -19,10 +19,10 @@ export const useSwipeMenu = () => {
     const swipeDistance = touchStartX - touchEndX;
 
     // Определяем свайп вправо или влево
-    if (swipeDistance > 50 && isShowModal) {
+    if (swipeDistance > 150 && isShowModal) {
       // Свайп влево - закрыть модальное окно
       setIsShowModal(false);
-    } else if (swipeDistance < -50 && !isShowModal) {
+    } else if (swipeDistance < -150 && !isShowModal) {
       // Свайп вправо - открыть модальное окно
       setIsShowModal(true);
     }
