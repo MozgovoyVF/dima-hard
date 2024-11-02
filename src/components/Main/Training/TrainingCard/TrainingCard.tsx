@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import styles from "./index.module.scss";
 import Image from "next/image";
@@ -17,7 +19,6 @@ export function TrainingCard({ description, image, title }: ITrainingCard) {
 
   return (
     <motion.div
-      key={title}
       initial="hidden"
       whileInView="visible"
       transition={{ duration: 0.3 }}
@@ -26,9 +27,9 @@ export function TrainingCard({ description, image, title }: ITrainingCard) {
       className={styles.trainingCard}
     >
       <h4 className={styles.title}>{title}</h4>
-      <p className={styles.description}>{description}</p>
+      {description && <p className={styles.description}>{description}</p>}
       <div className={styles.image}>
-        <Image alt="training photo" src={image} width={200} height={100} />
+        <Image alt={title} src={image} width={200} height={100} />
       </div>
     </motion.div>
   );

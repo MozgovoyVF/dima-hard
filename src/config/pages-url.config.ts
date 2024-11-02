@@ -1,5 +1,3 @@
-"use client";
-
 const root = "/";
 const profile = "/i/";
 const admin = "/admin/";

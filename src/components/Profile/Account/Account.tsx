@@ -4,15 +4,14 @@ import * as React from "react";
 import styles from "./index.module.scss";
 import { useProfile } from "@/hooks/useProfile";
 import Link from "next/link";
-import { FaWhatsapp } from "react-icons/fa6";
-import { PHONE_NUMBER } from "@/constants/global.constants";
 import { DASHBOARD_PAGES } from "@/config/pages-url.config";
 import { BiCalculator } from "react-icons/bi";
 import { getCalcResultType } from "@/utils/getCalcResultType";
 import Loader from "@/components/ui/loader/Loader";
 import { useFatsecret } from "@/hooks/useFatsecret";
-import { PiKeyholeFill } from "react-icons/pi";
 import { MotionSection } from "@/components/ui/motionSection/MotionSection";
+import { SubscribeBlock } from "../../ui/subscribeBlock/SubscribeBlock";
+import { FatsecretBlock } from "@/components/ui/subscribeBlock/FatsecretBlock";
 
 export function Account() {
   const { data, isLoading } = useProfile();
@@ -25,34 +24,7 @@ export function Account() {
         <Loader />
       ) : (
         <>
-          {!data?.profile.subscribe ? (
-            <div className={styles.subscribe}>
-              <span className={styles.info}>
-                В данный момент Ваша подписка <b className={styles.red}>неактивна</b>.
-                <br />
-                Для оформления подписки и получения подробностей о тренировках со мной напишите мне в{" "}
-                <b className={styles.green}>WhatsApp</b>
-              </span>
-              <Link href={`https://wa.me/${PHONE_NUMBER}`} className={styles.link}>
-                <FaWhatsapp className={styles.whatsapp} />
-                <span className={styles.text}>Выбрать тренировочный пакет</span>
-              </Link>
-            </div>
-          ) : (
-            !fatSecretData && (
-              <div className={styles.subscribe}>
-                <span className={styles.info}>
-                  Для того, чтобы тренировочный процесс был <b className={styles.blueViolet}>максимально</b> эффективен,
-                  привяжите Ваш аккаунт <b className={styles.green}>FatSecret</b> для оперативного получения обратной
-                  связи от меня
-                </span>
-                <Link href={DASHBOARD_PAGES.FATSECRET} className={styles.link}>
-                  <PiKeyholeFill className={styles.whatsapp} />
-                  <span className={styles.text}>Привязать FatSecret</span>
-                </Link>
-              </div>
-            )
-          )}
+          {!data?.profile.subscribe ? <SubscribeBlock /> : !fatSecretData && <FatsecretBlock />}
           {!data?.profile.bmi || !data?.profile.bmr || !data?.profile.tdee ? (
             <div className={styles.results}>
               <p className={styles.subtitle}>
