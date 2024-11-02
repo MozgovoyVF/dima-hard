@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import styles from "./index.module.scss";
 import { ADMIN_MENU_CONTENT, MENU_CONTENT, PROFILE_MENU_CONTENT } from "@/constants/menu.constants";

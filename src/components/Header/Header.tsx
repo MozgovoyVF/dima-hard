@@ -1,50 +1,19 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import styles from "./index.module.scss";
-import { Squash as Hamburger } from "hamburger-react";
 import { FaTelegram } from "react-icons/fa";
 import { BiPhone } from "react-icons/bi";
 import { PHONE_NUMBER } from "@/constants/global.constants";
-import ClientOnlyPortal from "@/components/ClientOnlyPortal/ClientOnlyPortal";
-import { MenuModal } from "@/components/MenuModal/MenuModal";
 import Image from "next/image";
 import Link from "next/link";
 import { DASHBOARD_PAGES } from "@/config/pages-url.config";
-import { MdPersonalInjury } from "react-icons/md";
-import { useProfile } from "@/hooks/useProfile";
-import Loader from "@/components/ui/loader/Loader";
-import { Profile } from "@/components/ui/profile/Profile";
 import { MenuBlock } from "../MenuBlock/MenuBlock";
-import { useSwipeMenu } from "@/hooks/useSwipeMenu";
+import { MenuModalContent } from "./MenuModalContent";
+import { ProfileContent } from "./ProfileContent";
 
 export function Header() {
-  const { data, isLoading, error, isRefetching } = useProfile();
-  const [user, setUser] = useState(data);
-  const [isVisible, setIsVisible] = useState(false);
-
-  const { isShowModal, setIsShowModal } = useSwipeMenu();
-
-  useEffect(() => {
-    if (error) setUser(undefined);
-    else setUser(data);
-  }, [data, error]);
-
   return (
     <div className={styles.header}>
-      <ClientOnlyPortal selector={"#modal"}>
-        <MenuModal
-          closeFn={() => setIsShowModal(false)}
-          subscribe={data?.profile.subscribe || false}
-          tasks={data?.task}
-          role={data?.role}
-          isShowModal={isShowModal}
-        />
-      </ClientOnlyPortal>
       <div className={styles.top}>
-        <span onTouchEnd={(e) => e.stopPropagation()}>
-          <Hamburger toggled={isShowModal} toggle={() => setIsShowModal((prev) => !prev)} size={20} />
-        </span>
+        <MenuModalContent />
         <a className={styles.fatsecret} href="https://www.fatsecret.com">
           <Image
             src="https://platform.fatsecret.com/api/static/images/powered_by_fatsecret.svg"
@@ -70,27 +39,17 @@ export function Header() {
             <h3 className={styles.lastName}>Песчальников</h3>
           </div>
         </Link>
-        {isRefetching || isLoading ? (
-          <Loader />
-        ) : user ? (
-          <Profile data={user} />
-        ) : (
-          <Link className={styles.lk} href={DASHBOARD_PAGES.AUTH}>
-            <MdPersonalInjury />
-            Войти
-          </Link>
-        )}
+        <ProfileContent />
       </div>
       <div className={styles.bottom}>
-        <MenuBlock
-          closeFn={() => setIsShowModal(false)}
-          tasks={data?.task}
-          role={data?.role}
-          setIsVisible={() => setIsVisible((prev) => !prev)}
-          isVisible={isVisible}
-        />
+        <MenuBlock />
         <a className={styles.fatsecret} href="https://www.fatsecret.com">
-          <img src="https://platform.fatsecret.com/api/static/images/powered_by_fatsecret.svg" alt="Fatsecret" />
+          <Image
+            src="https://platform.fatsecret.com/api/static/images/powered_by_fatsecret.svg"
+            width={130}
+            height={30}
+            alt="Fatsecret"
+          />
         </a>
         <div className={styles.social}>
           <a target="_blank" href={`https://t.me/${PHONE_NUMBER}`}>
