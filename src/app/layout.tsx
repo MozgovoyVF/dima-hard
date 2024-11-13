@@ -30,6 +30,7 @@ export default function RootLayout({
           <Header />
           {children}
           <div id="modal"></div>
+          <div id="lead"></div>
           <Toaster theme="dark" position="bottom-right" duration={1500} />
         </Providers>
       </body>

@@ -55,15 +55,31 @@
         align-items: center;
         justify-content: space-between;
         gap: 10px;
-        font-size: 16px;
+        font-size: 20px;
         color: white;
 
         span {
           flex: 1 1 100%;
         }
 
+        & .brain {
+          color: #c25dc8;
+        }
+
+        & .biceps {
+          color: #b7991f;
+        }
+
+        & .sport {
+          color: #1fb721;
+        }
+
+        & .health {
+          color: #5294ce;
+        }
+
         svg {
-          flex: 0 0 20px;
+          flex: 0 0 30px;
         }
       }
     }

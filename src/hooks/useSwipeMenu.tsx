@@ -6,25 +6,30 @@ export const useSwipeMenu = () => {
   let touchStartX = 0;
   let touchEndX = 0;
 
+  const minSwipeDistance = 150; // минимальная дистанция для определения свайпа
+  const minMoveThreshold = 30; // минимальное перемещение пальца для исключения случайного нажатия
+
   const handleTouchStart = (e: TouchEvent) => {
     touchStartX = e.changedTouches[0].screenX;
+    touchEndX = touchStartX;
   };
 
   const handleTouchMove = (e: TouchEvent) => {
     touchEndX = e.changedTouches[0].screenX;
   };
 
-  const handleTouchEnd = (e: TouchEvent) => {
-    // Расстояние свайпа для определения направления
+  const handleTouchEnd = () => {
     const swipeDistance = touchStartX - touchEndX;
 
-    // Определяем свайп вправо или влево
-    if (swipeDistance > 150 && isShowModal) {
-      // Свайп влево - закрыть модальное окно
-      setIsShowModal(false);
-    } else if (swipeDistance < -150 && !isShowModal) {
-      // Свайп вправо - открыть модальное окно
-      setIsShowModal(true);
+    // Проверяем, было ли реальное перемещение пальца
+    if (Math.abs(swipeDistance) > minMoveThreshold) {
+      if (swipeDistance > minSwipeDistance && isShowModal) {
+        // Свайп влево - закрыть модальное окно
+        setIsShowModal(false);
+      } else if (swipeDistance < -minSwipeDistance && !isShowModal) {
+        // Свайп вправо - открыть модальное окно
+        setIsShowModal(true);
+      }
     }
   };
 

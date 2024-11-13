@@ -9,6 +9,7 @@ import { Regals } from "./Regals/Regals";
 import { Results } from "./Results/Results";
 import { Contact } from "./Contact/Contact";
 import { ScrollProgress } from "../ui/scrollProgress/scrollProgress";
+import { Advantages } from "./Advantages/Advantages";
 
 export function Main() {
   return (
@@ -16,7 +17,9 @@ export function Main() {
       <div className={styles.main}>
         <Banner />
 
-        <Cards />
+        {/* <Cards /> */}
+
+        <Advantages />
 
         <Price />
 

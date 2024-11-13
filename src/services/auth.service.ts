@@ -1,6 +1,6 @@
 "use client";
 
-import { axiosClassic } from "@/app/api/interceptors";
+import { axiosClassic, axiosWithAuth } from "@/app/api/interceptors";
 import { IAuthForm, IAuthResponse } from "@/types/auth.types";
 import { saveTokenStorage, removeFromStorage } from "./auth-token.service";
 
@@ -19,9 +19,7 @@ export const authService = {
   },
 
   async getNewTokens() {
-    const response = await axiosClassic.post<IAuthResponse>(
-      "/login/access-token"
-    );
+    const response = await axiosClassic.post<IAuthResponse>("/login/access-token");
 
     if (response.data.accessToken) saveTokenStorage(response.data.accessToken);
 
@@ -34,5 +32,21 @@ export const authService = {
     if (response.data) removeFromStorage();
 
     return response;
+  },
+
+  async sendEmail(name: string, phone: string, type: string) {
+    try {
+      const response = await axiosClassic.post("/email/send", {
+        body: {
+          name,
+          phone,
+          type,
+        },
+      });
+      return response.data;
+    } catch (error: any) {
+      console.log(error);
+      return error.message;
+    }
   },
 };

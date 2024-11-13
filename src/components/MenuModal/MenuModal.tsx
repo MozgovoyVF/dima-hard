@@ -27,7 +27,7 @@ export const MenuModal = ({ closeFn, tasks, role, isShowModal }: IModal) => {
       document.body.style.overflow = "auto";
     };
   }, [isShowModal]);
-  console.log(isShowModal);
+
   return (
     <AnimatePresence>
       {isShowModal && (
