@@ -2,11 +2,12 @@
 
 import React from "react";
 import styles from "./index.module.scss";
-import { FaMedal } from "react-icons/fa";
-import { GiBiceps } from "react-icons/gi";
+import { GiBiceps, GiBrain } from "react-icons/gi";
 import { PiNotepadBold } from "react-icons/pi";
 import { motion } from "framer-motion";
 import { variants } from "@/constants/framer.constants";
+import { MdSportsGymnastics } from "react-icons/md";
+import { RiMentalHealthLine } from "react-icons/ri";
 
 export function BannerContent() {
   return (
@@ -19,16 +20,20 @@ export function BannerContent() {
       className={styles.promise}
     >
       <li className={styles.me}>
-        <GiBiceps />
-        <span>Видимый результат уже через 4 месяца тренировок</span>
+        <GiBrain className={styles.brain} />
+        <span>Внедряю привычки для нового тела!</span>
       </li>
       <li className={styles.me}>
-        <FaMedal />
-        <span>Сертифицированный тренер по физической подготовке (фитнес-тренер) с большим опытом</span>
+        <GiBiceps className={styles.biceps} />
+        <span>Из тюбика в киборга!</span>
       </li>
       <li className={styles.me}>
-        <PiNotepadBold />
-        <span>Специалист по здоровому спортивному питанию к Вашим услугам</span>
+        <MdSportsGymnastics className={styles.sport} />
+        <span>Из &quot;широкой&quot; кости в тонкую талию!</span>
+      </li>
+      <li className={styles.me}>
+        <RiMentalHealthLine className={styles.health} />
+        <span>Парюсь о Вашем здоровье - ментальном и физическом!</span>
       </li>
     </motion.ul>
   );
