@@ -11,13 +11,13 @@ export async function POST(req: Request, res: NextApiResponse) {
   const transporter = nodemailer.createTransport({
     service: "gmail", // или другой сервис почты
     auth: {
-      user: process.env.EMAIL_USER, // ваш email из переменных окружения
-      pass: process.env.EMAIL_PASS, // ваш пароль приложения из переменных окружения
+      user: process.env.NEXT_PUBLIC_EMAIL_USER, // ваш email из переменных окружения
+      pass: process.env.NEXT_PUBLIC_EMAIL_PASS, // ваш пароль приложения из переменных окружения
     },
   });
 
   const mailOptions = {
-    from: process.env.EMAIL_USER,
+    from: process.env.NEXT_PUBLIC_EMAIL_USER,
     to: "mozgovoy2796@gmail.com",
     subject: "Новая заявка с сайта",
     text: `Имя: ${name}\nТелефон: ${phone}\nСообщение: Предпочтительный способ для коммуникации с клиентом - ${type}`,
