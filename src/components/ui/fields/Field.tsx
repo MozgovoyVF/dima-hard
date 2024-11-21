@@ -12,10 +12,12 @@ interface InputFieldProps {
   disabled?: boolean;
   type?: string;
   isNumber?: boolean;
+  autocomplete?: string;
+  defaultValue?: string;
 }
 
 export const Field = forwardRef<HTMLInputElement, InputFieldProps>(
-  ({ label, id, extra, type, placeholder, state, disabled, isNumber, ...rest }, ref) => {
+  ({ label, id, extra, type, placeholder, state, disabled, isNumber, autocomplete, defaultValue, ...rest }, ref) => {
     return (
       <div className={`${styles.input} ${state ? styles.error : styles.success}`}>
         <label htmlFor={id}>{label}</label>
@@ -26,6 +28,8 @@ export const Field = forwardRef<HTMLInputElement, InputFieldProps>(
           id={id}
           placeholder={placeholder}
           className={styles.inp}
+          autoComplete={autocomplete}
+          defaultValue={defaultValue}
           onKeyDown={(event) => {
             if (
               isNumber &&
