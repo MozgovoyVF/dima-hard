@@ -81,7 +81,12 @@ export function Auth() {
     <AnimatePresence mode="wait">
       <MotionSection>
         <div className={styles.content}>
-          <form className={styles.form} onSubmit={handleSubmit(onSubmit)} onChange={() => setError("")}>
+          <form
+            autoComplete="on"
+            className={styles.form}
+            onSubmit={handleSubmit(onSubmit)}
+            onChange={() => setError("")}
+          >
             <div className={styles.heading}>
               <button
                 className={`${styles.button} ${isLoginForm && styles.active}`}
@@ -120,6 +125,8 @@ export function Auth() {
                     label="Имя:"
                     placeholder="Введите имя"
                     type="text"
+                    autocomplete="given-name"
+                    defaultValue=""
                     state={(errors as FieldErrors<IRegisterForm>).name ?? null}
                   />
                   <Field
@@ -128,6 +135,8 @@ export function Auth() {
                     label="Фамилия:"
                     placeholder="Введите фамилию"
                     type="text"
+                    autocomplete="family-name"
+                    defaultValue=""
                     state={(errors as FieldErrors<IRegisterForm>).lastName ?? null}
                   />
                 </>
@@ -138,6 +147,8 @@ export function Auth() {
                 label="Email:"
                 placeholder="Введите Email"
                 type="email"
+                autocomplete="email"
+                defaultValue=""
                 state={errors.email ?? null}
               />
               <Field
@@ -146,6 +157,8 @@ export function Auth() {
                 label="Пароль:"
                 placeholder="Введите пароль"
                 type="password"
+                autocomplete="new-password"
+                defaultValue=""
                 state={errors.password ?? null}
               />
               {error && <span className={styles.error}>{error}</span>}
